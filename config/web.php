@@ -7,9 +7,10 @@ $config = [
     'id' => 'simple_blog',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'defaultRoute' => '/post/list',
     'components' => [
         'request' => [
-            'cookieValidationKey' => md5($db['usermame'] . $db['password']),
+            'cookieValidationKey' => md5($db['username'] . $db['password']),
         ],
         'user' => [
             'identityClass' => 'app\models\User',
