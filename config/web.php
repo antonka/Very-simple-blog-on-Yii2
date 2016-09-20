@@ -1,18 +1,15 @@
 <?php
 
 $params = require(__DIR__ . '/params.php');
+$db = require(__DIR__ . '/db.php');
 
 $config = [
-    'id' => 'basic',
+    'id' => 'simple_blog',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'components' => [
         'request' => [
-            // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => 'IX7f1Zti5bdw_OlJlMQ9m3fUq8oTOGWG',
-        ],
-        'cache' => [
-            'class' => 'yii\caching\FileCache',
+            'cookieValidationKey' => md5($db['usermame'] . $db['password']),
         ],
         'user' => [
             'identityClass' => 'app\models\User',
@@ -37,7 +34,7 @@ $config = [
                 ],
             ],
         ],
-        'db' => require(__DIR__ . '/db.php'),
+        'db' => $db,
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,
