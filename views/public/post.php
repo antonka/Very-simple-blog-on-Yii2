@@ -1,15 +1,13 @@
 <?php
 
-/* @var $this yii\web\View */
-
 use yii\helpers\Html;
 
-$this->title = 'Demo post';
+$this->title = $title;
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="site-about">
-    <h1><?= Html::encode($this->title) ?></h1>
-    <p>
-        Demo post content
-    </p>
+    <h1><?= Html::encode($title) ?></h1>
+    <p><i><?= Html::encode($created_at) ?></i></p>
+    <p><?= Html::encode($content) ?></p>
 </div>
