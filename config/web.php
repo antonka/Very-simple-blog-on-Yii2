@@ -7,7 +7,7 @@ $config = [
     'id' => 'simple_blog',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    'defaultRoute' => '/post/list',
+    'defaultRoute' => '/public/index',
     'components' => [
         'request' => [
             'cookieValidationKey' => md5($db['username'] . $db['password']),
@@ -17,7 +17,7 @@ $config = [
             'enableAutoLogin' => true,
         ],
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            'errorAction' => 'public/error',
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',

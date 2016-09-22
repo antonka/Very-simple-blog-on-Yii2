@@ -4,12 +4,12 @@
 
 use yii\helpers\Html;
 
-$this->title = 'List of Posts';
+$this->title = 'Demo post';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-about">
     <h1><?= Html::encode($this->title) ?></h1>
     <p>
-        <?= Html::a('Demo post', ['/post/', 'id'=>1]) ?>
+        Demo post content
     </p>
 </div>
