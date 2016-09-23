@@ -6,7 +6,7 @@ use Yii;
 use app\models\Post;
 use yii\web\HttpException;
 
-class PostAction extends \yii\base\Action
+class ShowPost extends \yii\base\Action
 {
     public function run() 
     {

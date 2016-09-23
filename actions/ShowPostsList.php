@@ -4,7 +4,7 @@ namespace app\actions;
 
 use Yii;
 
-class PostsListAction extends \yii\base\Action
+class ShowPostsList extends \yii\base\Action
 {
     public function run()
     {

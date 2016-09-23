@@ -12,11 +12,9 @@ class PublicController extends \yii\web\Controller
     public function actions()
     {
         return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-            ],
-            'index' => ['class'=>'app\actions\PostsListAction'],
-            'post'  => ['class'=>'app\actions\PostAction'],
+            'error' => ['class' => \yii\web\ErrorAction::className()],
+            'index' => ['class' => \app\actions\ShowPostsList::className()],
+            'post' => ['class'=> \app\actions\ShowPost::className()],
         ];
     }
 }
