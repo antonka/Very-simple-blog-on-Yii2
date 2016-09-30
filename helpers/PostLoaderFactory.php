@@ -9,7 +9,9 @@ use app\models\PostFile;
  */
 class PostLoaderFactory
 {
-    
+    /**
+     * @return \app\helpers\PostLoader
+     */
     public static function build()
     {
         return new PostLoader(new PostFile);

@@ -11,7 +11,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <div>
         <?php $form = ActiveForm::begin(); ?>
-           <?= $form->field($postFile, 'file')->fileInput(); ?>
+           <?= $form->field($postFileModel, 'file')->fileInput(); ?>
            <?= Html::button('Load post', ['type' => 'submit']); ?>
         <?php ActiveForm::end(); ?>
     </div>

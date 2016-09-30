@@ -14,7 +14,7 @@ class LoadPost extends \yii\base\Action
         $postLoader = \app\helpers\PostLoaderFactory::build();
         
         return $this->controller->render('load_post', [
-            'postFile' => $postLoader->getPostFileModel()
+            'postFileModel' => $postLoader->getPostFileModel()
         ]);
     }
 }
