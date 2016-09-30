@@ -7,10 +7,10 @@ use Yii;
 /**
  * @author Anton Karamnov
  */
-class AddPost extends \yii\base\Action
+class LoadPost extends \yii\base\Action
 {
     public function run()
     {
-        return $this->controller->render('add_post');
+        return $this->controller->render('load_post');
     }
 }
