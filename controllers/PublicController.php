@@ -4,6 +4,9 @@ namespace app\controllers;
 
 use Yii;
 
+/**
+ * @author Anton Karamnov
+ */
 class PublicController extends \yii\web\Controller
 {
     /**

@@ -7,10 +7,11 @@ use Yii;
 /**
  * @author Anton Karamnov
  */
-class ShowPostsList extends \yii\base\Action
+class AddPost extends \yii\base\Action
 {
     public function run()
     {
-        return $this->controller->render('post_list.php');
+        echo "Action AddPost";
+        exit;
     }
 }

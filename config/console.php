@@ -11,9 +11,11 @@ $config = [
     'bootstrap' => ['log'],
     'controllerNamespace' => 'app\commands',
     'components' => [
+        /*
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+         */
         'log' => [
             'targets' => [
                 [
@@ -25,13 +27,13 @@ $config = [
         'db' => $db,
     ],
     'params' => $params,
-    /*
+    
     'controllerMap' => [
         'fixture' => [ // Fixture generation command line.
             'class' => 'yii\faker\FixtureController',
         ],
     ],
-    */
+    
 ];
 
 if (YII_ENV_DEV) {
