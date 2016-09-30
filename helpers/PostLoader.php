@@ -9,19 +9,11 @@ class PostLoader
     /**
      * @var \yii\base\Model
      */
-    public $formModel;
+    public $model;
     
-    public function __construct(\yii\base\Model $formModel) 
+    public function __construct(\yii\base\Model $model) 
     {
-        $this->formModel = $formModel;
-    }
-    
-    /**
-     * 
-     */
-    static public function loadFile() 
-    {
-        echo "called FileLoader::load();";
+        $this->model = $model;
     }
 }
 

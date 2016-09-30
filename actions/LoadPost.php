@@ -4,7 +4,7 @@ namespace app\actions;
 
 use Yii;
 use app\helpers\PostLoader;
-use app\models\PostFileForm;
+use app\models\PostFile;
 
 /**
  * @author Anton Karamnov
@@ -13,10 +13,11 @@ class LoadPost extends \yii\base\Action
 {
     public function run()
     {
-        $postLoader = new PostLoader(new PostFileForm);
+        $postFile = new PostFile();
+        $postLoader = new PostLoader($postFile);
         
-        // \app\helpers\FileLoader::loadFile();
-        
-        return $this->controller->render('load_post');
+        return $this->controller->render('load_post', [
+            'postFile' => $postFile
+        ]);
     }
 }
