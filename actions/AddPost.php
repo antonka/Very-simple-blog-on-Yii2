@@ -11,7 +11,6 @@ class AddPost extends \yii\base\Action
 {
     public function run()
     {
-        echo "Action AddPost";
-        exit;
+        return $this->controller->render('add_post');
     }
 }
