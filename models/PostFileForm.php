@@ -5,17 +5,17 @@ namespace app\models;
 /**
  * @author Anton Karamnov
  */
-class TextFileForm extends \yii\base\Model
+class PostFileForm extends \yii\base\Model
 {
     /**
      * @var string 
      */
-    public $textFile;
+    public $file;
     
     public function rules() 
     {
         return [
-            [['textFile'], 'file', 'skipOnly' => false, 'extensions' => 'txt'],
+            [['file'], 'file', 'skipOnly' => false, 'extensions' => 'txt'],
         ];
     }
     
