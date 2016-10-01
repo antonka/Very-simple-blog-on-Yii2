@@ -5,7 +5,7 @@ namespace app\models;
 /**
  * @author Anton Karamnov
  */
-class PostFile extends \yii\base\Model
+class MarkDownFile extends \yii\base\Model
 {
     /**
      * @var string 
@@ -15,7 +15,7 @@ class PostFile extends \yii\base\Model
     public function rules() 
     {
         return [
-            [['file'], 'file', 'extensions' => 'md'],
+            ['file', 'file', 'mimeTypes' => 'text/markdown, text/plain', 'skipOnEmpty' => false],
         ];
     }
     

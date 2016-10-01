@@ -11,10 +11,14 @@ class LoadPost extends \yii\base\Action
 {
     public function run()
     {
-        $postLoader = \app\helpers\PostLoaderFactory::build();
+        $fileLoader = \app\helpers\MarkDownFileLoaderFactory::build();
+        if ($fileLoader->loadFile()) {
+            echo $fileLoader->getFileContent();
+            exit;
+        }
         
         return $this->controller->render('load_post', [
-            'postFileModel' => $postLoader->getPostFileModel()
+            'fileModel' => $fileLoader->getFileModel()
         ]);
     }
 }
