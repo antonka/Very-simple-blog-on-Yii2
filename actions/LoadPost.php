@@ -3,6 +3,7 @@
 namespace app\actions;
 
 use Yii;
+use app\helpers\PostFactory;
 
 /**
  * @author Anton Karamnov
@@ -10,15 +11,14 @@ use Yii;
 class LoadPost extends \yii\base\Action
 {
     public function run()
-    {
-        $fileLoader = \app\helpers\MarkDownFileLoaderFactory::build();
-        if ($fileLoader->loadFile()) {
-            echo $fileLoader->getFileContent();
-            exit;
+    {   
+        $post = PostFactory::build();
+        if ($post->load()) {
+            $this->controller->redirect(['/public']);
         }
         
         return $this->controller->render('load_post', [
-            'fileModel' => $fileLoader->getFileModel()
+            'fileModel' => $post->getfileLoader()->getFileModel()
         ]);
     }
 }
