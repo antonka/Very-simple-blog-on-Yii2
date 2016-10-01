@@ -2,7 +2,7 @@
 
 namespace app\actions;
 
-use app\helpers\PostFactory;
+use app\helpers\PostLoaderFactory;
 
 /**
  * @author Anton Karamnov
@@ -11,16 +11,16 @@ class LoadPost extends \yii\base\Action
 {
     public function run()
     {   
-        $post = PostFactory::build();
+        $postLoader = PostLoaderFactory::build();
         
-        if ($post->load()) {
+        if ($postLoader->load()) {
             $this->controller->redirect([
-                '/public/post', 'id' => $post->getModel()->id 
+                '/public/post', 'id' => $postLoader->getModel()->id 
             ]);
         }
         
         return $this->controller->render('load_post', [
-            'fileModel' => $post->getfileLoader()->getFileModel()
+            'fileModel' => $postLoader->getfileLoader()->getFileModel()
         ]);
     }
 }

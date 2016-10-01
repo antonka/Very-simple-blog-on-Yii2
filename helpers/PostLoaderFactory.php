@@ -2,11 +2,11 @@
 
 namespace app\helpers;
 
-class PostFactory
+class PostLoaderFactory
 {
     public static function build()
     {
-        return new Post(
+        return new PostLoader(
             new \app\models\Post(),
             MarkDownFileLoaderFactory::build()
         );

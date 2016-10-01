@@ -2,7 +2,7 @@
 
 namespace app\helpers;
 
-class Post
+class PostLoader
 {    
     /**
      * @var \yii\db\ActiveRecord 
@@ -36,7 +36,7 @@ class Post
         
         $content = $this->fileLoader->getFileContent();
         
-        $this->model->title = $this->findPostTitle($content);
+        $this->model->title = self::findPostTitle($content);
         $this->model->content = $content;
         $this->model->save();
         
@@ -46,7 +46,7 @@ class Post
     /**
      * @return string
      */
-    protected function findPostTitle($content) 
+    protected static function findPostTitle($content) 
     {
         $rows = explode("=", $content);
         return substr(trim($rows[0]), 0, 255);
@@ -65,7 +65,7 @@ class Post
      */
     public function getModel() 
     {
-        return $this->model;
+        return $this->getModel();
     }
             
 }
