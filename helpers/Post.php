@@ -59,4 +59,13 @@ class Post
     {
         return $this->fileLoader;
     }
+    
+    /**
+     * @var \yii\db\ActiveRecord 
+     */
+    public function getModel() 
+    {
+        return $this->model;
+    }
+            
 }
