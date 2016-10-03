@@ -2,6 +2,9 @@
 
 namespace app\helpers;
 
+/**
+ * @author Anton Karamnov
+ */
 class PostLoaderFactory
 {
     public static function build()
