@@ -1,15 +1,27 @@
 <?php
 
-/* @var $this yii\web\View */
-
 use yii\helpers\Html;
+use yii\widgets\ListView;
 
 $this->title = 'List of Posts';
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
-<div class="site-about">
+
+<style>
+    .post-list-item {}
+    .post-list-item__descr {
+        color: gray;
+        font-style: italic;
+    }
+</style> 
+
+<div>
     <h1><?= Html::encode($this->title) ?></h1>
-    <p>
-        <?= Html::a('Demo post', ['/public/post', 'id'=>1]) ?>
-    </p>
+    <div>
+        <?= ListView::widget([
+            'dataProvider' => $dataProvider,
+            'itemView' => '_post_list_item',
+        ]) ?>
+    </div>
 </div>
