@@ -65,7 +65,7 @@ class PostLoader
      */
     public function getModel() 
     {
-        return $this->getModel();
+        return $this->model;
     }
             
 }
