@@ -13,7 +13,7 @@ class ReloadPost extends \yii\base\Action
     public function run()
     {
         $postId = Yii::$app->request->get('id');
-        $postLoader = PostLoaderFactory::buildExistingPost([$postId]);
+        $postLoader = PostLoaderFactory::buildExistingPost($postId);
         
         if ($postLoader->load()) {
             $this->controller->redirect([
