@@ -15,7 +15,8 @@ class ManageController extends \yii\web\Controller
     public function actions()
     {
         return [
-            'loadPost' => ['class' => \app\actions\LoadPost::className()]
+            'loadPost' => ['class' => \app\actions\LoadPost::className()],
+            'reloadPost' => ['class' => \app\actions\ReloadPost::className()],
         ];
     }   
 }
