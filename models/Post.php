@@ -32,6 +32,7 @@ class Post extends \yii\db\ActiveRecord
             [['content'], 'string'],
             [['created_at'], 'safe'],
             [['title'], 'string', 'max' => 255],
+            [['cutted_content'], 'string', 'max' => 1000],
         ];
     }
 

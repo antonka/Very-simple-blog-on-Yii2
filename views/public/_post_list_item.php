@@ -3,10 +3,12 @@
 use yii\helpers\Html;
 use yii\helpers\Markdown;
 
+$content = empty($model->cutted_content) ? $model->content : $model->cutted_content;
+
 ?>
 
 <div class="post-list-item">
-    <div><?= Markdown::process($model->content); ?></div>
+    <div><?= Markdown::process($content); ?></div>
     <div class="post-list-item__descr">
         <span>Created at <?= Html::encode($model->created_at) ?></span>
         <span>/</span>

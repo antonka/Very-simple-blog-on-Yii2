@@ -7,7 +7,7 @@ class m161006_215824_add_attribute_cutted_content_to_post_entity extends Migrati
     public function up()
     {
         $this->addColumn(
-            'posts', 'cutted_content', $this->string(500)
+            'posts', 'cutted_content', $this->string(1000)->defaultValue('')
         );
     }
 

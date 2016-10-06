@@ -18,6 +18,11 @@ class PostLoader
     protected $fileLoader;
     
     /**
+     * @var string
+     */
+    protected $cutTag = "#cut_post#";
+
+    /**
      * @param \yii\db\ActiveRecord $model
      * @param \app\helpers\FileLoader $fileLoader
      */
@@ -38,12 +43,12 @@ class PostLoader
         }
         
         $content = $this->fileLoader->getFileContent();
-        
+       
         $this->model->title = self::findPostTitle($content);
-        $this->model->content = $content;
-        $this->model->save();
+        $this->model->content = preg_replace($this->cutTag, '', $content);
+        $this->model->cutted_content = $this->cutContent($content);
         
-        return true;
+        return $this->model->save();
     }
     
     /**
@@ -53,7 +58,7 @@ class PostLoader
     {
         $rows = explode("=", $content);
         return substr(trim($rows[0]), 0, 255);
-    }  
+    }
     
     /**
      * @return FileLoader
@@ -69,6 +74,19 @@ class PostLoader
     public function getModel() 
     {
         return $this->model;
+    }
+    
+    /**
+     * @param string $content
+     * @return string or null
+     */
+    protected function cutContent($content)
+    {
+        if (($cutTagPosition = strpos($content, $this->cutTag)) > 0) {
+            return substr($content, 0, $cutTagPosition);
+        }
+        
+        return '';
     }
             
 }
