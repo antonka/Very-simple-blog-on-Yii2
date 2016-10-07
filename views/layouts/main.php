@@ -9,6 +9,12 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
+$topNavItems = [];
+if (!Yii::$app->user->isGuest) {
+    $topNavItems[] = ['label' => 'Load post', 'url' => ['/manage/loadPost']];
+    $topNavItems[] = ['label' => 'Log out', 'url' => ['/public/logout']];
+}
+
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -33,9 +39,7 @@ AppAsset::register($this);
     ]);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            ['label' => 'Load post', 'url' => ['/manage/loadPost']],
-        ],
+        'items' => $topNavItems,
     ]);
     NavBar::end();
     ?>
@@ -50,7 +54,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; Nullvar <?= date('Y') ?></p>
+        <p class="pull-left">&copy; <?= Yii::$app->params['username'] . ' ' . date('Y') ?></p>
 
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>
