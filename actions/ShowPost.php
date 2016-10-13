@@ -21,6 +21,7 @@ class ShowPost extends \yii\base\Action
         }
         
         return $this->controller->render('post', [
+            'postId' => $post->id,
             'title' => $post->title,
             'content' => $post->content,
             'created_at' => $post->created_at,

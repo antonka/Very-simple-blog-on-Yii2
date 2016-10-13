@@ -15,11 +15,5 @@ $content = empty($model->cutted_content) ? $model->content : $model->cutted_cont
         <span>
             <?= Html::a('Read more', ['/public/post', 'id' => $model->id]); ?>
         </span>
-        <span>/</span>
-        <span>
-            <?= Html::a('Reload post', [
-                'manage/reloadPost', 'id' => $model->id
-            ]); ?>
-        </span>
     </div>
 </div>
