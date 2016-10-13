@@ -4,7 +4,11 @@ use yii\helpers\Html;
 use yii\helpers\Markdown;
 
 $this->title = 'Load post';
-$this->params['breadcrumbs'][] = $postModel->title;
+$this->params['breadcrumbs'][] = [
+    'label' => $postModel->title, 
+    'url' => ['/public/post', 'id' => $postModel->id],
+];
+$this->params['breadcrumbs'][] = 'Reload';
 
 ?>
 <div class="site-about">
