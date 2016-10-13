@@ -2,7 +2,7 @@
 
 namespace app\actions;
 
-use app\helpers\PostLoaderFactory;
+use app\components\PostLoaderFactory;
 
 /**
  * @author Anton Karamnov

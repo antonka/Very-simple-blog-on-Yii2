@@ -3,7 +3,7 @@
 namespace app\actions;
 
 use Yii;
-use app\helpers\PostLoaderFactory;
+use app\components\PostLoaderFactory;
 
 /**
  * @author Anton Karamnov
