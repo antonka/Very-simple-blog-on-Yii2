@@ -20,7 +20,7 @@ class LoadPost extends \yii\base\Action
         }
         
         return $this->controller->render('load_post', [
-            'fileModel' => $postLoader->getfileLoader()->getFileModel()
+            'fileModel' => $postLoader->getFileLoader()->getFileModel()
         ]);
     }
 }
