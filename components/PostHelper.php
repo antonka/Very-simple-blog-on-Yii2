@@ -19,10 +19,16 @@ class PostHelper
         ]);
     }
     
+    /**
+     * @param integer $postId
+     */
     public static function redirectToPostPage($postId)
     {
-        Yii::$app->getResponse()->redirect(
-            self::createPostUrl($postId)
-        ); 
+        Yii::$app->getResponse()->redirect(self::createPostUrl($postId)); 
+    }
+    
+    public static function redirectToPostListPage()
+    {
+        Yii::$app->getResponse()->redirect(['/public/index']); 
     }
 }

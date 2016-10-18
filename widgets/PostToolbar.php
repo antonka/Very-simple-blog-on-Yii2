@@ -24,7 +24,7 @@ class PostToolbar extends \yii\base\Widget
            'links' => [
                 ['Download', '#'], 
                 ['Reload', ['/manage/reloadPost', 'post_id' => $this->postId]],
-                ['Delete', '#'],
+                ['Delete', ['/manage/deletePost', 'post_id' => $this->postId]],
             ],
         ]);
     }
