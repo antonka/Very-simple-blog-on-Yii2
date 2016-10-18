@@ -36,6 +36,7 @@ class ManageController extends \yii\web\Controller
         return [
             'loadPost' => ['class' => \app\actions\LoadPost::className()],
             'reloadPost' => ['class' => \app\actions\ReloadPost::className()],
+        //    'deletePost' => ['class' =]
         ];
     }   
 }

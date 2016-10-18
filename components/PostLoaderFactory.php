@@ -8,30 +8,28 @@ namespace app\components;
 class PostLoaderFactory
 {
     /**
-     * @return \app\helpers\PostLoader
+     * @param \app\models\Post $post
+     * @return \app\components\PostLoader
      */
-    public static function build()
+    public static function build(\app\models\Post $post) 
     {
-        return new PostLoader(
-            new \app\models\Post(),
-            MarkDownFileLoaderFactory::build()
-        );
+        return new PostLoader($post, MarkDownFileLoaderFactory::build());
+    }
+ 
+    /**
+     * @return \app\components\PostLoader
+     */
+    public static function buildWithNewPostModel() 
+    {
+        return self::build(new \app\models\Post());
     }
     
+    
     /**
-     * @param type $primaryKey
-     * @return \app\helpers\PostLoader
-     * @throws \yii\web\HttpException
+     * @return \app\components\PostLoader
      */
-    public static function buildExistingPost($primaryKey)
+    public static function buildWithFoundPostModelByHttpRequest()
     {
-        $post = \app\models\Post::findOne($primaryKey);
-        if (is_null($post)) {
-            throw new \yii\web\HttpException(
-                404, 'The requested post could not be found'
-            );
-        }
-        
-        return new PostLoader($post, MarkDownFileLoaderFactory::build());
+        return self::build(PostFinder::findByHttpRequest());
     }
 }

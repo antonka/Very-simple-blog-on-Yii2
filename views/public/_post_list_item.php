@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\helpers\Markdown;
+use app\components\PostHelper;
 
 $content = empty($model->cutted_content) ? $model->content : $model->cutted_content;
 
@@ -13,7 +14,7 @@ $content = empty($model->cutted_content) ? $model->content : $model->cutted_cont
         <span>Created at <?= Html::encode($model->created_at) ?></span>
         <span>/</span>
         <span>
-            <?= Html::a('Read more', ['/public/post', 'id' => $model->id]); ?>
+            <?= Html::a('Read more', PostHelper::createPostUrl($model->id)); ?>
         </span>
     </div>
 </div>
