@@ -89,6 +89,14 @@ class PostLoader
      */
     protected function cutContent($content)
     {
+        $explodedContent = explode("\n", $content);
+        if (strpos($explodedContent[1], '=') !== false) {
+            unset($explodedContent[0]);
+            unset($explodedContent[1]);
+        }
+        
+        $content = implode("\n", $explodedContent);
+        
         if (($cutTagPosition = strpos($content, $this->cutTag)) > 0) {
             return substr($content, 0, $cutTagPosition);
         }
