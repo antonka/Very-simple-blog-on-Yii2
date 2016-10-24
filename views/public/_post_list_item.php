@@ -9,7 +9,14 @@ $content = empty($model->cutted_content) ? $model->content : $model->cutted_cont
 ?>
 
 <div class="post-list-item">
-    <div><?= Markdown::process($content); ?></div>
+    <?= Html::a(
+        "<h2>{$model->title}</h2>", 
+        PostHelper::createPostUrl($model->id), 
+        ['class' => 'post-list-item__title']
+    ); ?>
+    <div class="post-list-item__cut">
+        <?= Markdown::process($content); ?>
+    </div>
     <div class="post-list-item__descr">
         <span>Created at <?= Html::encode($model->created_at) ?></span>
         <span>/</span>
