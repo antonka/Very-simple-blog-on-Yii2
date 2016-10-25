@@ -52,7 +52,9 @@ class PostLoader
     protected function savePost($content)
     {
         $this->model->title = self::findPostTitle($content);
-        $this->model->content = preg_replace("/" . $this->cutTag  . "/", '', $content);
+        $this->model->content = preg_replace(
+            "/" . $this->cutTag  . "/", '', $content
+        );
         $this->model->cutted_content = $this->cutContent($content);
         
         return $this->model->save();
