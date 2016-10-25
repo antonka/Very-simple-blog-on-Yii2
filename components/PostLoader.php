@@ -20,7 +20,7 @@ class PostLoader
     /**
      * @var string
      */
-    protected $cutTag = "#cut_post#";
+    protected $cutTag = '#cut_post#';
 
     /**
      * @param \yii\db\ActiveRecord $model
@@ -52,7 +52,7 @@ class PostLoader
     protected function savePost($content)
     {
         $this->model->title = self::findPostTitle($content);
-        $this->model->content = preg_replace($this->cutTag, '', $content);
+        $this->model->content = preg_replace("/" . $this->cutTag  . "/", '', $content);
         $this->model->cutted_content = $this->cutContent($content);
         
         return $this->model->save();
