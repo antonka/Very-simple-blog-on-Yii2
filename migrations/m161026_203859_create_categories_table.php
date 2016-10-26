@@ -2,6 +2,9 @@
 
 use yii\db\Migration;
 
+/**
+ * @author Anton Karamnov
+ */
 class m161026_203859_create_categories_table extends Migration
 {
     /**

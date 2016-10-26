@@ -2,6 +2,9 @@
 
 use yii\db\Migration;
 
+/**
+ * @author Anton Karamnov
+ */
 class m161006_215824_add_attribute_cutted_content_to_post_entity extends Migration
 {
     public function up()

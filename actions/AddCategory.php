@@ -5,6 +5,9 @@ namespace app\actions;
 use Yii;
 use \app\models\Category;
 
+/**
+ * @author Anton Karamnov
+ */
 class AddCategory extends \yii\base\Action
 {
     public function run()
