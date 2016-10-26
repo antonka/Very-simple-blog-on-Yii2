@@ -11,6 +11,7 @@ use app\assets\AppAsset;
 
 $topNavItems = [];
 if (!Yii::$app->user->isGuest) {
+    $topNavItems[] = ['label' => 'Add category', 'url' => ['/manage/addCategory']];
     $topNavItems[] = ['label' => 'Load post', 'url' => ['/manage/loadPost']];
     $topNavItems[] = ['label' => 'Log out', 'url' => ['/public/logout']];
 }

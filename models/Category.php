@@ -2,7 +2,7 @@
 
 namespace app\models;
 
-class Category extends yii\db\ActiveRecord
+class Category extends \yii\db\ActiveRecord
 {
     /**
      * @return string
