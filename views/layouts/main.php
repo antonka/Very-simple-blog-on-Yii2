@@ -8,6 +8,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use app\widgets\CategoriesNavigation;
 
 $topNavItems = [];
 if (!Yii::$app->user->isGuest) {
@@ -49,8 +50,16 @@ AppAsset::register($this);
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
-        <?= $content ?>
+        <div class="row">
+            <div class="col-sm-8">
+                <?= $content ?>
+            </div>
+            <div class="col-sm-3">
+                <?= CategoriesNavigation::widget() ?>
+            </div>
+        </div>
     </div>
+    
 </div>
 
 <footer class="footer">
