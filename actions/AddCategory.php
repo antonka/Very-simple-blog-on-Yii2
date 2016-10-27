@@ -16,8 +16,7 @@ class AddCategory extends \yii\base\Action
         if ($categoryModel->load(Yii::$app->request->post()) 
             && $categoryModel->save()
         ) {
-            echo 'New category was created';
-            exit;
+            $this->controller->goHome();
         }
         return $this->controller->render('add_category', [
             'categoryModel' => $categoryModel,

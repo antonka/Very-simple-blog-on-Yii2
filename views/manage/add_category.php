@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
         echo $form->field($categoryModel, 'name')->textInput([
             'style' => 'width: 250px',
         ]);
-        echo Html::submitButton('Login', ['class' => 'btn btn-primary']);
+        echo Html::submitButton('Save', ['class' => 'btn btn-primary']);
         ActiveForm::end(); 
         ?>
     </div>    
