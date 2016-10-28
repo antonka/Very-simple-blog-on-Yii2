@@ -1,18 +1,15 @@
 <?php
 
-/* @var $this \yii\web\View */
-/* @var $content string */
-
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
-use app\widgets\CategoriesNavigation;
+use app\widgets\CategoriesToolbar;
+use app\models\Category;
 
 $topNavItems = [];
 if (!Yii::$app->user->isGuest) {
-    $topNavItems[] = ['label' => 'Add category', 'url' => ['/manage/addCategory']];
     $topNavItems[] = ['label' => 'Load post', 'url' => ['/manage/loadPost']];
     $topNavItems[] = ['label' => 'Log out', 'url' => ['/public/logout']];
 }
@@ -48,14 +45,17 @@ AppAsset::register($this);
 
     <div class="container">
         <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+            'links' => isset($this->params['breadcrumbs']) 
+                ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <div class="row">
             <div class="col-sm-8">
                 <?= $content ?>
             </div>
             <div class="col-sm-3">
-                <?= CategoriesNavigation::widget() ?>
+                <?= CategoriesToolbar::widget([
+                    'categoryModel' => new Category(),
+                ]) ?>
             </div>
         </div>
     </div>
@@ -64,7 +64,9 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; <?= Yii::$app->params['username'] . ' ' . date('Y') ?></p>
+        <p class="pull-left">
+            &copy; <?= Yii::$app->params['username'] . ' ' . date('Y') ?>
+        </p>
 
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>
