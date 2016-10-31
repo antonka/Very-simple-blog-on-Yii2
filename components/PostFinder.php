@@ -7,7 +7,7 @@ use Yii;
 /**
  * @author Anton Karamnov
  */
-class PostFinder
+class PostFinder extends Finder
 {
     /**
      * @return \app\models\Post
@@ -15,14 +15,9 @@ class PostFinder
      */
     public static function findByHttpRequest()   
     {
-        $postId = Yii::$app->request->get('post_id');
-        $model = \app\models\Post::findOne($postId);
-        if (is_null($model)) {
-            throw new \yii\web\HttpException(
-                404, 'The requested post could not be found'
-            );
-        }
-        return $model;
+        return self::getFoundModelByHttpRequest(
+            'post_id', \app\models\Post::className()
+        );
     }       
 }
 

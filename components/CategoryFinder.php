@@ -7,7 +7,7 @@ use Yii;
 /**
  * @author Anton Karamnov
  */
-class CategoryFinder
+class CategoryFinder extends Finder
 {
     /**
      * @return \app\models\Post
@@ -15,13 +15,8 @@ class CategoryFinder
      */
     public static function findByHttpRequest()   
     {
-        $postId = Yii::$app->request->get('category_id');
-        $model = \app\models\Category::findOne($postId);
-        if (is_null($model)) {
-            throw new \yii\web\HttpException(
-                404, 'The requested category could not be found'
-            );
-        }
-        return $model;
+        return self::getFoundModelByHttpRequest(
+            'category_id', \app\models\Category::className()
+        );
     }       
 }
