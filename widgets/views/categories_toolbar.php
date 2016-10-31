@@ -9,7 +9,21 @@ use yii\widgets\Pjax;
     <div style="font-size: 16px;margin-bottom: 10px;">Categories</div>
     <div>
         <?php foreach ($categoriesList as $categoryRow): ?>
-            <div><?= Html::a($categoryRow['name'], '#'); ?></div>
+            <div>
+                <?= Html::a($categoryRow['name'], '#'); ?>
+                <?php 
+                if (!Yii::$app->user->isGuest) {
+                    echo Html::a(
+                        '<span class="glyphicon glyphicon-pencil"></span>', 
+                        '#'
+                    ); 
+                    echo Html::a(
+                        '<span class="glyphicon glyphicon-trash"></span>', 
+                        '#'
+                    );
+                } ?>
+            </div>
+        
         <?php endforeach; ?>
     </div>
 </div>
