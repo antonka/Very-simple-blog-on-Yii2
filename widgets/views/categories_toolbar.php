@@ -19,7 +19,10 @@ use yii\widgets\Pjax;
                     ); 
                     echo Html::a(
                         '<span class="glyphicon glyphicon-trash"></span>', 
-                        '#'
+                        [
+                            '/manage/deleteCategory', 
+                            'category_id' => $categoryRow['id']
+                        ]
                     );
                 } ?>
             </div>

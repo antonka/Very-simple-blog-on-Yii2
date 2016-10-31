@@ -34,11 +34,16 @@ class ManageController extends \yii\web\Controller
     public function actions()
     {
         return [
+            
+            // Post
             'loadPost' => ['class' => \app\actions\LoadPost::className()],
             'reloadPost' => ['class' => \app\actions\ReloadPost::className()],
             'deletePost' => ['class' => \app\actions\DeletePost::className()],
             'downloadPost' => ['class' => \app\actions\DownloadPost::className()],
+            
+            // Category
             'addCategory' => ['class' => \app\actions\AddCategory::className()],
+            'deleteCategory' => ['class' => \app\actions\DeleteCategory::className()],
         ];
     }   
 }
