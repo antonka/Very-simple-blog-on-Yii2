@@ -33,18 +33,3 @@ use yii\widgets\Pjax;
         <?php endforeach; ?>
     </div>
 </div>
-
-<?php if (!Yii::$app->user->isGuest): ?>
-<div>
-    <div>Add category</div>
-    <div>
-        <?php 
-        Pjax::begin(['id' => 'category-form-pjax']);
-        echo $this->render('@app/views/manage/_category_form', [
-            'categoryModel' => $categoryModel,
-        ]);
-        Pjax::end();
-        ?>
-    </div>    
-</div>
-<?php endif; ?>

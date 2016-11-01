@@ -16,23 +16,11 @@ class AddCategory extends \yii\base\Action
         if ($categoryModel->load(Yii::$app->request->post()) 
             && $categoryModel->save()
         ) {
-            $this->respondSuccess();
+            Yii::$app->session->setFlash('success', 'Category was added');
+            $this->controller->goHome();
         }
         return $this->controller->render('add_category', [
             'categoryModel' => $categoryModel,
         ]);
-    }
-    
-    protected function respondSuccess()
-    {
-        if (Yii::$app->request->isPjax) {
-            Yii::$app->session->setFlash('success', 'Category was added');
-            return $this->controller->renderPartial('_category_form', [
-                'categoryModel' => new Category(),
-            ]);
-        }
-        
-        $this->controller->goHome();
-        
     }
 }

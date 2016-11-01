@@ -11,6 +11,7 @@ use app\models\Category;
 $topNavItems = [];
 if (!Yii::$app->user->isGuest) {
     $topNavItems[] = ['label' => 'Load post', 'url' => ['/manage/loadPost']];
+    $topNavItems[] = ['label' => 'Add category', 'url' => ['/manage/addCategory']];
     $topNavItems[] = ['label' => 'Log out', 'url' => ['/public/logout']];
 }
 
