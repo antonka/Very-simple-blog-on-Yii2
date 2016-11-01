@@ -44,6 +44,7 @@ class ManageController extends \yii\web\Controller
             // Category
             'addCategory' => ['class' => \app\actions\AddCategory::className()],
             'deleteCategory' => ['class' => \app\actions\DeleteCategory::className()],
+            'editCategory' => ['class' => \app\actions\EditCategory::className()],
         ];
     }   
 }

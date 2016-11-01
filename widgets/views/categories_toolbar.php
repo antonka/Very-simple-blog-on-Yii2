@@ -15,13 +15,16 @@ use yii\widgets\Pjax;
                 if (!Yii::$app->user->isGuest) {
                     echo Html::a(
                         '<span class="glyphicon glyphicon-pencil"></span>', 
-                        '#'
+                        [
+                            'manage/editCategory', 
+                            'category_id' => $categoryRow['id'],
+                        ]
                     ); 
                     echo Html::a(
                         '<span class="glyphicon glyphicon-trash"></span>', 
                         [
                             '/manage/deleteCategory', 
-                            'category_id' => $categoryRow['id']
+                            'category_id' => $categoryRow['id'],
                         ]
                     );
                 } ?>

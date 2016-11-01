@@ -5,12 +5,16 @@ use yii\widgets\ActiveForm;
 use Yii;
 use yii\helpers\Url;
 
+$actionRoute = $categoryModel->isNewRecord 
+               ? ['/manage/addCategory']
+               : ['/manage/editCategory', 'category_id' => $categoryModel->id];
+
 if (Yii::$app->session->hasFlash('success')) {
     echo Yii::$app->session->getFlash('success');
 }
 
 $form = ActiveForm::begin([
-    'action' => Url::toRoute(['/manage/addCategory']),
+    'action' => Url::toRoute($actionRoute),
     'options' => [
         'data-pjax' => true,
     ]
