@@ -1,7 +1,12 @@
 <?php
 
-use \yii\bootstrap\Html;
-use yii\widgets\Pjax;
+use yii\bootstrap\Html;
+
+
+if ($canSetRelation) {
+    echo Html::beginForm();
+    echo Html::hiddenInput('post_id', Yii::$app->request->get('post_id'));
+}
 
 ?>
 
@@ -10,13 +15,21 @@ use yii\widgets\Pjax;
     <div>
         <?php foreach ($categoriesList as $categoryRow): ?>
             <div>
-                <?= Html::a($categoryRow['name'], '#'); ?>
-                <?php 
-                if (!Yii::$app->user->isGuest) {
+                <?php
+                
+                if ($canSetRelation) {
+                    echo Html::checkbox(
+                        'categories[' . $categoryRow['id'] . ']', false
+                    );
+                }
+                
+                echo Html::a($categoryRow['name'], '#'); 
+                
+                if ($canManageCategories) {
                     echo Html::a(
                         '<span class="glyphicon glyphicon-pencil"></span>', 
                         [
-                            'manage/editCategory', 
+                            '/manage/editCategory', 
                             'category_id' => $categoryRow['id'],
                         ]
                     ); 
@@ -27,9 +40,16 @@ use yii\widgets\Pjax;
                             'category_id' => $categoryRow['id'],
                         ]
                     );
-                } ?>
+                } 
+                ?>
             </div>
         
         <?php endforeach; ?>
     </div>
 </div>
+
+<?php 
+if ($canSetRelation) {
+    echo Html::submitButton('Save', ['class' => 'btn btn-primary']);
+    echo Html::endForm();
+}
