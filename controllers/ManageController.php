@@ -40,11 +40,16 @@ class ManageController extends \yii\web\Controller
             'reloadPost' => ['class' => \app\actions\ReloadPost::className()],
             'deletePost' => ['class' => \app\actions\DeletePost::className()],
             'downloadPost' => ['class' => \app\actions\DownloadPost::className()],
+            'savePostCategoriesRelation' => [
+                'class' => \app\actions\SavePostCategoriesRelation::className()
+            ],
             
             // Category
             'addCategory' => ['class' => \app\actions\AddCategory::className()],
             'deleteCategory' => ['class' => \app\actions\DeleteCategory::className()],
             'editCategory' => ['class' => \app\actions\EditCategory::className()],
+            
+            
         ];
     }   
 }

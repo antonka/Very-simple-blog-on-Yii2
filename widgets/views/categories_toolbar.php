@@ -1,11 +1,13 @@
 <?php
 
 use yii\bootstrap\Html;
-
+use yii\helpers\Url;
 
 if ($canSetRelation) {
-    echo Html::beginForm();
-    echo Html::hiddenInput('post_id', Yii::$app->request->get('post_id'));
+    echo Html::beginForm([
+        '/manage/savePostCategoriesRelation', 
+        'post_id' => $postId
+    ]);
 }
 
 ?>
@@ -19,7 +21,11 @@ if ($canSetRelation) {
                 
                 if ($canSetRelation) {
                     echo Html::checkbox(
-                        'categories[' . $categoryRow['id'] . ']', false
+                        'categoryIds[' . $categoryRow['id'] . ']', 
+                        in_array(
+                            $categoryRow['id'], 
+                            $currentPostBoundWithCategories    
+                        )
                     );
                 }
                 

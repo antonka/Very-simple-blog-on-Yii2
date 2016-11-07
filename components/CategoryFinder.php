@@ -3,6 +3,7 @@
 namespace app\components;
 
 use Yii;
+use app\models\Category;
 
 /**
  * @author Anton Karamnov
@@ -16,7 +17,17 @@ class CategoryFinder extends Finder
     public static function findByHttpRequest()   
     {
         return self::getFoundModelByHttpRequest(
-            'category_id', \app\models\Category::className()
+            'category_id', Category::className()
         );
-    }       
+    }
+    
+    /**
+     * @return array
+     */
+    public static function getAllCategoryIds()
+    {
+        return Yii::$app->db->createCommand(
+            'SELECT id FROM ' . Category::tableName()
+        )->queryColumn();
+    }
 }
