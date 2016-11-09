@@ -3,6 +3,7 @@
 namespace app\components;
 
 use Yii;
+use app\models\Post;
 
 /**
  * @author Anton Karamnov
@@ -30,5 +31,16 @@ class PostHelper
     public static function redirectToPostListPage()
     {
         Yii::$app->getResponse()->redirect(['/public/index']); 
+    }
+    
+    /**
+     * @return \yii\data\ActiveDataProvider
+     */
+    public static function getPostsListActiveDataProvider()
+    {
+        return new \yii\data\ActiveDataProvider([
+            'query' => Post::find()->orderBy('created_at DESC'),
+            'pagination' => ['pageSize' => 10],
+        ]);
     }
 }

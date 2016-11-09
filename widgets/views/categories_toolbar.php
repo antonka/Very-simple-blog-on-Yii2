@@ -15,35 +15,37 @@ if ($canSetRelation) {
 <div style="margin-bottom: 50px;">
     <div style="font-size: 16px;margin-bottom: 10px;">Categories</div>
     <div>
-        <?php foreach ($categoriesList as $categoryRow): ?>
+        <?php foreach ($categoriesList as $categoryRowData): ?>
             <div>
                 <?php
                 
                 if ($canSetRelation) {
                     echo Html::checkbox(
-                        'categoryIds[' . $categoryRow['id'] . ']', 
+                        'categoryIds[' . $categoryRowData['id'] . ']', 
                         in_array(
-                            $categoryRow['id'], 
+                            $categoryRowData['id'], 
                             $currentPostBoundWithCategories    
                         )
                     );
                 }
                 
-                echo Html::a($categoryRow['name'], '#'); 
+                echo Html::a($categoryRowData['name'], [
+                    '/public/category', 'category_id' => $categoryRowData['id'],
+                ]); 
                 
                 if ($canManageCategories) {
                     echo Html::a(
                         '<span class="glyphicon glyphicon-pencil"></span>', 
                         [
                             '/manage/editCategory', 
-                            'category_id' => $categoryRow['id'],
+                            'category_id' => $categoryRowData['id'],
                         ]
                     ); 
                     echo Html::a(
                         '<span class="glyphicon glyphicon-trash"></span>', 
                         [
                             '/manage/deleteCategory', 
-                            'category_id' => $categoryRow['id'],
+                            'category_id' => $categoryRowData['id'],
                         ]
                     );
                 } 

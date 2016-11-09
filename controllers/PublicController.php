@@ -21,6 +21,9 @@ class PublicController extends \yii\web\Controller
             'error' => ['class' => \yii\web\ErrorAction::className()],
             'index' => ['class' => \app\actions\ShowPostsList::className()],
             'post' =>  ['class'=> \app\actions\ShowPost::className()],
+            'category' => [
+                'class' => \app\actions\ShowPostsListByCategory::className()
+            ],
         ]; 
     }
     

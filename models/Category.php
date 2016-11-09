@@ -29,5 +29,11 @@ class Category extends \yii\db\ActiveRecord
             'id' => 'ID',
             'name' => 'Name',
         ];
-    }  
+    } 
+    
+    public function getPosts()
+    {
+        return $this->hasMany(Post::className(), ['id' => 'post_id'])
+            ->viaTable('posts_categories', ['category_id' => 'id']);
+    }
 }
