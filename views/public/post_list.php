@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <div>
         <?= ListView::widget([
-            'dataProvider' => $dataProvider,
+            'dataProvider' => $postsListActiveDataProvider,
             'itemView' => '_post_list_item',
         ]) ?>
     </div>
