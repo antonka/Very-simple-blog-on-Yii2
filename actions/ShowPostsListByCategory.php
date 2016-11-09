@@ -4,7 +4,6 @@ namespace app\actions;
 
 use app\components\CategoryFinder;
 use app\components\PostHelper;
-use yii\data\ActiveDataProvider;
 
 /**
  * @author Anton Karamnov
