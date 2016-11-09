@@ -12,7 +12,7 @@ class ShowPostsList extends \yii\base\Action
 {
     public function run()
     {
-        return $this->controller->render('post_list.php', [
+        return $this->controller->render('post_list', [
             'postsListActiveDataProvider' => PostHelper::getPostsListActiveDataProvider()
         ]);
     }
