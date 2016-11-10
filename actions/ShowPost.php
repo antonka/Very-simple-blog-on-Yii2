@@ -12,7 +12,7 @@ class ShowPost extends \yii\base\Action
 {
     public function run() 
     {
-        return $this->controller->render('post', [
+        return $this->controller->render('/post/view', [
             'post' => PostFinder::findByHttpRequest(),
         ]);
     }

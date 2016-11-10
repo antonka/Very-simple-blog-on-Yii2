@@ -18,7 +18,7 @@ class EditCategory extends \yii\base\Action
         ) {
             Yii::$app->session->setFlash('success', 'Category was updated');
         }
-        return $this->controller->render('edit_category', [
+        return $this->controller->render('/category/edit_category', [
             'categoryModel' => $categoryModel,
         ]);
     }

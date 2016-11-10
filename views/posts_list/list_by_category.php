@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ListView;
 
-$this->title = 'List of Posts';
+$this->title = $categoryName;
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -21,7 +21,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <div>
         <?= ListView::widget([
             'dataProvider' => $postsListActiveDataProvider,
-            'itemView' => '_post_list_item',
+            'itemView' => '_item',
         ]) ?>
     </div>
 </div>
+

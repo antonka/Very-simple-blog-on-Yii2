@@ -19,7 +19,7 @@ class AddCategory extends \yii\base\Action
             Yii::$app->session->setFlash('success', 'Category was added');
             $this->controller->goHome();
         }
-        return $this->controller->render('add_category', [
+        return $this->controller->render('/category/add_category', [
             'categoryModel' => $categoryModel,
         ]);
     }

@@ -21,7 +21,7 @@ class ShowPostsListByCategory extends \yii\base\Action
             [':category_id' => $categoryModel->id]
         );
         
-        return $this->controller->render('posts_list_by_category', [
+        return $this->controller->render('/posts_list/list_by_category', [
             'categoryName' => $categoryModel->name,
             'postsListActiveDataProvider' => $postsListActiveDataProvider,
         ]);
