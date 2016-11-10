@@ -15,7 +15,7 @@ class m161026_203859_create_categories_table extends Migration
         $this->createTable('categories', [
             'id' => $this->primaryKey(),
             'name' => $this->string(50)->notNull()
-        ]);
+        ], 'DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci');
     }
 
     /**
