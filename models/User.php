@@ -2,18 +2,11 @@
 
 namespace app\models;
 
-class User extends \yii\base\Object implements \yii\web\IdentityInterface
-{
-    /**
-     * @var integer
-     */
-    protected $id = 1;
-    
-    /**
-     * @var string 
-     */
-    protected $username;
-
+/**
+ * @autor Anton Karamnov
+ */
+class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
+{ 
     /**
      * @inheritdoc
      */
@@ -53,4 +46,37 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
     {
         throw new \yii\base\ErrorException(__METHOD__  . ' not implemented');
     }
+    
+    /**
+     * @return string
+     */
+    public static function tableName() 
+    {
+        return 'users';
+    }
+    
+    /**
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            [['email', 'name', 'role'], 'required'],
+            [['password'], 'safe'],
+        ];
+    }
+    
+    /**
+     * @return array
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => '#',
+            'email' => 'Email',
+            'name' => 'Name',
+            'password' => 'Password',
+            'role' => 'Role',
+        ];
+    }   
 }
