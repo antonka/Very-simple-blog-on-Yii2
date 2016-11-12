@@ -10,9 +10,9 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     /**
      * @inheritdoc
      */
-    public static function findIdentity($id = 1)
+    public static function findIdentity($id)
     {
-        return new static();
+        return self::findOne($id);
     }
 
     /**
@@ -61,7 +61,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            [['email', 'name', 'role'], 'required'],
+            [['email', 'name', 'role'], 'required'], 
             [['password'], 'safe'],
         ];
     }
@@ -78,5 +78,6 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'password' => 'Password',
             'role' => 'Role',
         ];
-    }   
+    }  
 }
+

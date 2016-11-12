@@ -14,6 +14,10 @@ class LoginForm extends \yii\base\Model
      */
     public $password;
     
+    /**
+     * @var string 
+     */
+    public $email;
     
     /**
      * @return array
@@ -21,21 +25,9 @@ class LoginForm extends \yii\base\Model
     public function rules() 
     {
         return [
-            [['password'], 'required'],
-            [['password'], 'validatePassword'],    
+            [['password', 'email'], 'required'],
+            [['email'], 'email'],
         ];
-    }
-    
-    /**
-     * 
-     * @param string $attribute
-     * @param array $params
-     */
-    public function validatePassword($attribute, $params)
-    {
-        if (Yii::$app->params['password'] !== $this->password) {
-            $this->addError($attribute, 'Incorrect password');
-        }
     }
     
 }

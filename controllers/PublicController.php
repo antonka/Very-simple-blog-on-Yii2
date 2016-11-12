@@ -27,7 +27,6 @@ class PublicController extends \yii\web\Controller
         ]; 
     }
     
-    
     public function actionLogin()
     {
         $loginForm = new LoginForm();
@@ -35,8 +34,23 @@ class PublicController extends \yii\web\Controller
         if ($loginForm->load(Yii::$app->request->post())
             && $loginForm->validate()
         ) {
-            Yii::$app->user->login(User::findIdentity());
-            return $this->goHome();
+            $userModel = User::find()->where([
+                'email' => $loginForm->email
+            ])->one();
+            
+            if ($userModel 
+                && Yii::$app->security->validatePassword(
+                    $loginForm->password, $userModel->password
+                )
+            ) {
+                Yii::$app->user->login($userModel);
+                return $this->goHome();
+            }
+            
+            Yii::$app->session->addFlash(
+                'error', 'User was not authenticated' 
+            );
+            return $this->refresh();
         }
         
         return $this->render('login', [
