@@ -40,7 +40,7 @@ class PublicController extends \yii\web\Controller
             
             if ($userModel 
                 && Yii::$app->security->validatePassword(
-                    $loginForm->password, $userModel->password
+                    $loginForm->password, $userModel->password_hash
                 )
             ) {
                 Yii::$app->user->login($userModel);
