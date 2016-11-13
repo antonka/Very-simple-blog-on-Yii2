@@ -7,6 +7,8 @@ use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use app\widgets\CategoriesToolbar;
 use app\models\Category;
+use app\widgets\AlertBlock;
+
 
 $topNavItems = [];
 if (!Yii::$app->user->isGuest) {
@@ -51,22 +53,7 @@ AppAsset::register($this);
                 ? $this->params['breadcrumbs'] : [],
         ]) ?>
         
-        <?php if (Yii::$app->session->hasFlash('success')): ?>
-            <div class="alert alert-success">
-                <?= Yii::$app->session->getFlash('success') ?>
-                <?php foreach (Yii::$app->session->getFlash('success') as $message): ?>
-                    <span><?= $message ?><span>
-                <?php endforeach; ?>
-            </div>
-        <?php endif; ?>
-        
-        <?php if (Yii::$app->session->hasFlash('error')): ?>
-            <div class="alert alert-danger">
-                <?php foreach (Yii::$app->session->getFlash('error') as $message): ?>
-                    <span><?= $message ?><span>
-                <?php endforeach; ?>
-            </div>
-        <?php endif; ?>
+        <?= AlertBlock::widget() ?> 
         
         <div class="row">
             <div class="col-sm-8">
