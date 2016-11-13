@@ -7,8 +7,6 @@ use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use app\widgets\CategoriesToolbar;
 use app\models\Category;
-use app\widgets\AlertBlock;
-
 
 $topNavItems = [];
 if (!Yii::$app->user->isGuest) {
@@ -53,7 +51,7 @@ AppAsset::register($this);
                 ? $this->params['breadcrumbs'] : [],
         ]) ?>
         
-        <?= AlertBlock::widget() ?> 
+        <?= blog\base\widgets\AlertBlock::widget() ?> 
         
         <div class="row">
             <div class="col-sm-8">
