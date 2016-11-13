@@ -1,13 +1,13 @@
 <?php
 
-namespace app\widgets;
+namespace blog\post\widgets;
 
 use Yii;
 
 /**
  * @author Anton Karamnov
  */
-class PostToolbar extends \yii\base\Widget
+class Toolbar extends \yii\base\Widget
 {
     /**
      * @var integer  
@@ -20,7 +20,7 @@ class PostToolbar extends \yii\base\Widget
             return;
         }
      
-        return $this->render('post_toolbar', [
+        return $this->render('toolbar', [
            'links' => [
                 [
                     'Download', 

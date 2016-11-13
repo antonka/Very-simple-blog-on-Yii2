@@ -8,7 +8,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
-<?= \app\widgets\PostToolbar::widget(['postId' => $post->id]); ?>
+<?= \blog\post\widgets\Toolbar::widget(['postId' => $post->id]); ?>
 
 <div class="site-about"> 
     <p><i><?= Html::encode($post->created_at) ?></i></p>
