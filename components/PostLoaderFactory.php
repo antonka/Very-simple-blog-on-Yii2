@@ -13,7 +13,11 @@ class PostLoaderFactory
      */
     public static function build(\app\models\Post $post) 
     {
-        return new PostLoader($post, MarkDownFileLoaderFactory::build());
+        return new PostLoader(
+            $post, 
+            MarkDownFileLoaderFactory::build(),
+            \Yii::$app->user->getIdentity()
+        );
     }
  
     /**

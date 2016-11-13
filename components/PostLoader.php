@@ -21,16 +21,24 @@ class PostLoader
      * @var string
      */
     protected $cutTag = '#cut_post#';
+    
+    /**
+     * @var \yii\web\IdentityInterface 
+     */
+    protected $identity;
 
     /**
      * @param \yii\db\ActiveRecord $model
      * @param \app\helpers\FileLoader $fileLoader
      */
     public function __construct(
-        \yii\db\ActiveRecord $model, FileLoader $fileLoader
+        \yii\db\ActiveRecord $model, 
+        FileLoader $fileLoader,
+        \yii\web\IdentityInterface $identity
     ) {
         $this->model = $model;
         $this->fileLoader = $fileLoader;
+        $this->identity = $identity;
     }
     
     /**
@@ -56,6 +64,7 @@ class PostLoader
             "/" . $this->cutTag  . "/", '', $content
         );
         $this->model->cutted_content = $this->cutContent($content);
+        $this->model->user_id = $this->identity->getId();
         
         return $this->model->save();
     }
