@@ -18,7 +18,7 @@ class Reload extends \yii\base\Action
             Helper::redirectToPostPage($postLoader->getModel()->id);
         }
         
-        return $this->controller->render('/post/reload_post', [
+        return $this->controller->render('@blog/post/views/reload', [
             'fileModel' => $postLoader->getFileLoader()->getFileModel(),
             'postModel' => $postLoader->getModel(),
         ]);

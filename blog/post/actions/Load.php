@@ -18,7 +18,7 @@ class Load extends \yii\base\Action
             Helper::redirectToPostPage($postLoader->getModel()->id);
         }
         
-        return $this->controller->render('/post/load_post', [
+        return $this->controller->render('@blog/post/views/load', [
             'fileModel' => $postLoader->getFileLoader()->getFileModel()
         ]);
     }
