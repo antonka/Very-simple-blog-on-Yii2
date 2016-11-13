@@ -16,8 +16,10 @@ class AddCategory extends \yii\base\Action
         if ($categoryModel->load(Yii::$app->request->post()) 
             && $categoryModel->save()
         ) {
-            Yii::$app->session->setFlash('success', 'Category was added');
-            $this->controller->goHome();
+            Yii::$app->session->setFlash('success', 
+                $categoryModel->name . ' category was added'
+            );
+            return $this->controller->goHome();
         }
         return $this->controller->render('/category/add_category', [
             'categoryModel' => $categoryModel,
