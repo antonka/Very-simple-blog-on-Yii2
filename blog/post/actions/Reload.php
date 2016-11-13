@@ -1,22 +1,21 @@
 <?php
 
-namespace app\actions;
+namespace blog\post\actions; 
 
-use Yii;
-use app\components\PostLoaderFactory;
-use app\components\PostHelper;
+use blog\post\LoaderFactory;
+use blog\post\Helper;
 
 /**
  * @author Anton Karamnov
  */
-class ReloadPost extends \yii\base\Action
+class Reload extends \yii\base\Action
 {
     public function run()
     {
-        $postLoader = PostLoaderFactory::buildWithFoundPostModelByHttpRequest();
+        $postLoader = LoaderFactory::buildWithFoundPostModelByHttpRequest();
         
         if ($postLoader->load()) {
-            PostHelper::redirectToPostPage($postLoader->getModel()->id);
+            Helper::redirectToPostPage($postLoader->getModel()->id);
         }
         
         return $this->controller->render('/post/reload_post', [

@@ -3,7 +3,7 @@
 namespace app\widgets;
 
 use Yii;
-use app\components\PostFinder;
+use blog\post\Finder as PostFinder; 
 
 
 /**

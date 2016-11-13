@@ -1,11 +1,11 @@
 <?php
 
-namespace app\components;
+namespace blog\post;
 
 /**
  * @author Anton Karamnov
  */
-class PostLoaderFactory
+class LoaderFactory
 {
     /**
      * @param \app\models\Post $post
@@ -13,9 +13,9 @@ class PostLoaderFactory
      */
     public static function build(\app\models\Post $post) 
     {
-        return new PostLoader(
+        return new Loader(
             $post, 
-            MarkDownFileLoaderFactory::build(),
+            \blog\base\MarkDownFileLoaderFactory::build(),
             \Yii::$app->user->getIdentity()
         );
     }
@@ -34,6 +34,6 @@ class PostLoaderFactory
      */
     public static function buildWithFoundPostModelByHttpRequest()
     {
-        return self::build(PostFinder::findByHttpRequest());
+        return self::build(Finder::findByHttpRequest());
     }
 }

@@ -1,11 +1,11 @@
 <?php
 
-namespace app\components;
+namespace blog\post;
 
 /**
  * @author Anton Karamnov
  */
-class PostLoader
+class Loader
 {    
     /**
      * @var \yii\db\ActiveRecord 
@@ -33,7 +33,7 @@ class PostLoader
      */
     public function __construct(
         \yii\db\ActiveRecord $model, 
-        FileLoader $fileLoader,
+        \blog\base\FileLoader $fileLoader,
         \yii\web\IdentityInterface $identity
     ) {
         $this->model = $model;

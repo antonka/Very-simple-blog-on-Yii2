@@ -1,21 +1,21 @@
 <?php
 
-namespace app\actions;
+namespace blog\post\actions;
 
-use app\components\PostLoaderFactory;
-use app\components\PostHelper;
+use blog\post\LoaderFactory;
+use blog\post\Helper;
 
 /**
  * @author Anton Karamnov
  */
-class LoadPost extends \yii\base\Action
+class Load extends \yii\base\Action
 {
     public function run()
     {   
-        $postLoader = PostLoaderFactory::buildWithNewPostModel();
+        $postLoader = LoaderFactory::buildWithNewPostModel();
         
         if ($postLoader->load()) {
-            PostHelper::redirectToPostPage($postLoader->getModel()->id);
+            Helper::redirectToPostPage($postLoader->getModel()->id);
         }
         
         return $this->controller->render('/post/load_post', [

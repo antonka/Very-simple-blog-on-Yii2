@@ -36,10 +36,12 @@ class ManageController extends \yii\web\Controller
         return [
             
             // Post
-            'loadPost' => ['class' => \app\actions\LoadPost::className()],
-            'reloadPost' => ['class' => \app\actions\ReloadPost::className()],
-            'deletePost' => ['class' => \app\actions\DeletePost::className()],
-            'downloadPost' => ['class' => \app\actions\DownloadPost::className()],
+            'loadPost' => ['class' => \blog\post\actions\Load::className()],
+            'reloadPost' => ['class' => \blog\post\actions\Reload::className()],
+            'deletePost' => ['class' => \blog\post\actions\Delete::className()],
+            'downloadPost' => [
+                'class' => \blog\post\actions\Download::className()
+            ],
             'savePostCategoriesRelation' => [
                 'class' => \app\actions\SavePostCategoriesRelation::className()
             ],

@@ -1,19 +1,18 @@
 <?php
 
-namespace app\actions;
+namespace blog\post\actions;
 
 use app\components\CategoryFinder;
-use app\components\PostHelper;
 
 /**
  * @author Anton Karamnov
  */
-class ShowPostsListByCategory extends \yii\base\Action
+class ShowListByCategory extends \yii\base\Action
 {
     public function run()
     {
         $categoryModel = CategoryFinder::findByHttpRequest();
-        $postsListActiveDataProvider = PostHelper::getPostsListActiveDataProvider();
+        $postsListActiveDataProvider = \blog\post\Helper::getPostsListActiveDataProvider();
         $postsListActiveDataProvider->query->join(
             'inner join',
             'posts_categories AS rel',
@@ -21,9 +20,12 @@ class ShowPostsListByCategory extends \yii\base\Action
             [':category_id' => $categoryModel->id]
         );
         
-        return $this->controller->render('/posts_list/list_by_category', [
-            'categoryName' => $categoryModel->name,
-            'postsListActiveDataProvider' => $postsListActiveDataProvider,
-        ]);
+        return $this->controller->render(
+            '@blog/post/views/list/show_by_category',
+            [
+                'categoryName' => $categoryModel->name,
+                'postsListActiveDataProvider' => $postsListActiveDataProvider,
+            ]
+        );
     }
 }

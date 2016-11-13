@@ -1,6 +1,6 @@
 <?php
 
-namespace app\components;
+namespace blog\post;
 
 use Yii;
 use app\models\Post;
@@ -8,7 +8,7 @@ use app\models\Post;
 /**
  * @author Anton Karamnov
  */
-class PostHelper
+class Helper
 {
     /**
      * @param integer $postId

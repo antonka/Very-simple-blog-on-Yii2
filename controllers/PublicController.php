@@ -19,10 +19,10 @@ class PublicController extends \yii\web\Controller
     {
         return [
             'error' => ['class' => \yii\web\ErrorAction::className()],
-            'index' => ['class' => \app\actions\ShowPostsList::className()],
-            'post' =>  ['class'=> \app\actions\ShowPost::className()],
+            'index' => ['class' => \blog\post\actions\ShowList::className()],
+            'post' =>  ['class'=> \blog\post\actions\Show::className()],
             'category' => [
-                'class' => \app\actions\ShowPostsListByCategory::className()
+                'class' => \blog\post\actions\ShowListByCategory::className()
             ],
         ]; 
     }

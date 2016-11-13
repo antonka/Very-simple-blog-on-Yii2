@@ -1,13 +1,13 @@
 <?php
 
-namespace app\components;
+namespace blog\post;
 
 use Yii;
 
 /**
  * @author Anton Karamnov
  */
-class PostFinder extends Finder
+class Finder extends \blog\base\Finder
 {
     /**
      * @return \app\models\Post

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\components;
+namespace blog\base;
 
 use app\models\MarkDownFile;
 
