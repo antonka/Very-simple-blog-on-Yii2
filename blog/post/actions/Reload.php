@@ -8,19 +8,19 @@ use blog\post\Helper;
 /**
  * @author Anton Karamnov
  */
-class Reload extends \yii\base\Action
+class Reload extends \blog\base\Action
 {
     public function run()
     {
-        $postLoader = LoaderFactory::buildWithFoundPostModelByHttpRequest();
+        $loader = LoaderFactory::buildWithFoundPostModelByHttpRequest();
         
-        if ($postLoader->load()) {
-            Helper::redirectToPostPage($postLoader->getModel()->id);
+        if ($loader->load()) {
+            Helper::redirectToPostPage($loader->getModel()->id);
         }
         
-        return $this->controller->render('@blog/post/views/reload', [
-            'fileModel' => $postLoader->getFileLoader()->getFileModel(),
-            'postModel' => $postLoader->getModel(),
+        return $this->render('reload', [
+            'fileModel' => $loader->getFileLoader()->getFileModel(),
+            'postModel' => $loader->getModel(),
         ]);
     }
 }

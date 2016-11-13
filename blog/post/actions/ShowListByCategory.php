@@ -7,7 +7,7 @@ use app\components\CategoryFinder;
 /**
  * @author Anton Karamnov
  */
-class ShowListByCategory extends \yii\base\Action
+class ShowListByCategory extends \blog\base\Action 
 {
     public function run()
     {
@@ -20,12 +20,9 @@ class ShowListByCategory extends \yii\base\Action
             [':category_id' => $categoryModel->id]
         );
         
-        return $this->controller->render(
-            '@blog/post/views/list/show_by_category',
-            [
-                'categoryName' => $categoryModel->name,
-                'postsListActiveDataProvider' => $postsListActiveDataProvider,
-            ]
-        );
+        return $this->render('list/show_by_category', [
+            'categoryName' => $categoryModel->name,
+            'postsListActiveDataProvider' => $postsListActiveDataProvider,
+        ]);
     }
 }

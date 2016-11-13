@@ -8,18 +8,18 @@ use blog\post\Helper;
 /**
  * @author Anton Karamnov
  */
-class Load extends \yii\base\Action
+class Load extends \blog\base\Action
 {
     public function run()
     {   
-        $postLoader = LoaderFactory::buildWithNewPostModel();
+        $loader = LoaderFactory::buildWithNewPostModel();
         
-        if ($postLoader->load()) {
-            Helper::redirectToPostPage($postLoader->getModel()->id);
+        if ($loader->load()) {
+            Helper::redirectToPostPage($loader->getModel()->id);
         }
         
-        return $this->controller->render('@blog/post/views/load', [
-            'fileModel' => $postLoader->getFileLoader()->getFileModel()
+        return $this->render('load', [
+            'fileModel' => $loader->getFileLoader()->getFileModel()
         ]);
     }
 }
