@@ -1,6 +1,6 @@
 <?php
 
-namespace app\components;
+namespace blog\category;
 
 use Yii;
 use app\models\Category;
@@ -8,7 +8,7 @@ use app\models\Category;
 /**
  * @author Anton Karamnov
  */
-class CategoryFinder extends Finder
+class Finder extends \blog\base\Finder
 {
     /**
      * @return \app\models\Post

@@ -1,24 +1,24 @@
 <?php
 
-namespace app\actions;
+namespace blog\category\actions;
 
-use app\components\CategoryFinder;
 use Yii;
 
 /**
  * @author Anton Karamnov
  */
-class EditCategory extends \yii\base\Action
+class Edit extends \blog\base\Action
 {
     public function run()
     {
-        $categoryModel = CategoryFinder::findByHttpRequest();
+        $categoryModel = \blog\category\Finder::findByHttpRequest();
         if ($categoryModel->load(Yii::$app->request->post())
             && $categoryModel->save()
         ) {
             Yii::$app->session->setFlash('success', 'Category was updated');
+            return $this->controller->refresh();
         }
-        return $this->controller->render('/category/edit_category', [
+        return $this->render('edit', [
             'categoryModel' => $categoryModel,
         ]);
     }

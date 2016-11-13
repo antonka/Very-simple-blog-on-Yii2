@@ -1,6 +1,6 @@
 <?php
 
-namespace app\actions;
+namespace blog\category\actions;
 
 use Yii;
 use \app\models\Category;
@@ -8,7 +8,7 @@ use \app\models\Category;
 /**
  * @author Anton Karamnov
  */
-class AddCategory extends \yii\base\Action
+class Add extends \blog\base\Action
 {
     public function run()
     {
@@ -21,7 +21,7 @@ class AddCategory extends \yii\base\Action
             );
             return $this->controller->goHome();
         }
-        return $this->controller->render('/category/add_category', [
+        return $this->render('add', [
             'categoryModel' => $categoryModel,
         ]);
     }
