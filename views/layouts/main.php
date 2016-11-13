@@ -5,7 +5,6 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
-use app\widgets\CategoriesToolbar;
 use app\models\Category;
 
 $topNavItems = [];
@@ -58,7 +57,7 @@ AppAsset::register($this);
                 <?= $content ?>
             </div>
             <div class="col-sm-3">
-                <?= CategoriesToolbar::widget([
+                <?= \blog\category\widgets\CategoriesList::widget([
                     'categoryModel' => new Category(),
                 ]) ?>
             </div>

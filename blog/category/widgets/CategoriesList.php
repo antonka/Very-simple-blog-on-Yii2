@@ -1,6 +1,6 @@
 <?php
 
-namespace app\widgets;
+namespace blog\category\widgets;
 
 use Yii;
 use blog\post\Finder as PostFinder; 
@@ -9,7 +9,7 @@ use blog\post\Finder as PostFinder;
 /**
  * @author Anton Karamnov
  */
-class CategoriesToolbar extends \yii\base\Widget
+class CategoriesList extends \yii\base\Widget
 {
     /**
      * @var ActiveRecord
@@ -34,7 +34,7 @@ class CategoriesToolbar extends \yii\base\Widget
             }, PostFinder::findBoundCategories($postId));
         }
         
-        return $this->render('categories_toolbar', [
+        return $this->render('categories_list', [
             'categoriesList' => $categoriesList,
             'categoryModel' => $this->categoryModel,
             'canManageCategories' => !Yii::$app->user->isGuest,
