@@ -19,7 +19,8 @@ class Load extends \blog\base\Action
         }
         
         return $this->render('load', [
-            'fileModel' => $loader->getFileLoader()->getFileModel()
+            'fileModel' => $loader->getFileLoader()->getFileModel(),
+            'postModel' => $loader->getModel()
         ]);
     }
 }

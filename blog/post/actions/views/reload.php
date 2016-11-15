@@ -15,7 +15,10 @@ $this->params['breadcrumbs'][] = 'Reload';
 <div class="site-about">
     <h4>Load markdown file to update this post</h4>
     <div>
-        <?= $this->render('_form', ['fileModel' => $fileModel]); ?>
+        <?= $this->render('_form', [
+            'fileModel' => $fileModel,
+            'postModel' => $postModel,
+        ]); ?>
     </div>
     <div style="margin-top: 30px;">
         <p><i><?= Html::encode($postModel->created_at) ?></i></p>

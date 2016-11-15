@@ -20,7 +20,7 @@ class Loader
     /**
      * @var string
      */
-    protected $cutTag = '#cut_post#';
+    protected $cutTag = '#cut#';
     
     /**
      * @var \yii\web\IdentityInterface 
