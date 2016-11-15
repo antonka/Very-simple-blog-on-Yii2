@@ -2,7 +2,7 @@
 
 namespace blog\post\actions;
 
-use app\components\CategoryFinder;
+use blog\category\Finder as CategoryFinder;
 
 /**
  * @author Anton Karamnov
