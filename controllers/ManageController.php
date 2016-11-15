@@ -42,9 +42,9 @@ class ManageController extends \yii\web\Controller
             'downloadPost' => [
                 'class' => \blog\post\actions\Download::className()
             ],
-//            'savePostCategoriesRelation' => [
-//                'class' => \app\actions\SavePostCategoriesRelation::className()
-//            ],
+            'savePostCategoriesRelation' => [
+                'class' => \blog\post\actions\SavePostCategoriesRelation::className(),
+            ],
             
             // Category
             'addCategory' => ['class' => \blog\category\actions\Add::className()],

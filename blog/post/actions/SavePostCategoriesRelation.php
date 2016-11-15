@@ -1,12 +1,11 @@
 <?php
 
-namespace app\actions;
+namespace blog\post\actions;
 
 use Yii;
-use app\components\PostManager;
-use app\components\CategoryFinder;
+use blog\category\Finder as CategoryFinder;
 use yii\web\HttpException;
-use app\components\PostHelper;
+use blog\post\Helper;
 
 /**
  * @author Anton Karamnov
@@ -18,7 +17,7 @@ class SavePostCategoriesRelation extends \yii\base\Action
      */
     public function run()
     {
-        $postManager = PostManager::buildWithFoundPostModelByHttpRequest();
+        $relationSaver = \blog\post\PostCategoriesRelationSaver::buildWithFoundPostModelByHttpRequest();
         
         $selectedCategoryIds = array_keys(
             Yii::$app->request->post('categoryIds', [])
@@ -31,8 +30,7 @@ class SavePostCategoriesRelation extends \yii\base\Action
             throw new HttpException(403, 'Invalid incoming data');
         }
          
-        $postManager->savePostCategoriesRelations($selectedCategoryIds); 
-        PostHelper::redirectToPostPage($postManager->getPostModel()->id);
+        $relationSaver->savePostCategoriesRelations($selectedCategoryIds); 
+        Helper::redirectToPostPage($relationSaver->getPostModel()->id);
     }
 }
-
