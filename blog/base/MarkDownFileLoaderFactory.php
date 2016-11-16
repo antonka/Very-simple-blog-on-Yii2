@@ -2,8 +2,6 @@
 
 namespace blog\base;
 
-use app\models\MarkDownFile;
-
 /**
  * @author Anton Karamnov
  */
@@ -14,6 +12,6 @@ class MarkDownFileLoaderFactory
      */
     public static function build()
     {
-        return new FileLoader(new MarkDownFile);
+        return new FileLoader(new models\MarkDownFile());
     }
 }

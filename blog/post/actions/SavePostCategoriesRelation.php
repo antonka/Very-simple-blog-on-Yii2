@@ -31,6 +31,6 @@ class SavePostCategoriesRelation extends \yii\base\Action
         }
          
         $relationSaver->savePostCategoriesRelations($selectedCategoryIds); 
-        Helper::redirectToPostPage($relationSaver->getPostModel()->id);
+        Helper::redirectToPostPage($relationSaver->getModel()->id);
     }
 }

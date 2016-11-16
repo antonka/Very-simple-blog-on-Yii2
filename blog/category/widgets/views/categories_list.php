@@ -5,7 +5,7 @@ use yii\helpers\Url;
 
 if ($canSetRelation) {
     echo Html::beginForm([
-        '/manage/savePostCategoriesRelation', 
+        '/blog/savePostCategoriesRelation', 
         'post_id' => $postId
     ]);
 }
@@ -22,29 +22,29 @@ if ($canSetRelation) {
                 if ($canSetRelation) {
                     echo Html::checkbox(
                         'categoryIds[' . $categoryRowData['id'] . ']', 
-                        in_array(
+                        in_array( 
                             $categoryRowData['id'], 
                             $currentPostBoundWithCategories    
                         )
                     );
                 }
-                
+                  
                 echo Html::a($categoryRowData['name'], [
-                    '/public/category', 'category_id' => $categoryRowData['id'],
+                    '/blog/category', 'category_id' => $categoryRowData['id'],
                 ]); 
                 
                 if ($canManageCategories) {
                     echo Html::a(
                         '<span class="glyphicon glyphicon-pencil"></span>', 
                         [
-                            '/manage/editCategory', 
+                            '/blog/editCategory', 
                             'category_id' => $categoryRowData['id'],
                         ]
                     ); 
                     echo Html::a(
                         '<span class="glyphicon glyphicon-trash"></span>', 
                         [
-                            '/manage/deleteCategory', 
+                            '/blog/deleteCategory', 
                             'category_id' => $categoryRowData['id'],
                         ]
                     );
@@ -57,7 +57,7 @@ if ($canSetRelation) {
 </div>
 
 <?php 
-if ($canSetRelation) {
+if ($canSetRelation && $categoriesList) {
     echo Html::submitButton('Save', ['class' => 'btn btn-primary']);
     echo Html::endForm();
 }

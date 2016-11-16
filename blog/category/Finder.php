@@ -3,7 +3,6 @@
 namespace blog\category;
 
 use Yii;
-use app\models\Category;
 
 /**
  * @author Anton Karamnov
@@ -17,7 +16,7 @@ class Finder extends \blog\base\Finder
     public static function findByHttpRequest()   
     {
         return self::getFoundModelByHttpRequest(
-            'category_id', Category::className()
+            'category_id', models\Category::className()
         );
     }
     
@@ -27,7 +26,7 @@ class Finder extends \blog\base\Finder
     public static function getAllCategoryIds()
     {
         return Yii::$app->db->createCommand(
-            'SELECT id FROM ' . Category::tableName()
+            'SELECT id FROM ' . models\Category::tableName()
         )->queryColumn();
     }
 }

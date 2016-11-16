@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace blog\category\models;
 
 class Category extends \yii\db\ActiveRecord
 {
@@ -33,7 +33,7 @@ class Category extends \yii\db\ActiveRecord
     
     public function getPosts()
     {
-        return $this->hasMany(Post::className(), ['id' => 'post_id'])
+        return $this->hasMany(\blog\post\models\Post::className(), ['id' => 'post_id'])
             ->viaTable('posts_categories', ['category_id' => 'id']);
     }
 }

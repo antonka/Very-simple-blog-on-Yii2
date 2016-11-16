@@ -24,10 +24,10 @@ class Toolbar extends \yii\base\Widget
            'links' => [
                 [
                     'Download', 
-                    ['/manage/downloadPost', 'post_id' => $this->postId]
+                    ['/blog/downloadPost', 'post_id' => $this->postId]
                 ], 
-                ['Reload', ['/manage/reloadPost', 'post_id' => $this->postId]],
-                ['Delete', ['/manage/deletePost', 'post_id' => $this->postId]],
+                ['Reload', ['/blog/reloadPost', 'post_id' => $this->postId]],
+                ['Delete', ['/blog/deletePost', 'post_id' => $this->postId]],
             ],
         ]);
     }

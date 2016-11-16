@@ -10,12 +10,7 @@ use blog\post\Finder as PostFinder;
  * @author Anton Karamnov
  */
 class CategoriesList extends \yii\base\Widget
-{
-    /**
-     * @var ActiveRecord
-     */
-    public $categoryModel;
-    
+{    
     public function run()
     {
         $categoriesList = Yii::$app->db->createCommand('
@@ -36,7 +31,7 @@ class CategoriesList extends \yii\base\Widget
         
         return $this->render('categories_list', [
             'categoriesList' => $categoriesList,
-            'categoryModel' => $this->categoryModel,
+            'categoryModel' => new \blog\category\models\Category(),
             'canManageCategories' => !Yii::$app->user->isGuest,
             'canSetRelation' => $canSetRelation,
             'currentPostBoundWithCategories' => $currentPostBoundWithCategories,

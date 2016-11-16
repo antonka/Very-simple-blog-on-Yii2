@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace blog\base\models;
 
 /**
  * @author Anton Karamnov

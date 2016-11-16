@@ -8,29 +8,28 @@ namespace blog\post;
 class LoaderFactory
 {
     /**
-     * @param \app\models\Post $post
-     * @return \app\components\PostLoader
+     * @param \blog\post\models\Post $model
+     * @return \blog\post\Loader
      */
-    public static function build(\app\models\Post $post) 
+    public static function build(models\Post $model) 
     {
         return new Loader(
-            $post, 
+            $model, 
             \blog\base\MarkDownFileLoaderFactory::build(),
             \Yii::$app->user->getIdentity()
         );
     }
  
     /**
-     * @return \app\components\PostLoader
+     * @return \blog\post\Loader
      */
     public static function buildWithNewPostModel() 
     {
-        return self::build(new \app\models\Post());
+        return self::build(new models\Post());
     }
     
-    
     /**
-     * @return \app\components\PostLoader
+     * @return \blog\post\Loader
      */
     public static function buildWithFoundPostModelByHttpRequest()
     {

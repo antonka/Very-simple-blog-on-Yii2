@@ -3,8 +3,7 @@
 namespace blog\category\actions;
 
 use Yii;
-use \app\models\Category;
-
+use \blog\category\models\Category as Category;
 /**
  * @author Anton Karamnov
  */

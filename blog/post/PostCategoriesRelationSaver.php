@@ -10,16 +10,16 @@ use Yii;
 class PostCategoriesRelationSaver
 {
     /**
-     * @var \app\models\Post 
+     * @var \blog\post\models\Post 
      */
-    protected $postModel;
+    protected $model;
 
     /**
-     * @param \app\models\Post $postModel
+     * @param \blog\post\models\Post $model
      */
-    public function __construct(\app\models\Post $postModel) 
+    public function __construct(models\Post $model) 
     {
-        $this->postModel = $postModel;
+        $this->model = $model;
     }
     
     /**
@@ -35,7 +35,7 @@ class PostCategoriesRelationSaver
      */
     public function savePostCategoriesRelations(array $categoryIds)
     {
-        $boundCategories = Finder::findBoundCategories($this->postModel->id);
+        $boundCategories = Finder::findBoundCategories($this->model->id);
         
         $transaction = Yii::$app->db->beginTransaction();
         try {
@@ -99,7 +99,7 @@ class PostCategoriesRelationSaver
         if (!$categoryIds) {
             return false;
         }
-        $postId = $this->postModel->id;
+        $postId = $this->model->id;
         $data = array_map(function($categoryId) use ($postId) {
             return [$postId, $categoryId];
         }, $categoryIds);
@@ -119,7 +119,7 @@ class PostCategoriesRelationSaver
                 'posts_categories', 
                 'post_id = :post_id AND category_id = :category_id',
                 [
-                    ':post_id' => $this->postModel->id, 
+                    ':post_id' => $this->model->id, 
                     ':category_id' => $boundCategoryRowData['id']
                 ]
             )->execute();
@@ -127,11 +127,11 @@ class PostCategoriesRelationSaver
     }
     
     /**
-     * @return \app\models\Post
+     * @return \blog\post\Model
      */
-    public function getPostModel()
+    public function getModel()
     {
-        return $this->postModel;
+        return $this->model;
     }
             
 }

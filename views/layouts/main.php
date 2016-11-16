@@ -5,13 +5,12 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
-use app\models\Category;
 
 $topNavItems = [];
 if (!Yii::$app->user->isGuest) {
-    $topNavItems[] = ['label' => 'Load post', 'url' => ['/manage/loadPost']];
-    $topNavItems[] = ['label' => 'Add category', 'url' => ['/manage/addCategory']];
-    $topNavItems[] = ['label' => 'Log out', 'url' => ['/public/logout']];
+    $topNavItems[] = ['label' => 'Load post', 'url' => ['/blog/loadPost']];
+    $topNavItems[] = ['label' => 'Add category', 'url' => ['/blog/addCategory']];
+    $topNavItems[] = ['label' => 'Log out', 'url' => ['/blog/logout']];
 }
 
 AppAsset::register($this);
@@ -57,9 +56,7 @@ AppAsset::register($this);
                 <?= $content ?>
             </div>
             <div class="col-sm-3">
-                <?= \blog\category\widgets\CategoriesList::widget([
-                    'categoryModel' => new Category(),
-                ]) ?>
+                <?= \blog\category\widgets\CategoriesList::widget() ?>
             </div>
         </div>
     </div>

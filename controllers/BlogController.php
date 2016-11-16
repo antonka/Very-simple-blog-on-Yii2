@@ -8,7 +8,7 @@ use yii\filters\AccessControl;
 /**
  * @author Anton Karamnov
  */
-class ManageController extends \yii\web\Controller
+class BlogController extends \yii\web\Controller
 {
     /**
      * @return array
@@ -20,9 +20,20 @@ class ManageController extends \yii\web\Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => array_keys($this->actions()),
+                        'actions' => [
+                            'loadPost', 'reloadPost', 'deletePost', 
+                            'downloadPost', 'savePostCategoriesRelation',
+                            'addCategory', 'deleteCategory', 'editCategory',
+                            'logout',
+                        ],
                         'roles' => ['@'],
                     ],
+                    [
+                        'allow' => true,
+                        'actions' => [
+                            'error', 'index', 'category', 'post', 'login',
+                        ],
+                    ]
                 ],
             ],
         ];
@@ -35,7 +46,16 @@ class ManageController extends \yii\web\Controller
     {
         return [
             
-            // Post
+            // Public
+            'error' => ['class' => \yii\web\ErrorAction::className()],
+            'index' => ['class' => \blog\post\actions\ShowList::className()],
+            'post' =>  ['class'=> \blog\post\actions\Show::className()],
+            'category' => [
+                'class' => \blog\post\actions\ShowListByCategory::className()
+            ],
+            'login' => ['class' => \blog\user\actions\Login::className()],
+            
+            // Protected
             'loadPost' => ['class' => \blog\post\actions\Load::className()],
             'reloadPost' => ['class' => \blog\post\actions\Reload::className()],
             'deletePost' => ['class' => \blog\post\actions\Delete::className()],
@@ -45,13 +65,16 @@ class ManageController extends \yii\web\Controller
             'savePostCategoriesRelation' => [
                 'class' => \blog\post\actions\SavePostCategoriesRelation::className(),
             ],
-            
-            // Category
             'addCategory' => ['class' => \blog\category\actions\Add::className()],
             'deleteCategory' => ['class' => \blog\category\actions\Delete::className()],
             'editCategory' => ['class' => \blog\category\actions\Edit::className()],
-            
-            
-        ];
-    }   
+        ]; 
+    }
+    
+    public function actionLogout() 
+    {
+        Yii::$app->user->logout();
+        return $this->goHome();
+    }
 }
+

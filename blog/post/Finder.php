@@ -10,13 +10,14 @@ use Yii;
 class Finder extends \blog\base\Finder
 {
     /**
-     * @return \app\models\Post
+     * @return \blog\post\models\Post
      * @throws \yii\web\HttpException
      */
+    
     public static function findByHttpRequest()   
     {
         return self::getFoundModelByHttpRequest(
-            'post_id', \app\models\Post::className()
+            'post_id', models\Post::className()
         );
     }
     

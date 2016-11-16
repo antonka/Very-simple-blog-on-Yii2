@@ -32,7 +32,7 @@ class Loader
      * @param \app\helpers\FileLoader $fileLoader
      */
     public function __construct(
-        \yii\db\ActiveRecord $model, 
+        models\Post $model, 
         \blog\base\FileLoader $fileLoader,
         \yii\web\IdentityInterface $identity
     ) {

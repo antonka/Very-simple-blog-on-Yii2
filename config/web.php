@@ -9,18 +9,18 @@ $config = [
     'id' => 'simple_blog',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    'defaultRoute' => '/public/index',
+    'defaultRoute' => '/blog/index',
     'components' => [
         'request' => [
             'cookieValidationKey' => md5($db['username'] . $db['password']),
         ],
         'user' => [
-            'identityClass' => 'app\models\User',
+            'identityClass' => 'blog\user\models\User',
             'enableAutoLogin' => true,
-            'loginUrl' => ['/public/login'],
+            'loginUrl' => ['/blog/login'],
         ],
         'errorHandler' => [
-            'errorAction' => 'public/error',
+            'errorAction' => 'blog/error',
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
