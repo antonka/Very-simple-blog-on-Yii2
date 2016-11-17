@@ -32,6 +32,7 @@ class BlogController extends \yii\web\Controller
                         'allow' => true,
                         'actions' => [
                             'error', 'index', 'category', 'post', 'login',
+                            'addComment',
                         ],
                     ]
                 ],
@@ -54,6 +55,7 @@ class BlogController extends \yii\web\Controller
                 'class' => \blog\post\actions\ShowListByCategory::className()
             ],
             'login' => ['class' => \blog\user\actions\Login::className()],
+            'addComment' => ['class' => \blog\comment\actions\Add::className()],
             
             // Protected
             'loadPost' => ['class' => \blog\post\actions\Load::className()],

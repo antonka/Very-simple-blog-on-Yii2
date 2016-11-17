@@ -16,5 +16,5 @@ $this->params['breadcrumbs'][] = $this->title;
     <div><?= Markdown::process($post->content) ?></div>
 </div>
 
-<?= CommentBox::widget() ?>
+<?= CommentBox::widget(['postId' => $post->id]) ?>
 

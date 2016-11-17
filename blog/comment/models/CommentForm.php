@@ -25,14 +25,21 @@ class CommentForm extends \yii\base\Model
     public $content;
     
     /**
+     * @var integer
+     */
+    public $postId;
+    
+    /**
      * @return array
      */
     public function rules() 
     {
         return [
-            [['username', 'email', 'content'], 'required'],
-            ['email', 'email'],
+            [['content', 'postId'], 'required'],
+            [['username', 'email'], 'required', 'on' => 'need_to_authenticate_user'],
+            ['email', 'email', 'on' => 'need_to_authenticate_user'],
             ['content', 'string', 'max' => 2000],
+            ['postId', 'integer', 'integerOnly' => true],
         ];
     }
     

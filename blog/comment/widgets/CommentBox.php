@@ -3,7 +3,6 @@
 namespace blog\comment\widgets;
 
 use Yii;
-use blog\comment\models\Comment;
 use blog\comment\models\CommentForm;
 
 /**
@@ -11,12 +10,21 @@ use blog\comment\models\CommentForm;
  */
 class CommentBox extends \yii\base\Widget
 {
+    /**
+     * @var integer
+     */
+    public $postId;
+    
     public function run()
     {
-        $model = Yii::$app->user->isGuest ? new CommentForm() : new Comment();
+        $commentForm = new CommentForm();
+        $commentForm->postId = $this->postId;
+        if (Yii::$app->user->isGuest) {
+            $commentForm->setScenario('need_to_authenticate_user');
+        }
         
         return $this->render('comment_box', [
-            'model' => $model,
+            'commentForm' => $commentForm,
         ]);
     }
 }
