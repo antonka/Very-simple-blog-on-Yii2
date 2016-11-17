@@ -32,7 +32,18 @@ class CommentForm extends \yii\base\Model
         return [
             [['username', 'email', 'content'], 'required'],
             ['email', 'email'],
-            ['content', 'length', 'max' => 2000],
+            ['content', 'string', 'max' => 2000],
+        ];
+    }
+    
+    /**
+     * @return array
+     */
+    public function attributeLabels() {
+        return [
+            'username' => 'Name',
+            'email' => 'Email',
+            'content' => 'Content',
         ];
     }
     
