@@ -4,7 +4,7 @@ namespace blog\comment\actions;
 
 use Yii;
 use blog\comment\models\CommentForm;
-use blog\comment\models\Comment;
+use blog\comment\Helper;
 
 /**
  * @author Anton Karamnov
@@ -28,20 +28,27 @@ class Add extends \blog\base\Action
             && $commentForm->validate()
         ) {
             if ($commentForm->getScenario() == 'need_to_authenticate_user') {
-                // redirect to authenticate user
+                Yii::$app->session->set('comment', [
+                    'post_id' => $commentForm->postId,
+                    'content' => $commentForm->content   
+                ]);
+                Yii::$app->session->set('user', [
+                    'username' => $commentForm->username,
+                    'email' => $commentForm->email,
+                ]);
             }
             else {
-                $comment = new Comment();
-                $comment->user_id = Yii::$app->user->getIdentity()->getId();
-                $comment->content = $commentForm->content;
-                $comment->status = 'moderation';
-                if ($comment->save()) {
+                if (Helper::addComment(
+                        $commentForm->postId, 
+                        $commentForm->content
+                    )
+                ) {
                     Yii::$app->session->setFlash('Comment was added');
                     return \blog\post\Helper::redirectToPostPage($commentForm->postId);
                 }
             }
         }
-        
+      
         return $this->render('add', [
             'commentForm' => $commentForm,
         ]);
