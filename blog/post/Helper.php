@@ -24,12 +24,12 @@ class Helper
      */
     public static function redirectToPostPage($postId)
     {
-        Yii::$app->getResponse()->redirect(self::createPostUrl($postId)); 
+        return Yii::$app->getResponse()->redirect(self::createPostUrl($postId)); 
     }
     
     public static function redirectToPostListPage()
-    {
-        Yii::$app->getResponse()->redirect(['/blog/index']); 
+    { 
+        return Yii::$app->getResponse()->redirect(['/blog/index']); 
     }
     
     /**
