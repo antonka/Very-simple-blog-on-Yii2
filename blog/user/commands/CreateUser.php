@@ -7,7 +7,7 @@ namespace blog\user\commands;
  */
 class CreateUser extends \blog\base\Command
 {
-    public function run()
+    public function execute()
     {
     }
 }

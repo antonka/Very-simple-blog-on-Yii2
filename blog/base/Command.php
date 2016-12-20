@@ -7,7 +7,7 @@ namespace blog\base;
  */
 abstract class Command
 {
-    abstract function run();
+    abstract function execute();
     
     /**
      * @return string
