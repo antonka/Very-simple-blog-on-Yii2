@@ -1,7 +1,10 @@
 <?php 
+
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\Url;
+use blog\comment\models\GuestCommentForm as GuestCommentForm;
+
 ?>
 <div>
     <h2>Leave a comment</h2>
@@ -11,7 +14,7 @@ use yii\helpers\Url;
         ]); ?>
         <?= $form->errorSummary($commentForm) ?>
         <?= $form->field($commentForm, 'postId')->hiddenInput()->label(false); ?>
-        <?php if ($commentForm->getScenario() == 'need_to_authenticate_user'): ?>
+        <?php if ($commentForm instanceof GuestCommentForm): ?>
             <?= $form->field($commentForm, 'username')->textInput([
                 'style' => 'width: 250px;',
             ]); ?>

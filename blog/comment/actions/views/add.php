@@ -1,5 +1,5 @@
 <?php
 
-use blog\comment\widgets\CommentBox;
+use blog\comment\widgets\Comment;
 
-echo CommentBox::widget(['commentForm' => $commentForm]);
+echo Comment::widget(['commentForm' => $commentForm]);

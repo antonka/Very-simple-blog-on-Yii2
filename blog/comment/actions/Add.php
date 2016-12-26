@@ -3,8 +3,10 @@
 namespace blog\comment\actions;
 
 use Yii;
-use blog\comment\models\CommentForm;
-use blog\comment\Helper;
+use blog\comment\CommentFormFactory as CommentFormFactory;
+use blog\comment\models\GuestCommentForm as GuestCommentForm;
+use blog\comment\models\AuthenticatedCommentForm as AuthenticatedCommentForm;
+use blog\comment\models\Comment as Comment;
 
 /**
  * @author Anton Karamnov
@@ -15,43 +17,49 @@ class Add extends \blog\base\Action
     {
         $request = Yii::$app->getRequest();
         if (!$request->isPost) {
-            throw new \yii\web\HttpException(403, 'Request is not post');
+            throw new \yii\web\HttpException(403, 'Request type is not post');
         }
         
-        $commentForm = new CommentForm();
-        
-        if (Yii::$app->user->isGuest) {
-            $commentForm->setScenario('need_to_authenticate_user');
-        }
-        
-        if ($commentForm->load($request->post())
-            && $commentForm->validate()
-        ) {
-            if ($commentForm->getScenario() == 'need_to_authenticate_user') {
-                Yii::$app->session->set('comment', [
-                    'post_id' => $commentForm->postId,
-                    'content' => $commentForm->content   
-                ]);
-                Yii::$app->session->set('user', [
-                    'username' => $commentForm->username,
-                    'email' => $commentForm->email,
-                ]);
+        $commentForm = CommentFormFactory::getFilledCommentForm();
+        if ($commentForm->validate()) {
+            if ($commentForm instanceof GuestCommentForm) {
+                /**
+                 * @todo 
+                 * 1. Send confirmation email
+                 * 2. Check link
+                 * 3. Create a user
+                 * 4. Authenticate a user
+                 * 5. Add a comment
+                 */
+                throw new \yii\base\ExitException('Guest can not add a comment');
             }
             else {
-                if (Helper::addComment(
-                        $commentForm->postId, 
-                        $commentForm->content
-                    )
-                ) {
-                    Yii::$app->session->setFlash('Comment was added');
-                    return \blog\post\Helper::redirectToPostPage($commentForm->postId);
-                }
+                $this->addComment($commentForm);
+                Yii::$app->session->setFlash('Comment was added');
+                return \blog\post\Helper::redirectToPostPage($commentForm->postId);
             }
         }
       
         return $this->render('add', [
             'commentForm' => $commentForm,
         ]);
+    }
+    
+    /**
+     * @param AuthenticatedCommentForm $commentForm
+     * @throws \yii\base\ExitException
+     */
+    protected function addComment(AuthenticatedCommentForm $commentForm)
+    {
+        $comment = new Comment();
+        $comment->user_id = Yii::$app->user->getId();
+        $comment->post_id = $commentForm->postId;
+        $comment->content = $commentForm->content;
+        $comment->status = 'moderation';
+        
+        if (!$comment->save()) {
+            throw new \yii\base\ExitException('Comment was not saved');
+        }
     }
 }
 

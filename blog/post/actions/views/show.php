@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\helpers\Markdown;
-use blog\comment\widgets\CommentBox;
+use blog\comment\widgets\Comment;
 
 $this->title = $post->title;
 $this->params['breadcrumbs'][] = $this->title;
@@ -16,5 +16,5 @@ $this->params['breadcrumbs'][] = $this->title;
     <div><?= Markdown::process($post->content) ?></div>
 </div>
 
-<?= CommentBox::widget(['postId' => $post->id]) ?>
+<?= Comment::widget(['postId' => $post->id]) ?>
 

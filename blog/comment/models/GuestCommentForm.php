@@ -24,10 +24,10 @@ class GuestCommentForm extends AuthenticatedCommentForm
      */
     public function rules() 
     {
-        return parent::rules() + [
+        return array_merge(parent::rules(), [
             [['username', 'email'], 'required'],
             ['email', 'email'],
-        ];
+        ]);
     } 
     
     /**
@@ -35,10 +35,10 @@ class GuestCommentForm extends AuthenticatedCommentForm
      */
     public function attributeLabels() 
     {
-        return parent::attributeLabels() + [
+        return array_merge(parent::attributeLabels(), [
             'username' => 'Name',
             'email' => 'Email',
-        ];
+        ]);
     }
 }
 
