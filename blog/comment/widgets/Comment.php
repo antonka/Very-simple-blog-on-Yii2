@@ -34,7 +34,7 @@ class Comment extends \yii\base\Widget
 
     public function run()
     {
-        return $this->render('comment_box', [
+        return $this->render('comment', [
             'commentForm' => $this->commentForm,
         ]);
     }    
