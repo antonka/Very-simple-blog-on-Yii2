@@ -40,37 +40,9 @@ class BlogController extends \yii\web\Controller
         ];
     }
     
-    /**
-     * @inheritdoc
-     */
     public function actions()
     {
-        return [
-            
-            // Public
-            'error' => ['class' => \yii\web\ErrorAction::className()],
-            'index' => ['class' => \blog\post\actions\ShowList::className()],
-            'post' =>  ['class'=> \blog\post\actions\Show::className()],
-            'category' => [
-                'class' => \blog\post\actions\ShowListByCategory::className()
-            ],
-            'login' => ['class' => \blog\user\actions\Login::className()],
-            'addComment' => ['class' => \blog\comment\actions\Add::className()],
-            
-            // Protected
-            'loadPost' => ['class' => \blog\post\actions\Load::className()],
-            'reloadPost' => ['class' => \blog\post\actions\Reload::className()],
-            'deletePost' => ['class' => \blog\post\actions\Delete::className()],
-            'downloadPost' => [
-                'class' => \blog\post\actions\Download::className()
-            ],
-            'savePostCategoriesRelation' => [
-                'class' => \blog\post\actions\SavePostCategoriesRelation::className(),
-            ],
-            'addCategory' => ['class' => \blog\category\actions\Add::className()],
-            'deleteCategory' => ['class' => \blog\category\actions\Delete::className()],
-            'editCategory' => ['class' => \blog\category\actions\Edit::className()],
-        ]; 
+        return include Yii::getAlias('@app') . '/config/base_action_map.php';
     }
     
     public function actionLogout() 
@@ -78,5 +50,6 @@ class BlogController extends \yii\web\Controller
         Yii::$app->user->logout();
         return $this->goHome();
     }
+    
 }
 
