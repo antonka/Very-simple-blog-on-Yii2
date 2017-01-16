@@ -15,6 +15,9 @@ use Yii;
  */
 class Comment extends \yii\db\ActiveRecord
 {
+    const STATUS_MODERATION = 'moderation';
+    const STATUS_PUBLICATED = 'publicated';
+    
     /**
      * @inheritdoc
      */
@@ -29,11 +32,12 @@ class Comment extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'content', 'status', 'post_id'], 'required'],
+            [['username', 'email', 'content', 'status', 'post_id'], 'required'],
             [['user_id', 'post_id'], 'integer'],
-            [['created_at'], 'safe'],
-            [['status'], 'string'],
-            [['content'], 'string', 'max' => 2000],
+            ['email', 'email'],
+            ['created_at', 'safe'],
+            ['status', 'string'],
+            ['content', 'string', 'max' => 2000],
         ];
     }
 
@@ -45,6 +49,8 @@ class Comment extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'user_id' => 'User ID',
+            'username' => 'Name',
+            'email' => 'Email',
             'content' => 'Content',
             'created_at' => 'Created At',
             'status' => 'Status',

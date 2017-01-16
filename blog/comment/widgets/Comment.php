@@ -2,7 +2,7 @@
 
 namespace blog\comment\widgets;
 
-use blog\comment\CommentFormFactory as CommentFormFactory;
+use blog\comment\models\Comment as CommentModel;
 use Yii;
 
 
@@ -17,25 +17,22 @@ class Comment extends \yii\base\Widget
     public $postId;
     
     /**
-     * @var blog\comment\models\CommentForm
+     * @var blog\comment\models\Comment
      */
-    public $commentForm;
+    public $model;
     
     public function init() 
     {
-        if (is_null($this->commentForm)) {
-            $this->commentForm = CommentFormFactory::getCommentForm();
-        }
-        
-        if (!empty($this->postId)) {
-            $this->commentForm->postId = $this->postId;
+        if (is_null($this->model)) {
+            $this->model = new CommentModel();
         }
     }
 
     public function run()
     {
         return $this->render('comment', [
-            'commentForm' => $this->commentForm,
+            'model' => $this->model,
+            'postId' => $this->postId,
         ]);
     }    
 }
