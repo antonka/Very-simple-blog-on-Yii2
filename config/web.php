@@ -4,12 +4,13 @@ Yii::setAlias('@blog', dirname(__DIR__) . '/blog');
 
 $params = require(__DIR__ . '/params.php');
 $db = require(__DIR__ . '/db.php');
+$controllerMap = require(__DIR__ . '/controller_map.php');
 
 $config = [
     'id' => 'simple_blog',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    'defaultRoute' => '/blog/index',
+    'defaultRoute' => '/post/showList',
     'components' => [
         'request' => [
             'cookieValidationKey' => md5($db['username'] . $db['password']),
@@ -48,6 +49,7 @@ $config = [
         ],
         */
     ],
+    'controllerMap' => $controllerMap,
     'params' => $params,
 ];
 
