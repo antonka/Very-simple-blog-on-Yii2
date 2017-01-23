@@ -2,6 +2,9 @@
 
 namespace blog\post;
 
+use blog\post\models\Post;
+use blog\base\MarkDownFileLoaderFactory;
+
 /**
  * @author Anton Karamnov
  */
@@ -11,11 +14,11 @@ class LoaderFactory
      * @param \blog\post\models\Post $model
      * @return \blog\post\Loader
      */
-    public static function build(models\Post $model) 
+    public static function build(Post $model) 
     {
         return new Loader(
             $model, 
-            \blog\base\MarkDownFileLoaderFactory::build(),
+            MarkDownFileLoaderFactory::build(),
             \Yii::$app->user->getIdentity()
         );
     }
@@ -25,7 +28,7 @@ class LoaderFactory
      */
     public static function buildWithNewPostModel() 
     {
-        return self::build(new models\Post());
+        return self::build(new Post());
     }
     
     /**
@@ -33,6 +36,6 @@ class LoaderFactory
      */
     public static function buildWithFoundPostModelByHttpRequest()
     {
-        return self::build(Finder::findByHttpRequest());
+        return self::build(Post::findByUrlQueryParam('post_id'));
     }
 }

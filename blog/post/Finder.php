@@ -8,19 +8,7 @@ use Yii;
  * @author Anton Karamnov
  */
 class Finder extends \blog\base\Finder
-{
-    /**
-     * @return \blog\post\models\Post
-     * @throws \yii\web\HttpException
-     */
-    
-    public static function findByHttpRequest()   
-    {
-        return self::getFoundModelByHttpRequest(
-            'post_id', models\Post::className()
-        );
-    }
-    
+{    
     /**
      * @param string $postId
      * @return array

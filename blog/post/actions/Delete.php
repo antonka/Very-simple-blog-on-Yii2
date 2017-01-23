@@ -2,7 +2,7 @@
 
 namespace blog\post\actions;
 
-use blog\post\Finder;
+use blog\post\models\Post;
 use blog\post\Helper;
 
 /**
@@ -12,7 +12,7 @@ class Delete extends \yii\base\Action
 {
     public function run()
     {
-        Finder::findByHttpRequest()->delete();
+        Post::findByUrlQueryParam('post_id')->delete();
         Helper::redirectToPostListPage();
     }
 }
