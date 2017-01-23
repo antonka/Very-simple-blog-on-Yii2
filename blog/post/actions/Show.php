@@ -2,6 +2,8 @@
 
 namespace blog\post\actions;
 
+use blog\post\models\Post;
+
 /**
  * @author Anton Karamnov
  */
@@ -10,7 +12,7 @@ class Show extends \blog\base\Action
     public function run() 
     {
         return $this->render('show', [
-            'post' => \blog\post\Finder::findByHttpRequest()
+            'post' => Post::findByUrlQueryParam('post_id'),
         ]);
     }
 }

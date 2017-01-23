@@ -12,15 +12,13 @@ class ActiveRecord extends \yii\db\ActiveRecord
 {
     /**
      * @param string $queryParamName
-     * @param string $modelClassName
      * @return \yii\db\ActiveRecord
      * @throws HttpException
      */
-    public static function findBySingleUrlQueryParam(
-        $queryParamName, $modelClassName
-    ) {
+    public static function findByUrlQueryParam($queryParamName) 
+    {
         $queryParamValue = Yii::$app->request->get($queryParamName);
-        $model = $modelClassName::findOne($queryParamValue);
+        $model = self::findOne($queryParamValue);
         if (is_null($model)) {
             throw new HttpException(404);
         }

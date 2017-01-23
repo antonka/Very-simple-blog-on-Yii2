@@ -12,7 +12,7 @@ use Yii;
  * @property string $content
  * @property string $created_at
  */
-class Post extends \yii\db\ActiveRecord
+class Post extends \blog\base\ActiveRecord
 {
     /**
      * @inheritdoc
