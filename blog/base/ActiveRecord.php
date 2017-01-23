@@ -8,7 +8,7 @@ use yii\web\HttpException;
 /**
  * @author Anton Karamnov
  */
-class ActiveRecordFinder
+class ActiveRecord extends \yii\db\ActiveRecord
 {
     /**
      * @param string $queryParamName
