@@ -3,19 +3,22 @@
 namespace blog\post\actions; 
 
 use blog\post\LoaderFactory;
-use blog\post\Helper;
+use blog\post\helpers\PostUrl;
 
 /**
  * @author Anton Karamnov
  */
 class Reload extends \blog\base\Action
 {
+    /**
+     * @return \yii\web\Response
+     */
     public function run()
     {
         $loader = LoaderFactory::buildWithFoundPostModelByHttpRequest();
         
         if ($loader->load()) {
-            Helper::redirectToPostPage($loader->getModel()->id);
+            return $this->redirect(PostUrl::show($loader->getModel()->id));
         }
         
         return $this->render('reload', [

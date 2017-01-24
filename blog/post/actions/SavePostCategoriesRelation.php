@@ -5,7 +5,7 @@ namespace blog\post\actions;
 use Yii;
 use blog\category\Finder as CategoryFinder;
 use yii\web\HttpException;
-use blog\post\Helper;
+use blog\post\helpers\PostUrl;
 
 /**
  * @author Anton Karamnov
@@ -13,6 +13,7 @@ use blog\post\Helper;
 class SavePostCategoriesRelation extends \yii\base\Action
 {
     /**
+     * @retunr \yii\web\Response
      * @throws HttpException
      */
     public function run()
@@ -31,6 +32,6 @@ class SavePostCategoriesRelation extends \yii\base\Action
         }
          
         $relationSaver->savePostCategoriesRelations($selectedCategoryIds); 
-        Helper::redirectToPostPage($relationSaver->getModel()->id);
+        return $this->redirect(PostUrl::show($relationSaver->getModel()->id));
     }
 }

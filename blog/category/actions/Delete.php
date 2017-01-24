@@ -2,16 +2,19 @@
 
 namespace blog\category\actions;
 
-use blog\post\Helper as PostHelper; 
+use blog\post\helpers\PostUrl;
 
 /**
  * @author Anton Karamnov
  */
-class Delete extends \yii\base\Action
+class Delete extends \blog\base\Action
 {
+    /**
+     * @return \yii\web\Response
+     */
     public function run() 
     {
         \blog\category\Finder::findByHttpRequest()->delete();
-        PostHelper::redirectToPostListPage();
+        return $this->redirect(PostUrl::showList());
     }
 }

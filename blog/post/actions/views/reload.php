@@ -2,12 +2,12 @@
 
 use yii\helpers\Html;
 use yii\helpers\Markdown;
-use blog\post\Helper;
+use blog\post\helpers\PostUrl;
 
 $this->title = 'Load post';
 $this->params['breadcrumbs'][] = [
     'label' => $postModel->title, 
-    'url' => Helper::createPostUrl($postModel->id),
+    'url' => PostUrl::show($postModel->id),
 ];
 $this->params['breadcrumbs'][] = 'Reload';
 
