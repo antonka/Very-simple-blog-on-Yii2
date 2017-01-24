@@ -8,7 +8,20 @@ use Yii;
  * @author Anton Karamnov
  */
 class DefaultController extends \yii\web\Controller
-{
+{    
+    /**
+     * @return array
+     */
+    public function actions()
+    {
+        return [
+            'showError' => [
+                'class' => \yii\web\ErrorAction::className(),
+                'view' => '@blog/base/actions/views/show_error.php',
+            ],
+        ];
+    }
+    
     /**
      * @param string $id the action ID.
      * @return Action the newly created action instance. Null if the ID doesn't resolve into any action.
