@@ -3,16 +3,19 @@
 namespace blog\post\actions;
 
 use blog\post\models\Post;
-use blog\post\Helper;
+use blog\post\helpers\PostUrl;
 
 /**
  * @author Anton Karamnov
  */
-class Delete extends \yii\base\Action
+class Delete extends \blog\base\Action
 {
+    /**
+     * @return \yii\web\Responce
+     */
     public function run()
     {
         Post::findByUrlQueryParam('post_id')->delete();
-        Helper::redirectToPostListPage();
+        return $this->redirect(PostUrl::showList());
     }
 }

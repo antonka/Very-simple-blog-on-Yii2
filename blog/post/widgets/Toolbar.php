@@ -3,6 +3,7 @@
 namespace blog\post\widgets;
 
 use Yii;
+use blog\post\helpers\PostUrl;
 
 /**
  * @author Anton Karamnov
@@ -22,12 +23,9 @@ class Toolbar extends \yii\base\Widget
      
         return $this->render('toolbar', [
            'links' => [
-                [
-                    'Download', 
-                    ['/blog/downloadPost', 'post_id' => $this->postId]
-                ], 
-                ['Reload', ['/blog/reloadPost', 'post_id' => $this->postId]],
-                ['Delete', ['/blog/deletePost', 'post_id' => $this->postId]],
+                ['Download', PostUrl::download($this->postId)],
+                ['Reload', PostUrl::reload($this->postId)],
+                ['Delete', PostUrl::delete($this->postId)],
             ],
         ]);
     }

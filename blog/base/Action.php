@@ -19,6 +19,16 @@ class Action extends \yii\base\Action implements \yii\base\ViewContextInterface
     }
     
     /**
+     * @param string $url
+     * @param integer $statusCode
+     * @return \yii\web\Response
+     */
+    protected function redirect($url, $statusCode = 302)
+    {
+        return $this->controller->redirect($url, $statusCode);
+    }
+
+    /**
      * @return string
      */
     public function getViewPath()
