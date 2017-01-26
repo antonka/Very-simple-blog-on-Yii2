@@ -1,42 +1,46 @@
 <?php
 
-namespace blog\post;
+namespace blog\post\algorithms;
+
+use blog\post\models\Post;
+use blog\base\FileLoader;
+use yii\web\IdentityInterface;
+use blog\base\MarkDownFileLoaderFactory;
 
 /**
  * @author Anton Karamnov
  */
-class Loader
-{    
+class PostLoadProcess
+{
     /**
-     * @var \yii\db\ActiveRecord 
+     * @var Post
      */
-    protected $model;
+    protected $post;
     
     /**
-     * @var \app\helpers\FileLoader
+     * @var FileLoader
      */
     protected $fileLoader;
     
     /**
-     * @var string
+     * @var IdentityInterface
+     */
+    protected $identity;
+    
+    /**
+     * @var string 
      */
     protected $cutTag = '#cut#';
     
     /**
-     * @var \yii\web\IdentityInterface 
-     */
-    protected $identity;
-
-    /**
-     * @param \yii\db\ActiveRecord $model
-     * @param \app\helpers\FileLoader $fileLoader
+     * @param Post $post
+     * @param FileLoader $fileLoader
+     * @param IdentityInterface $identity
      */
     public function __construct(
-        models\Post $model, 
-        \blog\base\FileLoader $fileLoader,
-        \yii\web\IdentityInterface $identity
+        Post $post, FileLoader $fileLoader, IdentityInterface $identity
     ) {
-        $this->model = $model;
+        $this->post = $post;
         $this->fileLoader = $fileLoader;
         $this->identity = $identity;
     }
@@ -44,13 +48,10 @@ class Loader
     /**
      * @return boolean
      */
-    public function load() 
+    public function execute() 
     {
-        if (!$this->fileLoader->loadFile()) {
-            return false;
-        }
-        
-        return $this->savePost($this->fileLoader->getFileContent()); 
+        return $this->fileLoader->loadFile()
+            && $this->savePost($this->fileLoader->getFileContent());
     }
     
     /**
@@ -59,16 +60,16 @@ class Loader
      */
     protected function savePost($content)
     {
-        $this->model->title = self::findPostTitle($content);
-        $this->model->content = preg_replace(
+        $this->post->title = self::findPostTitle($content);
+        $this->post->content = preg_replace(
             "/" . $this->cutTag  . "/", '', $content
         );
-        $this->model->cutted_content = $this->cutContent($content);
-        $this->model->user_id = $this->identity->getId();
+        $this->post->cutted_content = $this->cutContent($content);
+        $this->post->user_id = $this->identity->getId();
         
-        return $this->model->save();
+        return $this->post->save();
     }
-
+    
     /**
      * @return string
      */
@@ -87,11 +88,11 @@ class Loader
     }
     
     /**
-     * @var \yii\db\ActiveRecord 
+     * @var Post
      */
-    public function getModel() 
+    public function getPost() 
     {
-        return $this->model;
+        return $this->post;
     }
     
     /**
@@ -114,5 +115,17 @@ class Loader
         
         return '';
     }
-            
+    
+    /**
+     * @param Post $post
+     * @return \self
+     */
+    public static function build(Post $post)
+    {
+        return new self(
+            $post, 
+            MarkDownFileLoaderFactory::build(),
+            \Yii::$app->user->getIdentity()
+        );
+    }
 }

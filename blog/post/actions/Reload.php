@@ -2,8 +2,9 @@
 
 namespace blog\post\actions; 
 
-use blog\post\LoaderFactory;
+use blog\post\algorithms\PostLoadProcess;
 use blog\post\helpers\PostUrl;
+use blog\post\models\Post;
 
 /**
  * @author Anton Karamnov
@@ -15,15 +16,16 @@ class Reload extends \blog\base\Action
      */
     public function run()
     {
-        $loader = LoaderFactory::buildWithFoundPostModelByHttpRequest();
+        $post = Post::findByUrlQueryParam('post_id');
+        $process = PostLoadProcess::build($post);
         
-        if ($loader->load()) {
-            return $this->redirect(PostUrl::show($loader->getModel()->id));
+        if ($process->execute()) {
+            return $this->redirect(PostUrl::show($process->getPost()->id));
         }
         
         return $this->render('reload', [
-            'fileModel' => $loader->getFileLoader()->getFileModel(),
-            'postModel' => $loader->getModel(),
+            'fileModel' => $process->getFileLoader()->getFileModel(),
+            'postModel' => $process->getPost(),
         ]);
     }
 }

@@ -52,6 +52,9 @@ class PostUrl extends \yii\helpers\Url
         return self::toRoute(['post/delete', 'post_id' => $id]);
     }
     
+    /**
+     * @return string
+     */
     public static function showList()
     {
         return self::toRoute(['post/showList']);

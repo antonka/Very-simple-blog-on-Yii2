@@ -2,8 +2,9 @@
 
 namespace blog\post\actions;
 
-use blog\post\LoaderFactory;
+use blog\post\algorithms\PostLoadProcess;
 use blog\post\helpers\PostUrl;
+use blog\post\models\Post;
 
 /**
  * @author Anton Karamnov
@@ -15,15 +16,15 @@ class Load extends \blog\base\Action
      */
     public function run()
     {   
-        $loader = LoaderFactory::buildWithNewPostModel();
+        $process = PostLoadProcess::build(new Post());
         
-        if ($loader->load()) {
-            return $this->redirect(PostUrl::show($loader->getModel()->id));
+        if ($process->execute()) {
+            return $this->redirect(PostUrl::show($process->getPost()->id));
         }
         
         return $this->render('load', [
-            'fileModel' => $loader->getFileLoader()->getFileModel(),
-            'postModel' => $loader->getModel()
+            'fileModel' => $process->getFileLoader()->getFileModel(),
+            'postModel' => $process->getPost()
         ]);
     }
 }
