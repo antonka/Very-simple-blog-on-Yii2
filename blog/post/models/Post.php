@@ -48,4 +48,27 @@ class Post extends \blog\base\ActiveRecord
             'created_at' => 'Created At',
         ];
     }
+    
+    /**
+     * @return array
+     */
+    public function getBoundCategories()
+    {
+        return self::getBoundCategoriesByPk($this->id);
+    }
+    
+    /**
+     * @param integer $primaryKey
+     * @return array
+     */
+    public static function getBoundCategoriesByPk($primaryKey)
+    {
+        return Yii::$app->db->createCommand('
+            SELECT c.id, c.name
+            FROM posts_categories AS rel
+            JOIN categories AS c
+                ON c.id = rel.category_id
+            WHERE rel.post_id = :post_id
+        ')->bindValue(':post_id', $primaryKey)->queryAll();
+    }
 }

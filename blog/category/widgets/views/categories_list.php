@@ -5,7 +5,7 @@ use yii\helpers\Url;
 
 if ($canSetRelation) {
     echo Html::beginForm([
-        '/blog/savePostCategoriesRelation', 
+        '/post/savePostCategoriesRelation', 
         'post_id' => $postId
     ]);
 }

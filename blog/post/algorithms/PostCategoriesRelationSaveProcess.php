@@ -1,50 +1,55 @@
 <?php
 
-namespace blog\post;
+namespace blog\post\algorithms;
 
+use blog\post\models\Post;
 use Yii;
 
 /**
  * @author Anton Karamnov
  */
-class PostCategoriesRelationSaver
+class PostCategoriesRelationSaveProcess
 {
     /**
      * @var \blog\post\models\Post 
      */
-    protected $model;
+    protected $post;
+    
+    /**
+     * @var array
+     */
+    protected $categoryIds;
 
     /**
-     * @param \blog\post\models\Post $model
-     */
-    public function __construct(models\Post $model) 
-    {
-        $this->model = $model;
-    }
-    
-    /**
-     * @return \self
-     */
-    public static function buildWithFoundPostModelByHttpRequest()
-    {
-       return new self(Finder::findByHttpRequest()); 
-    }
-    
-    /**
+     * @param Post $post
      * @param array $categoryIds
      */
-    public function savePostCategoriesRelations(array $categoryIds)
+    public function __construct(Post $post, array $categoryIds) 
     {
-        $boundCategories = Finder::findBoundCategories($this->model->id);
+        $this->post = $post;
+        $this->categoryIds = $categoryIds;
+    }
+     
+    /**
+     * @throws Exception
+     */
+    public function execute()
+    {
+        $boundCategories = $this->post->getBoundCategories();
         
         $transaction = Yii::$app->db->beginTransaction();
         try {
+            
             $this->removeRelationWithCategories(
-                self::findCategoriesToRemoveFromRelations($boundCategories, $categoryIds)
+                self::findCategoriesToRemoveFromRelations(
+                    $boundCategories, $this->categoryIds
+                )
             );
 
             $this->bindCategoriesWithPost(
-                self::findCategoriesToBindRelations($boundCategories, $categoryIds)    
+                self::findCategoriesToBindRelations(
+                    $boundCategories, $this->categoryIds
+                )    
             );
             
             $transaction->commit();
@@ -99,7 +104,7 @@ class PostCategoriesRelationSaver
         if (!$categoryIds) {
             return false;
         }
-        $postId = $this->model->id;
+        $postId = $this->post->id;
         $data = array_map(function($categoryId) use ($postId) {
             return [$postId, $categoryId];
         }, $categoryIds);
@@ -119,19 +124,11 @@ class PostCategoriesRelationSaver
                 'posts_categories', 
                 'post_id = :post_id AND category_id = :category_id',
                 [
-                    ':post_id' => $this->model->id, 
+                    ':post_id' => $this->post->id, 
                     ':category_id' => $boundCategoryRowData['id']
                 ]
             )->execute();
         }
-    }
-    
-    /**
-     * @return \blog\post\Model
-     */
-    public function getModel()
-    {
-        return $this->model;
-    }
-            
+    }            
 }
+

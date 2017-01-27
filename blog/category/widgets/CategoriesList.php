@@ -3,8 +3,7 @@
 namespace blog\category\widgets;
 
 use Yii;
-use blog\post\Finder as PostFinder; 
-
+use blog\post\models\Post;
 
 /**
  * @author Anton Karamnov
@@ -20,13 +19,14 @@ class CategoriesList extends \yii\base\Widget
         $postId = Yii::$app->request->get('post_id');
         $canSetRelation = false;
         $currentPostBoundWithCategories = [];
-        if (Yii::$app->controller->action->id == 'post'
+        
+        if (Yii::$app->controller->action->id == 'show'
             && !Yii::$app->user->isGuest
         ) {
             $canSetRelation = true;
             $currentPostBoundWithCategories = array_map(function($rowData) {
                 return $rowData['id'];
-            }, PostFinder::findBoundCategories($postId));
+            }, Post::getBoundCategoriesByPk($postId));
         }
         
         return $this->render('categories_list', [
