@@ -59,5 +59,16 @@ class PostUrl extends \yii\helpers\Url
     {
         return self::toRoute(['post/showList']);
     }
+    
+    /**
+     * @param type $categoryId
+     * @return string
+     */
+    public static function showListByCategory($categoryId)
+    {
+        return self::toRoute([
+            'post/showListByCategory', 'category_id' => $categoryId
+        ]);
+    }
 }
 

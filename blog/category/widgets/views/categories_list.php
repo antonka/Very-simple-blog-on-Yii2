@@ -1,7 +1,8 @@
 <?php
 
 use yii\bootstrap\Html;
-use yii\helpers\Url;
+use blog\category\helpers\CategoryUrl;
+use blog\post\helpers\PostUrl;
 
 if ($canSetRelation) {
     echo Html::beginForm([
@@ -29,24 +30,19 @@ if ($canSetRelation) {
                     );
                 }
                   
-                echo Html::a($categoryRowData['name'], [
-                    '/blog/category', 'category_id' => $categoryRowData['id'],
-                ]); 
+                echo Html::a(
+                    $categoryRowData['name'], 
+                    PostUrl::showListByCategory($categoryRowData['id'])
+                ); 
                 
                 if ($canManageCategories) {
                     echo Html::a(
                         '<span class="glyphicon glyphicon-pencil"></span>', 
-                        [
-                            '/blog/editCategory', 
-                            'category_id' => $categoryRowData['id'],
-                        ]
+                        CategoryUrl::edit($categoryRowData['id'])    
                     ); 
                     echo Html::a(
                         '<span class="glyphicon glyphicon-trash"></span>', 
-                        [
-                            '/blog/deleteCategory', 
-                            'category_id' => $categoryRowData['id'],
-                        ]
+                        CategoryUrl::delete($categoryRowData['id'])
                     );
                 } 
                 ?>
