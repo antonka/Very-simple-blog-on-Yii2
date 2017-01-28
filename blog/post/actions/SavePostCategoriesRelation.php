@@ -35,9 +35,11 @@ class SavePostCategoriesRelation extends \blog\base\Action
         }
         
         $process = new PostCategoriesRelationSaveProcess(
-            $post, $selectedCategoryIds);
+            $post, $selectedCategoryIds, $allCategoryIds);
         
         $process->execute(); 
+        
+        Yii::$app->session->setFlash('success', 'Relations was updated');
         
         return $this->redirect(PostUrl::show($post->id));
     }

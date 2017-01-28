@@ -23,10 +23,7 @@ if ($canSetRelation) {
                 if ($canSetRelation) {
                     echo Html::checkbox(
                         'categoryIds[' . $categoryRowData['id'] . ']', 
-                        in_array( 
-                            $categoryRowData['id'], 
-                            $currentPostBoundWithCategories    
-                        )
+                        in_array($categoryRowData['id'], $postBoundWithCategoryIds)
                     );
                 }
                   

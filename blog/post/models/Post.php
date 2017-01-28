@@ -52,23 +52,23 @@ class Post extends \blog\base\ActiveRecord
     /**
      * @return array
      */
-    public function getBoundCategories()
+    public function getBoundCategoryIds()
     {
-        return self::getBoundCategoriesByPk($this->id);
+        return self::getBoundCategoryIdsByPk($this->id);
     }
     
     /**
      * @param integer $primaryKey
      * @return array
      */
-    public static function getBoundCategoriesByPk($primaryKey)
+    public static function getBoundCategoryIdsByPk($primaryKey)
     {
         return Yii::$app->db->createCommand('
-            SELECT c.id, c.name
+            SELECT c.id
             FROM posts_categories AS rel
             JOIN categories AS c
                 ON c.id = rel.category_id
             WHERE rel.post_id = :post_id
-        ')->bindValue(':post_id', $primaryKey)->queryAll();
+        ')->bindValue(':post_id', $primaryKey)->queryColumn();
     }
 }

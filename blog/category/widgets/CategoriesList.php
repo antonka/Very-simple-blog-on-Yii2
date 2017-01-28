@@ -18,15 +18,13 @@ class CategoriesList extends \yii\base\Widget
      
         $postId = Yii::$app->request->get('post_id');
         $canSetRelation = false;
-        $currentPostBoundWithCategories = [];
+        $postBoundWithCategoryIds = [];
         
         if (Yii::$app->controller->action->id == 'show'
             && !Yii::$app->user->isGuest
         ) {
             $canSetRelation = true;
-            $currentPostBoundWithCategories = array_map(function($rowData) {
-                return $rowData['id'];
-            }, Post::getBoundCategoriesByPk($postId));
+            $postBoundWithCategoryIds = Post::getBoundCategoryIdsByPk($postId);
         }
         
         return $this->render('categories_list', [
@@ -34,7 +32,7 @@ class CategoriesList extends \yii\base\Widget
             'categoryModel' => new \blog\category\models\Category(),
             'canManageCategories' => !Yii::$app->user->isGuest,
             'canSetRelation' => $canSetRelation,
-            'currentPostBoundWithCategories' => $currentPostBoundWithCategories,
+            'postBoundWithCategoryIds' => $postBoundWithCategoryIds,
             'postId' => $postId,
         ]);
     }

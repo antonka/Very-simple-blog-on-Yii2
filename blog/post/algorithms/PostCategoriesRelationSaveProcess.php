@@ -18,16 +18,22 @@ class PostCategoriesRelationSaveProcess
     /**
      * @var array
      */
-    protected $categoryIds;
-
+    protected $selectedCategoryIds;
+    
+    /**
+     * @var array
+     */
+    protected $boundCategoryIds;
+   
     /**
      * @param Post $post
-     * @param array $categoryIds
+     * @param array $selectedCategoryIds
+     * @param array $allCategoryIds
      */
-    public function __construct(Post $post, array $categoryIds) 
-    {
+    public function __construct(Post $post, array $selectedCategoryIds) {
         $this->post = $post;
-        $this->categoryIds = $categoryIds;
+        $this->selectedCategoryIds = $selectedCategoryIds;
+        $this->boundCategoryIds =  $this->post->getBoundCategoryIds();
     }
      
     /**
@@ -35,23 +41,10 @@ class PostCategoriesRelationSaveProcess
      */
     public function execute()
     {
-        $boundCategories = $this->post->getBoundCategories();
-        
         $transaction = Yii::$app->db->beginTransaction();
         try {
-            
-            $this->removeRelationWithCategories(
-                self::findCategoriesToRemoveFromRelations(
-                    $boundCategories, $this->categoryIds
-                )
-            );
-
-            $this->bindCategoriesWithPost(
-                self::findCategoriesToBindRelations(
-                    $boundCategories, $this->categoryIds
-                )    
-            );
-            
+            $this->bindRelation();
+            $this->unbindRelation();
             $transaction->commit();
         }
         catch (Exception $e) {
@@ -60,72 +53,42 @@ class PostCategoriesRelationSaveProcess
         }
     }
     
-    /**
-     * @param array $boundCategories
-     * @param array $currentCategoryIds
-     * @return array
-     */
-    protected static function findCategoriesToRemoveFromRelations(
-        array $boundCategories, array $currentCategoryIds
-    ) {
-        return array_filter(
-            $boundCategories, function($row) use ($currentCategoryIds) {
-                return !in_array($row['id'], $currentCategoryIds);
-            }
-        );
-    }
-    
-    /**
-     * @param array $boundCategories
-     * @param array $currentCategoryIds
-     * @return array
-     */
-    protected static function findCategoriesToBindRelations(
-        array $boundCategories, array $currentCategoryIds
-    ) {
-        $boundCategoryIds = array_map(function($rowData) {
-            return $rowData['id'];
-        }, $boundCategories);
-        
-        return array_filter(
-            $currentCategoryIds, 
-            function($currentCategoryId) use ($boundCategoryIds) {
-                return !in_array($currentCategoryId, $boundCategoryIds);
-            }
-        );
-    }
-    
-    /**
-     * @param array $categoryIds
-     * @return boolean
-     */
-    protected function bindCategoriesWithPost(array $categoryIds)
+    protected function bindRelation()
     {
+        $boundCategoryIds = $this->boundCategoryIds;
+        $categoryIds = array_diff(
+            $this->selectedCategoryIds, $this->boundCategoryIds
+        );
+        
         if (!$categoryIds) {
-            return false;
+            return;
         }
+        
         $postId = $this->post->id;
         $data = array_map(function($categoryId) use ($postId) {
             return [$postId, $categoryId];
         }, $categoryIds);
         
-        return Yii::$app->db->createCommand()->batchInsert(
+        Yii::$app->db->createCommand()->batchInsert(
             'posts_categories', ['post_id', 'category_id'], $data
         )->execute();
+        
+        $this->boundCategoryIds = array_merge($boundCategoryIds, $categoryIds);
     }
     
-    /**
-     * @param array $boundCategories
-     */
-    protected function removeRelationWithCategories(array $boundCategories)
+    protected function unbindRelation()
     {   
-        $boundCategoryIds = array_map(function($rowData) {
-            return $rowData['id'];
-        }, $boundCategories);
+        $categoryIds = array_diff(
+            $this->boundCategoryIds, $this->selectedCategoryIds
+        );
+        
+        if (!$categoryIds) {
+            return;
+        }
         
         Yii::$app->db->createCommand()->delete('posts_categories', [
             'post_id' => $this->post->id,
-            'category_id' => $boundCategoryIds,
+            'category_id' => $categoryIds,
         ])->execute();
     }            
 }
