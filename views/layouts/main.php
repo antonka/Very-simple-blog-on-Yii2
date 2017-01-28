@@ -6,12 +6,13 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use blog\post\helpers\PostUrl;
+use blog\category\helpers\CategoryUrl;
 
 
 $topNavItems = [];
 if (!Yii::$app->user->isGuest) {
     $topNavItems[] = ['label' => 'Load post', 'url' => PostUrl::load()];
-    $topNavItems[] = ['label' => 'Add category', 'url' => ['/blog/addCategory']];
+    $topNavItems[] = ['label' => 'Add category', 'url' => CategoryUrl::add()];
     $topNavItems[] = ['label' => 'Log out', 'url' => ['/blog/logout']];
 }
 

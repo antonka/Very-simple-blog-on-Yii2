@@ -118,17 +118,15 @@ class PostCategoriesRelationSaveProcess
      * @param array $boundCategories
      */
     protected function removeRelationWithCategories(array $boundCategories)
-    {      
-        foreach ($boundCategories as $boundCategoryRowData) {
-            Yii::$app->db->createCommand()->delete(
-                'posts_categories', 
-                'post_id = :post_id AND category_id = :category_id',
-                [
-                    ':post_id' => $this->post->id, 
-                    ':category_id' => $boundCategoryRowData['id']
-                ]
-            )->execute();
-        }
+    {   
+        $boundCategoryIds = array_map(function($rowData) {
+            return $rowData['id'];
+        }, $boundCategories);
+        
+        Yii::$app->db->createCommand()->delete('posts_categories', [
+            'post_id' => $this->post->id,
+            'category_id' => $boundCategoryIds,
+        ])->execute();
     }            
 }
 
