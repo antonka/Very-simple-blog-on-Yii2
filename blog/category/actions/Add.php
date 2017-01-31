@@ -12,17 +12,17 @@ class Add extends \blog\base\Action
 {
     public function run()
     {
-        $categoryModel = new Category();
-        if ($categoryModel->load(Yii::$app->request->post()) 
-            && $categoryModel->save()
+        $category = new Category();
+        if ($category->load(Yii::$app->request->post()) 
+            && $category->save()
         ) {
             Yii::$app->session->setFlash('success', 
-                $categoryModel->name . ' category was added'
+                $category->name . ' category was added'
             );
             return $this->controller->goHome();
         }
         return $this->render('add', [
-            'categoryModel' => $categoryModel,
+            'categoryModel' => $category,
         ]);
     }
 }

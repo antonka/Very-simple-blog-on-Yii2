@@ -2,7 +2,7 @@
 
 namespace blog\category\models;
 
-class Category extends \yii\db\ActiveRecord
+class Category extends \blog\base\ActiveRecord
 {
     /**
      * @return string
@@ -35,5 +35,15 @@ class Category extends \yii\db\ActiveRecord
     {
         return $this->hasMany(\blog\post\models\Post::className(), ['id' => 'post_id'])
             ->viaTable('posts_categories', ['category_id' => 'id']);
+    }
+    
+    /**
+     * @return array
+     */
+    public static function getAllIds()
+    {
+        return Yii::$app->db->createCommand(
+            'SELECT id FROM ' . models\Category::tableName()
+        )->queryColumn();
     }
 }

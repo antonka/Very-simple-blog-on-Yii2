@@ -3,6 +3,7 @@
 namespace blog\category\actions;
 
 use blog\post\helpers\PostUrl;
+use blog\category\models\Category;
 
 /**
  * @author Anton Karamnov
@@ -14,7 +15,7 @@ class Delete extends \blog\base\Action
      */
     public function run() 
     {
-        \blog\category\Finder::findByHttpRequest()->delete();
+        Category::findByUrlQueryParam('category_id')->delete();
         return $this->redirect(PostUrl::showList());
     }
 }

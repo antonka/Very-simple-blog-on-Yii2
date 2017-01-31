@@ -2,9 +2,9 @@
 
 namespace blog\post\actions;
 
-use blog\category\Finder as CategoryFinder;
 use yii\data\ActiveDataProvider;
 use blog\post\models\Post;
+use blog\category\models\Category;
 
 /**
  * @author Anton Karamnov
@@ -16,7 +16,7 @@ class ShowListByCategory extends \blog\base\Action
      */
     public function run()
     {
-        $categoryModel = CategoryFinder::findByHttpRequest();
+        $categoryModel = Category::findByUrlQueryParam('category_id');
   
         $query = Post::find()
             ->join(

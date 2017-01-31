@@ -3,12 +3,11 @@
 namespace blog\post\actions;
 
 use Yii;
-
 use yii\web\HttpException;
 use blog\post\helpers\PostUrl;
 use blog\post\algorithms\PostCategoriesRelationSaveProcess;
 use blog\post\models\Post;
-use blog\category\Finder as CategoryFinder;
+use blog\category\models\Category;
 
 /**
  * @author Anton Karamnov
@@ -27,7 +26,7 @@ class SavePostCategoriesRelation extends \blog\base\Action
             Yii::$app->request->post('categoryIds', [])
         );
         
-        $allCategoryIds = CategoryFinder::getAllCategoryIds();
+        $allCategoryIds = Category::getAllIds();
         if (count(array_intersect($selectedCategoryIds, $allCategoryIds))
             != count($selectedCategoryIds)
         ) {
