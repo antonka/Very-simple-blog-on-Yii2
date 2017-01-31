@@ -12,7 +12,7 @@ class Logout extends \blog\base\Action
     public function run() 
     {
         Yii::$app->user->logout();
-        return $this->goHome();
+        return $this->controller->goHome();
     }
 }
 

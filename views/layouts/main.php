@@ -7,13 +7,14 @@ use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use blog\post\helpers\PostUrl;
 use blog\category\helpers\CategoryUrl;
+use blog\user\helpers\UserUrl;
 
 
 $topNavItems = [];
 if (!Yii::$app->user->isGuest) {
     $topNavItems[] = ['label' => 'Load post', 'url' => PostUrl::load()];
     $topNavItems[] = ['label' => 'Add category', 'url' => CategoryUrl::add()];
-    $topNavItems[] = ['label' => 'Log out', 'url' => ['/blog/logout']];
+    $topNavItems[] = ['label' => 'Log out', 'url' => UserUrl::logout()];
 }
 
 AppAsset::register($this);

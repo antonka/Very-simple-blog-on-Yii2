@@ -9,5 +9,6 @@ return [
     'post' => DefaultController::className(),
     'user' => DefaultController::className(),
     'base' => DefaultController::className(),
+    'user' => DefaultController::className(),
 ];
 
