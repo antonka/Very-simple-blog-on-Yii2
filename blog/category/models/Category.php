@@ -2,6 +2,11 @@
 
 namespace blog\category\models;
 
+use Yii;
+
+/**
+ * @author Anton Karamnov
+ */
 class Category extends \blog\base\ActiveRecord
 {
     /**
@@ -43,7 +48,7 @@ class Category extends \blog\base\ActiveRecord
     public static function getAllIds()
     {
         return Yii::$app->db->createCommand(
-            'SELECT id FROM ' . models\Category::tableName()
+            'SELECT id FROM ' . self::tableName()
         )->queryColumn();
     }
 }

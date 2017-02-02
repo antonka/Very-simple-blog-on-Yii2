@@ -5,6 +5,7 @@ namespace blog\post\actions;
 use blog\post\algorithms\PostLoadProcess;
 use blog\post\helpers\PostUrl;
 use blog\post\models\Post;
+use Yii;
 
 /**
  * @author Anton Karamnov
@@ -20,6 +21,8 @@ class Reload extends \blog\base\Action
         $process = PostLoadProcess::build($post);
         
         if ($process->execute()) {
+            Yii::$app->session->setFlash('success', 
+                Yii::t('post', 'This post was reloaded'));
             return $this->redirect(PostUrl::show($process->getPost()->id));
         }
         

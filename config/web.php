@@ -11,6 +11,7 @@ $config = [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'defaultRoute' => '/post/showList',
+    'language' => 'ru-RU',
     'components' => [
         'request' => [
             'cookieValidationKey' => md5($db['username'] . $db['password']),
@@ -48,6 +49,15 @@ $config = [
             ],
         ],
         */
+        
+        'i18n' => [
+            'translations' => [
+                'post' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@blog/base/messages',
+                ],
+            ],
+        ],
     ],
     'controllerMap' => $controllerMap,
     'params' => $params,

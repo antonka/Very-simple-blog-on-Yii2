@@ -23,9 +23,9 @@ class Toolbar extends \yii\base\Widget
      
         return $this->render('toolbar', [
            'links' => [
-                ['Download', PostUrl::download($this->postId)],
-                ['Reload', PostUrl::reload($this->postId)],
-                ['Delete', PostUrl::delete($this->postId)],
+                [Yii::t('post', 'Download'), PostUrl::download($this->postId)],
+                [Yii::t('post', 'Reload'), PostUrl::reload($this->postId)],
+                [Yii::t('post','Delete'), PostUrl::delete($this->postId)],
             ],
         ]);
     }

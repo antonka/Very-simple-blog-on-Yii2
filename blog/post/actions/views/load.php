@@ -1,8 +1,9 @@
 <?php
 
 use yii\helpers\Html;
+use Yii;
 
-$this->title = 'Load post';
+$this->title = Yii::t('post', 'Load post');
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>

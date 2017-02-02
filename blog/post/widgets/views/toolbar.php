@@ -1,7 +1,6 @@
 <?php
-
 use \yii\bootstrap\Html;
-
+use Yii;
 ?>
 
 <style>
@@ -11,7 +10,7 @@ use \yii\bootstrap\Html;
 </style>
 
 <div class="panel panel-default">
-    <div class="panel-heading">Post toolbar</div>
+    <div class="panel-heading"><?= Yii::t('post', 'Post toolbar'); ?></div>
     <div class="panel-body">
        <?php
        foreach ($links as $link) {

@@ -10,6 +10,6 @@ $form = ActiveForm::begin([
 echo $form->errorSummary($fileModel);
 echo $form->errorSummary($postModel);
 echo $form->field($fileModel, 'file')->fileInput();
-echo Html::button('Load', ['type' => 'submit']); 
+echo Html::button(Yii::t('post', 'Load'), ['type' => 'submit']); 
 ActiveForm::end(); 
 

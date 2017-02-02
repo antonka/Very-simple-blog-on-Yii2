@@ -38,7 +38,8 @@ class SavePostCategoriesRelation extends \blog\base\Action
         
         $process->execute(); 
         
-        Yii::$app->session->setFlash('success', 'Relations was updated');
+        Yii::$app->session->setFlash('success', 
+            Yii::t('post', 'Relations was updated'));
         
         return $this->redirect(PostUrl::show($post->id));
     }
