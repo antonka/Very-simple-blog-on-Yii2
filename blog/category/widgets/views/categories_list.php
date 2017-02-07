@@ -14,7 +14,9 @@ if ($canSetRelation) {
 ?>
 
 <div style="margin-bottom: 50px;">
-    <div style="font-size: 16px;margin-bottom: 10px;">Categories</div>
+    <div style="font-size: 16px;margin-bottom: 10px;">
+        <?= Yii::t('category', 'Categories') ?>
+    </div>
     <div>
         <?php foreach ($categoriesList as $categoryRowData): ?>
             <div>
@@ -51,6 +53,7 @@ if ($canSetRelation) {
 
 <?php 
 if ($canSetRelation && $categoriesList) {
-    echo Html::submitButton('Save', ['class' => 'btn btn-primary']);
+    echo Html::submitButton(Yii::t('app', 'Save'), [
+        'class' => 'btn btn-primary btn-xs']);
     echo Html::endForm();
 }

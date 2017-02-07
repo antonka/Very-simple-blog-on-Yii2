@@ -16,7 +16,8 @@ class Edit extends \blog\base\Action
         if ($category->load(Yii::$app->request->post())
             && $category->save()
         ) {
-            Yii::$app->session->setFlash('success', 'Category was updated');
+            Yii::$app->session->setFlash('success', 
+                Yii::t('category', 'Category was updated'));
             return $this->controller->refresh();
         }
         return $this->render('edit', [

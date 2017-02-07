@@ -56,6 +56,14 @@ $config = [
                     'class' => 'yii\i18n\PhpMessageSource',
                     'basePath' => '@blog/base/messages',
                 ],
+                'category' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@blog/base/messages',
+                ],
+                'app' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@blog/base/messages',
+                ],
             ],
         ],
     ],

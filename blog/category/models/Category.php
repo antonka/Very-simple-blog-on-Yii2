@@ -32,7 +32,7 @@ class Category extends \blog\base\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'name' => Yii::t('app', 'Name'),
         ];
     } 
     

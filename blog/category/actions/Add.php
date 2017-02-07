@@ -17,7 +17,7 @@ class Add extends \blog\base\Action
             && $category->save()
         ) {
             Yii::$app->session->setFlash('success', 
-                $category->name . ' category was added'
+                Yii::t('category', 'This category was added')
             );
             return $this->controller->goHome();
         }
