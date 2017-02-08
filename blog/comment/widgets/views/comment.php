@@ -3,16 +3,16 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\Url;
-
+use Yii;
 
 ?>
 <div>
-    <h2>Leave a comment</h2>
+    <h2><?= Yii::t('comment', 'Leave a comment') ?></h2>
     <div>
         <?php 
         
         $form = ActiveForm::begin(['action' => Url::toRoute([
-            '/blog/addComment', 'post_id' => $postId
+            '/comment/add', 'post_id' => $postId
         ])]); 
         
         echo $form->errorSummary($model);
@@ -30,7 +30,9 @@ use yii\helpers\Url;
             'style' => 'width: 500px; height: 100px; resize: none;'
         ]);
         
-        echo Html::submitButton('Add comment', ['class' => 'btn btn-primary']);
+        echo Html::submitButton(Yii::t('comment', 'Add this comment'), [
+            'class' => 'btn btn-primary'
+        ]);
         
         ActiveForm::end(); 
         

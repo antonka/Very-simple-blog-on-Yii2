@@ -49,9 +49,9 @@ class Comment extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'user_id' => 'User ID',
-            'username' => 'Name',
+            'username' => Yii::t('comment', 'Name'),
             'email' => 'Email',
-            'content' => 'Content',
+            'content' => Yii::t('comment', 'Comment'),
             'created_at' => 'Created At',
             'status' => 'Status',
         ];
