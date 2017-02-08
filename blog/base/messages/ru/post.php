@@ -12,4 +12,7 @@ return [
     'This post was reloaded' => 'Пост был обновлен',
     'Load markdown file to update this post' => 'Загрузите файл в формате markdown, чтобы обновить пост',
     'Relations was updated' => 'Отношения были обновлены',
+    'List of Posts' => 'Все посты',
+    'Read more' => 'Читать дальше',
+    'Created at' => 'Добавлен',
 ];

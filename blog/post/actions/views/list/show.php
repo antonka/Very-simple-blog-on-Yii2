@@ -2,8 +2,9 @@
 
 use yii\helpers\Html;
 use yii\widgets\ListView;
+use Yii;
 
-$this->title = 'List of Posts';
+$this->title =  Yii::t('post', 'List of Posts');
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
