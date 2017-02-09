@@ -1,5 +1,6 @@
 <?php
 
+use Yii;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
@@ -12,9 +13,9 @@ use blog\user\helpers\UserUrl;
 
 $topNavItems = [];
 if (!Yii::$app->user->isGuest) {
-    $topNavItems[] = ['label' => 'Load post', 'url' => PostUrl::load()];
-    $topNavItems[] = ['label' => 'Add category', 'url' => CategoryUrl::add()];
-    $topNavItems[] = ['label' => 'Log out', 'url' => UserUrl::logout()];
+    $topNavItems[] = ['label' => Yii::t('app', 'Load post'), 'url' => PostUrl::load()];
+    $topNavItems[] = ['label' => Yii::t('app', 'Add category'), 'url' => CategoryUrl::add()];
+    $topNavItems[] = ['label' => Yii::t('app', 'Log out'), 'url' => UserUrl::logout()];
 }
 
 AppAsset::register($this);
