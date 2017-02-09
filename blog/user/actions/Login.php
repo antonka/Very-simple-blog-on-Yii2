@@ -29,9 +29,9 @@ class Login extends \blog\base\Action
                 return $this->controller->goHome();
             }
             
-            Yii::$app->session->addFlash(
-                'error', 'User was not authenticated' 
-            );
+            Yii::$app->session->addFlash('error', 
+                Yii::t('user', 'User was not authenticated'));
+            
             return $this->controller->refresh();
         }
         

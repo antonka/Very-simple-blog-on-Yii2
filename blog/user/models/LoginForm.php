@@ -30,4 +30,15 @@ class LoginForm extends \yii\base\Model
         ];
     }
     
+    /**
+     * @return array
+     */
+    public function attributeLabels()
+    {
+        return [
+            'email' => 'Email',
+            'password' => Yii::t('user', 'Password'),
+        ];
+    }  
+    
 }

@@ -2,6 +2,8 @@
 
 namespace blog\user\models;
 
+use Yii;
+
 /**
  * @autor Anton Karamnov
  */
@@ -74,9 +76,9 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return [
             'id' => '#',
             'email' => 'Email',
-            'name' => 'Name',
-            'password' => 'Password',
-            'role' => 'Role',
+            'name' => Yii::t('user', 'Name'),
+            'password' => Yii::t('user', 'Password'),
+            'role' => Yii::t('user', 'Role'),
         ];
     }  
 }
