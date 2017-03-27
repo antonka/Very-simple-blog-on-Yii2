@@ -2,7 +2,8 @@
 
 return [
     'blog' => [
-        'name' => 'phplang.ru',
+        'name' => 'The blog',
         'owner' => 'Anton Karamnov',
     ],
 ];
+

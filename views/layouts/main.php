@@ -10,7 +10,6 @@ use blog\post\helpers\PostUrl;
 use blog\category\helpers\CategoryUrl;
 use blog\user\helpers\UserUrl;
 
-
 $topNavItems = [];
 if (!Yii::$app->user->isGuest) {
     $topNavItems[] = ['label' => Yii::t('app', 'Load post'), 'url' => PostUrl::load()];
@@ -36,7 +35,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'Simple Blog',
+        'brandLabel' => Yii::$app->params['blog']['name'],
         'brandUrl' => Yii::$app->homeUrl,
         'options' => ['class' => 'navbar-inverse navbar-fixed-top',],
     ]);
@@ -71,7 +70,7 @@ AppAsset::register($this);
 <footer class="footer">
     <div class="container">
         <p class="pull-left">
-            &copy; <?= Yii::$app->params['username'] . ' ' . date('Y') ?>
+            &copy; <?= Yii::$app->params['blog']['owner'] . ' ' . date('Y') ?>
         </p>
 
         <p class="pull-right"><?= Yii::powered() ?></p>

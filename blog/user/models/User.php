@@ -5,7 +5,7 @@ namespace blog\user\models;
 use Yii;
 
 /**
- * @autor Anton Karamnov
+ * @author Anton Karamnov
  */
 class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 { 
