@@ -8,7 +8,7 @@ use Yii;
 $this->title = 'Load post';
 $this->params['breadcrumbs'][] = [
     'label' => $postModel->title, 
-    'url' => PostUrl::show($postModel->id),
+    'url' => PostUrl::show($postModel),
 ];
 $this->params['breadcrumbs'][] = Yii::t('post', 'Reload');
 

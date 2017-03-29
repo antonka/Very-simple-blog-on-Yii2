@@ -47,7 +47,7 @@ class Add extends \blog\base\Action
         if ($comment->save()) {
             Yii::$app->session->setFlash('success', Yii::t('comment', 
                 'The comment was added'));
-            return $this->redirect(PostUrl::show($post->id));
+            return $this->redirect(PostUrl::show($post));
         }
         
         return $this->render('add', [

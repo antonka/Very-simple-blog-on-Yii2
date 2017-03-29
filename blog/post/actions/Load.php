@@ -22,7 +22,7 @@ class Load extends \blog\base\Action
         if ($process->execute()) {
             Yii::$app->session->setFlash('success', 
                 Yii::t('post', 'This post was loaded'));
-            return $this->redirect(PostUrl::show($process->getPost()->id));
+            return $this->redirect(PostUrl::show($process->getPost()));
         }
         
         return $this->render('load', [

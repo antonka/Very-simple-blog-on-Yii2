@@ -12,7 +12,7 @@ class Show extends \blog\base\Action
     public function run() 
     {
         return $this->render('show', [
-            'post' => Post::findByUrlQueryParam('post_id'),
+            'post' => Post::findByUrlQueryParam('slug', 'slug'),
         ]);
     }
 }

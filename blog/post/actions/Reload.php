@@ -23,7 +23,7 @@ class Reload extends \blog\base\Action
         if ($process->execute()) {
             Yii::$app->session->setFlash('success', 
                 Yii::t('post', 'This post was reloaded'));
-            return $this->redirect(PostUrl::show($process->getPost()->id));
+            return $this->redirect(PostUrl::show($process->getPost()));
         }
         
         return $this->render('reload', [

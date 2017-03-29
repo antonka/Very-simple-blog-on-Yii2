@@ -2,6 +2,7 @@
 
 namespace blog\post\algorithms;
 
+use Yii;
 use blog\post\models\Post;
 use blog\base\FileLoader;
 use yii\web\IdentityInterface;
@@ -60,12 +61,13 @@ class PostLoadProcess
      */
     protected function savePost($content)
     {
+        $this->post->load(Yii::$app->request->post());
         $this->post->title = self::findPostTitle($content);
         $this->post->content = preg_replace(
             "/" . $this->cutTag  . "/", '', $content
         );
         $this->post->cutted_content = $this->cutContent($content);
-        $this->post->user_id = $this->identity->getId();
+        $this->post->user_id = $this->identity->getId(); 
         
         return $this->post->save();
     }

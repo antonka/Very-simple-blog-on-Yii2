@@ -6,7 +6,7 @@ use blog\post\helpers\PostUrl;
 use Yii;
 
 $content = empty($model->cutted_content) ? $model->content : $model->cutted_content;
-$showPostUrl = PostUrl::show($model->id);
+$showPostUrl = PostUrl::show($model);
 ?>
 
 <div class="post-list-item">

@@ -2,18 +2,20 @@
 
 namespace blog\post\helpers;
 
+use blog\post\models\Post;
+
 /**
  * @author Anton Karamnov
  */
 class PostUrl extends \yii\helpers\Url
 {
     /**
-     * @param string $id
+     * @param Post $post
      * @return string
      */
-    public static function show($id)
+    public static function show(Post $post)
     {
-        return self::toRoute(['post/show', 'post_id' => $id]);
+        return self::toRoute(['post/show', 'slug' => $post->slug]);
     }
     
     /**

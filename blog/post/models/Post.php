@@ -28,11 +28,12 @@ class Post extends \blog\base\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'content'], 'required'],
+            [['title', 'content', 'slug'], 'required'],
             [['content'], 'string'],
             [['created_at'], 'safe'],
             [['title'], 'string', 'max' => 255],
             [['cutted_content'], 'string', 'max' => 1000],
+            [['slug'], 'string', 'max' => 100],
         ];
     }
 
@@ -46,6 +47,7 @@ class Post extends \blog\base\ActiveRecord
             'title' => 'Title',
             'content' => 'Content',
             'created_at' => 'Created At',
+            'slug' => 'Slug',
         ];
     }
     
