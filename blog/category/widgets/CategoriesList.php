@@ -16,24 +16,20 @@ class CategoriesList extends \yii\base\Widget
             SELECT * FROM categories ORDER BY name
         ')->queryAll();
      
-        $postId = Yii::$app->request->get('post_id');
-        $canSetRelation = false;
         $postBoundWithCategoryIds = [];
-        
+        $post = null;
+                
         if (Yii::$app->controller->action->id == 'show'
             && !Yii::$app->user->isGuest
         ) {
-            $canSetRelation = true;
-            $postBoundWithCategoryIds = Post::getBoundCategoryIdsByPk($postId);
+            $post = Yii::$app->controller->action->getPost();
+            $postBoundWithCategoryIds = $post->getBoundCategoryIds();
         }
         
         return $this->render('categories_list', [
             'categoriesList' => $categoriesList,
-            'categoryModel' => new \blog\category\models\Category(),
-            'canManageCategories' => !Yii::$app->user->isGuest,
-            'canSetRelation' => $canSetRelation,
             'postBoundWithCategoryIds' => $postBoundWithCategoryIds,
-            'postId' => $postId,
+            'post' => $post,
         ]);
     }
 }

@@ -4,10 +4,10 @@ use yii\bootstrap\Html;
 use blog\category\helpers\CategoryUrl;
 use blog\post\helpers\PostUrl;
 
-if ($canSetRelation) {
+if ($post) {
     echo Html::beginForm([
         '/post/savePostCategoriesRelation', 
-        'post_id' => $postId
+        'post_id' => $post->id
     ]);
 }
 
@@ -22,7 +22,7 @@ if ($canSetRelation) {
             <div>
                 <?php
                 
-                if ($canSetRelation) {
+                if ($post) {
                     echo Html::checkbox(
                         'categoryIds[' . $categoryRowData['id'] . ']', 
                         in_array($categoryRowData['id'], $postBoundWithCategoryIds)
@@ -34,7 +34,7 @@ if ($canSetRelation) {
                     PostUrl::showListByCategory($categoryRowData['id'])
                 ); 
                 
-                if ($canManageCategories) {
+                if ($post) {
                     echo Html::a(
                         '<span class="glyphicon glyphicon-pencil"></span>', 
                         CategoryUrl::edit($categoryRowData['id'])    
@@ -52,7 +52,7 @@ if ($canSetRelation) {
 </div>
 
 <?php 
-if ($canSetRelation && $categoriesList) {
+if ($post && $categoriesList) {
     echo Html::submitButton(Yii::t('app', 'Save'), [
         'class' => 'btn btn-primary btn-xs']);
     echo Html::endForm();

@@ -9,10 +9,25 @@ use blog\post\models\Post;
  */
 class Show extends \blog\base\Action
 {
+    /**
+     * @var Post; 
+     */
+    protected $post;
+    
     public function run() 
     {
+        $this->post = Post::findByUrlQueryParam('slug', 'slug');
+        
         return $this->render('show', [
-            'post' => Post::findByUrlQueryParam('slug', 'slug'),
+            'post' => $this->post,
         ]);
+    }
+    
+    /**
+     * @return Post
+     */
+    public function getPost()
+    {
+        return $this->post;
     }
 }

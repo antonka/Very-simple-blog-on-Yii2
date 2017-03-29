@@ -19,7 +19,7 @@ class SavePostCategoriesRelation extends \blog\base\Action
      * @throws HttpException
      */
     public function run()
-    {
+    {   
         $post = Post::findByUrlQueryParam('post_id');
         
         $selectedCategoryIds = array_keys(
