@@ -5,12 +5,15 @@ namespace blog\category\actions;
 use Yii;
 use blog\post\helpers\PostUrl;
 use blog\category\models\Category;
+use blog\base\traits\AuthenticatedAccess;
 
 /**
  * @author Anton Karamnov
  */
 class Delete extends \blog\base\Action
 {
+    use AuthenticatedAccess;
+    
     /**
      * @return \yii\web\Response
      */

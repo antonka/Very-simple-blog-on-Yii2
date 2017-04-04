@@ -2,6 +2,7 @@
 
 namespace blog\post\actions;
 
+use blog\base\traits\AuthenticatedAccess;
 use yii\web\Response;
 use blog\post\models\Post;
 
@@ -10,6 +11,8 @@ use blog\post\models\Post;
  */
 class Download extends \yii\base\Action
 {
+    use AuthenticatedAccess;
+    
     public function run()
     {
         $post = Post::findByUrlQueryParam('post_id');

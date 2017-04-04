@@ -39,7 +39,11 @@ class DefaultController extends \yii\web\Controller
         else {
             $actionClassName = 'blog\\' . $this->id . '\\actions\\' . ucfirst($id);
             if (class_exists($actionClassName)) {
-                return Yii::createObject($actionClassName, [$id, $this]);
+                $action = Yii::createObject($actionClassName, [$id, $this]);
+                if (method_exists($action, 'getAccessControllBehavior')) {
+                    $this->attachBehavior('access', $action->getAccessControllBehavior());
+                }
+                return $action;
             }
             elseif (preg_match('/^[a-z0-9\\-_]+$/', $id) && strpos($id, '--') === false && trim($id, '-') === $id) {
                 $methodName = 'action' . str_replace(' ', '', ucwords(implode(' ', explode('-', $id))));

@@ -2,6 +2,7 @@
 
 namespace blog\post\actions;
 
+use blog\base\traits\AuthenticatedAccess;
 use blog\post\models\Post;
 use blog\post\helpers\PostUrl;
 use Yii;
@@ -11,6 +12,8 @@ use Yii;
  */
 class Delete extends \blog\base\Action
 {
+    use AuthenticatedAccess;
+    
     /**
      * @return \yii\web\Responce
      */

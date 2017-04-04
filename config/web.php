@@ -19,7 +19,7 @@ $config = [
         'user' => [
             'identityClass' => 'blog\user\models\User',
             'enableAutoLogin' => true,
-            'loginUrl' => ['/blog/login'],
+            'loginUrl' => ['/user/login'],
         ],
         'errorHandler' => [
             'errorAction' => 'base/showError',

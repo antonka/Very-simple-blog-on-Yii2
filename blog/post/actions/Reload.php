@@ -12,6 +12,8 @@ use Yii;
  */
 class Reload extends \blog\base\Action
 {
+    use AuthenticatedAccess;
+    
     /**
      * @return \yii\web\Response
      */

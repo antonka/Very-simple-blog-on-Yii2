@@ -8,12 +8,15 @@ use blog\post\helpers\PostUrl;
 use blog\post\algorithms\PostCategoriesRelationSaveProcess;
 use blog\post\models\Post;
 use blog\category\models\Category;
+use blog\base\traits\AuthenticatedAccess;
 
 /**
  * @author Anton Karamnov
  */
 class SavePostCategoriesRelation extends \blog\base\Action
 {
+    use AuthenticatedAccess;
+    
     /**
      * @return \yii\web\Response
      * @throws HttpException
