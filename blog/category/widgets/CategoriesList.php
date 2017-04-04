@@ -18,18 +18,23 @@ class CategoriesList extends \yii\base\Widget
      
         $postBoundWithCategoryIds = [];
         $post = null;
-                
-        if (Yii::$app->controller->action->id == 'show'
-            && !Yii::$app->user->isGuest
-        ) {
-            $post = Yii::$app->controller->action->getPost();
-            $postBoundWithCategoryIds = $post->getBoundCategoryIds();
+        list($currentRoute) = Yii::$app->urlManager->parseRequest(
+            Yii::$app->request);
+        $canEditCategory = false;
+        
+        if (!Yii::$app->user->isGuest) {
+            if ($currentRoute == 'post/show') {
+                $post = Yii::$app->controller->action->getPost();
+                $postBoundWithCategoryIds = $post->getBoundCategoryIds();
+            }
+            $canEditCategory = true;
         }
         
         return $this->render('categories_list', [
             'categoriesList' => $categoriesList,
             'postBoundWithCategoryIds' => $postBoundWithCategoryIds,
             'post' => $post,
+            'canEditCategory' => $canEditCategory,
         ]);
     }
 }

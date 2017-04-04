@@ -63,13 +63,13 @@ class PostUrl extends \yii\helpers\Url
     }
     
     /**
-     * @param type $categoryId
+     * @param type $slug
      * @return string
      */
-    public static function showListByCategory($categoryId)
+    public static function showListByCategory($slug)
     {
         return self::toRoute([
-            'post/showListByCategory', 'category_id' => $categoryId
+            'post/showListByCategory', 'slug' => $slug
         ]);
     }
 }

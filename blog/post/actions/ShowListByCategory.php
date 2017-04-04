@@ -16,7 +16,7 @@ class ShowListByCategory extends \blog\base\Action
      */
     public function run()
     {
-        $categoryModel = Category::findByUrlQueryParam('category_id');
+        $categoryModel = Category::findByUrlQueryParam('slug', 'slug');
   
         $query = Post::find()
             ->join(

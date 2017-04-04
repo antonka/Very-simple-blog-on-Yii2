@@ -24,7 +24,7 @@ class Category extends \blog\base\ActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['name'], 'string', 'max' => 50], 
+            [['name', 'slug'], 'string', 'max' => 50], 
         ];
     }
     
@@ -33,6 +33,7 @@ class Category extends \blog\base\ActiveRecord
         return [
             'id' => 'ID',
             'name' => Yii::t('app', 'Name'),
+            'slug' => Yii::t('app', 'Slug'),
         ];
     } 
     

@@ -14,10 +14,12 @@ if ($post) {
 ?>
 
 <div style="margin-bottom: 50px;">
+    
     <div style="font-size: 16px;margin-bottom: 10px;">
         <?= Yii::t('category', 'Categories') ?>
     </div>
-    <div>
+    
+    <div style="margin-bottom: 10px;">
         <?php foreach ($categoriesList as $categoryRowData): ?>
             <div>
                 <?php
@@ -31,10 +33,10 @@ if ($post) {
                   
                 echo Html::a(
                     $categoryRowData['name'], 
-                    PostUrl::showListByCategory($categoryRowData['id'])
+                    PostUrl::showListByCategory($categoryRowData['slug'])
                 ); 
                 
-                if ($post) {
+                if ($canEditCategory) {
                     echo Html::a(
                         '<span class="glyphicon glyphicon-pencil"></span>', 
                         CategoryUrl::edit($categoryRowData['id'])    
@@ -49,11 +51,16 @@ if ($post) {
         
         <?php endforeach; ?>
     </div>
+    
+    <div>
+        <?php 
+        if ($post && $categoriesList && $canEditCategory) {
+            echo Html::submitButton(Yii::t('app', 'Save'), [
+                'class' => 'btn btn-primary btn-xs']);
+            echo Html::endForm();
+        } 
+        ?>
+    </div>
+    
 </div>
 
-<?php 
-if ($post && $categoriesList) {
-    echo Html::submitButton(Yii::t('app', 'Save'), [
-        'class' => 'btn btn-primary btn-xs']);
-    echo Html::endForm();
-}
