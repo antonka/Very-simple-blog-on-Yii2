@@ -4,7 +4,7 @@ use Yii;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-$this->title = Yii::t('user', 'Changing email');
+$this->title = Yii::t('user', 'Changing profile');
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -13,6 +13,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <div>
         <?php 
         $form = ActiveForm::begin();
+        echo $form->field($userModel, 'name')->textInput([
+            'style' => 'width: 250px',
+        ]);
         echo $form->field($userModel, 'email')->textInput([
             'style' => 'width: 250px',
         ]);

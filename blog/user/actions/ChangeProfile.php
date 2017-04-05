@@ -8,7 +8,7 @@ use blog\base\traits\AuthenticatedAccess;
 /**
  * @author Anton Karamnov
  */
-class ChangeEmail extends \blog\base\Action
+class ChangeProfile extends \blog\base\Action
 {
     use AuthenticatedAccess;
     
@@ -16,13 +16,13 @@ class ChangeEmail extends \blog\base\Action
     {
         $userModel = Yii::$app->user->getIdentity();
         if ($userModel->load(Yii::$app->request->post())
-            && $userModel->update(true, ['email'])
+            && $userModel->update(true, ['email', 'name'])
         ) {
             Yii::$app->session->setFlash('success', Yii::t('user', 
-                'The email was changed'));
+                'The profile was changed'));
         }
         
-        return $this->render('changeEmail', [
+        return $this->render('changeProfile', [
             'userModel' => $userModel,
         ]);
         
