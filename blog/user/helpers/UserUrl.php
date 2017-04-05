@@ -14,5 +14,15 @@ class UserUrl extends \yii\helpers\Url
     {
         return self::toRoute(['user/logout']);
     }
+    
+    public static function changeProfile()
+    {
+        return self::toRoute(['user/changeProfile']);
+    }
+    
+    public static function changePassword()
+    {
+        return self::toRoute(['user/changePassword']);
+    }
 }
 

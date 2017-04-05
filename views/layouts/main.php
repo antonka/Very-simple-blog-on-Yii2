@@ -14,7 +14,14 @@ $topNavItems = [];
 if (!Yii::$app->user->isGuest) {
     $topNavItems[] = ['label' => Yii::t('app', 'Load post'), 'url' => PostUrl::load()];
     $topNavItems[] = ['label' => Yii::t('app', 'Add category'), 'url' => CategoryUrl::add()];
-    $topNavItems[] = ['label' => Yii::t('app', 'Log out'), 'url' => UserUrl::logout()];
+    $topNavItems[] = [
+        'label' => Yii::$app->user->getIdentity()->name,
+        'items' => [
+            ['label' => Yii::t('user', 'Change profile'), 'url' => UserUrl::changeProfile()],
+            ['label' => Yii::t('user', 'Change password'), 'url' => UserUrl::changePassword()],
+            ['label' => Yii::t('app', 'Log out'), 'url' => UserUrl::logout()],
+        ],
+    ];
 }
 
 AppAsset::register($this);
