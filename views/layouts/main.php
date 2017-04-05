@@ -82,7 +82,7 @@ AppAsset::register($this);
 
         <p class="pull-right">
             Powered by 
-            <a href="http://www.yiiframework.com/" rel="_blank" class="">Yii2blog</a>
+            <a href="https://github.com/antonka/Yii2Blog" rel="_blank" class="">Yii2blog</a>
         </p>
     </div>
 </footer>
