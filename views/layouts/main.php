@@ -77,10 +77,13 @@ AppAsset::register($this);
 <footer class="footer">
     <div class="container">
         <p class="pull-left">
-            &copy; <?= Yii::$app->params['blog']['owner'] . ' ' . date('Y') ?>
+            &copy; <?= Yii::$app->params['blog']['name'] . ' ' . date('Y') ?>
         </p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
+        <p class="pull-right">
+            Powered by 
+            <a href="http://www.yiiframework.com/" rel="external" class="">https://github.com/antonka</a>
+        </p>
     </div>
 </footer>
 
