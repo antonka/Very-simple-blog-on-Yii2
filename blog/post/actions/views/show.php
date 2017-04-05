@@ -3,10 +3,16 @@
 use yii\helpers\Html;
 use yii\helpers\Markdown;
 use blog\comment\widgets\Comment;
+use blog\post\helpers\PostUrl;
 
 $this->title = $post->title;
-$this->params['breadcrumbs'][] = $this->title;
-
+$this->params['breadcrumbs'] = [
+    [
+        'label' => $category['name'], 
+        'url' => PostUrl::showListByCategory($category['slug'])
+    ],
+    $this->title,
+];
 ?>
 
 <?= \blog\post\widgets\Toolbar::widget(['postId' => $post->id]); ?>

@@ -2,6 +2,7 @@
 
 namespace blog\post\actions; 
 
+use blog\base\traits\AuthenticatedAccess;
 use blog\post\algorithms\PostLoadProcess;
 use blog\post\helpers\PostUrl;
 use blog\post\models\Post;

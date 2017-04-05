@@ -13,6 +13,7 @@ class ActiveRecord extends \yii\db\ActiveRecord
     /**
      * @param string $queryParamName
      * @param string $attributeName 
+     * @param string $relationName
      * @return \yii\db\ActiveRecord
      * @throws HttpException
      */

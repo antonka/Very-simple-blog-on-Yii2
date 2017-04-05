@@ -28,7 +28,6 @@ class PostCategoriesRelationSaveProcess
     /**
      * @param Post $post
      * @param array $selectedCategoryIds
-     * @param array $allCategoryIds
      */
     public function __construct(Post $post, array $selectedCategoryIds) {
         $this->post = $post;

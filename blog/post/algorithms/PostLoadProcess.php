@@ -7,6 +7,7 @@ use blog\post\models\Post;
 use blog\base\FileLoader;
 use yii\web\IdentityInterface;
 use blog\base\MarkDownFileLoaderFactory;
+use blog\post\algorithms\PostCategoriesRelationSaveProcess;
 
 /**
  * @author Anton Karamnov
@@ -67,9 +68,19 @@ class PostLoadProcess
             "/" . $this->cutTag  . "/", '', $content
         );
         $this->post->cutted_content = $this->cutContent($content);
-        $this->post->user_id = $this->identity->getId(); 
+        $this->post->user_id = $this->identity->getId();
         
-        return $this->post->save();
+        if (!$this->post->save()) {
+            return false;
+        }
+        
+        $this->post->getBoundCategoryIds();
+        $process = new PostCategoriesRelationSaveProcess($this->post, array_merge(
+            [$this->post->category_id], $this->post->getBoundCategoryIds()
+        ));
+        $process->execute();
+        
+        return true;
     }
     
     /**

@@ -37,7 +37,7 @@ class SavePostCategoriesRelation extends \blog\base\Action
         }
         
         $process = new PostCategoriesRelationSaveProcess(
-            $post, $selectedCategoryIds, $allCategoryIds);
+            $post, $selectedCategoryIds);
         
         $process->execute(); 
         

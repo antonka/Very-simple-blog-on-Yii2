@@ -17,9 +17,11 @@ class Show extends \blog\base\Action
     public function run() 
     {
         $this->post = Post::findByUrlQueryParam('slug', 'slug');
+        $category = $this->post->getCategory()->asArray()->one();
         
         return $this->render('show', [
             'post' => $this->post,
+            'category' => $category,
         ]);
     }
     

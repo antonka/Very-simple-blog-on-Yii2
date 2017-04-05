@@ -3,6 +3,7 @@
 namespace blog\post\models;
 
 use Yii;
+use blog\category\models\Category;
 
 /**
  * This is the model class for table "posts".
@@ -28,7 +29,7 @@ class Post extends \blog\base\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'content', 'slug'], 'required'],
+            [['title', 'content', 'slug', 'category_id'], 'required'],
             [['content'], 'string'],
             [['created_at'], 'safe'],
             [['title'], 'string', 'max' => 255],
@@ -47,7 +48,8 @@ class Post extends \blog\base\ActiveRecord
             'title' => 'Title',
             'content' => 'Content',
             'created_at' => 'Created At',
-            'slug' => 'Slug',
+            'slug' => Yii::t('app', 'Slug'),
+            'category_id' => Yii::t('post', 'Main category'),
         ];
     }
     
@@ -72,5 +74,10 @@ class Post extends \blog\base\ActiveRecord
                 ON c.id = rel.category_id
             WHERE rel.post_id = :post_id
         ')->bindValue(':post_id', $primaryKey)->queryColumn();
+    }
+    
+    public function getCategory()
+    {
+        return $this->hasOne(Category::className(), ['id' => 'category_id']);
     }
 }
