@@ -13,7 +13,7 @@ use Yii;
  * @property string $created_at
  * @property string $status
  */
-class Comment extends \yii\db\ActiveRecord
+class Comment extends \blog\base\ActiveRecord
 {
     const STATUS_MODERATION = 'moderation';
     const STATUS_PUBLICATED = 'publicated';
@@ -55,5 +55,11 @@ class Comment extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
             'status' => 'Status',
         ];
+    }
+    
+    public function publicate()
+    {
+        $this->status = self::STATUS_PUBLICATED;
+        $this->save();
     }
 }
