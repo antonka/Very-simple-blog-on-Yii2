@@ -27,6 +27,7 @@ class m161113_003859_add_user_id_attribute_to_posts_table extends Migration
 
     public function down()
     {
+        $this->dropForeignKey('fk_posts_user_id', 'posts');
         $this->dropColumn('posts', 'user_id');
     }
 }
