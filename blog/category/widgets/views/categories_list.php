@@ -4,13 +4,6 @@ use yii\bootstrap\Html;
 use blog\category\helpers\CategoryUrl;
 use blog\post\helpers\PostUrl;
 
-if ($post) {
-    echo Html::beginForm([
-        '/post/savePostCategoriesRelation', 
-        'post_id' => $post->id
-    ]);
-}
-
 ?>
 
 <div style="margin-bottom: 50px;">
@@ -23,24 +16,13 @@ if ($post) {
         <?php foreach ($categoriesList as $categoryRowData): ?>
             <div>
                 <?php
-                
-                if ($post) {
-                    echo Html::checkbox(
-                        'categoryIds[' . $categoryRowData['id'] . ']', 
-                        in_array($categoryRowData['id'], $postBoundWithCategoryIds)
-                    );
-                }
                   
                 echo Html::a(
                     $categoryRowData['name'], 
                     PostUrl::showListByCategory($categoryRowData['slug'])
                 ); 
                 
-                if ($canEditCategory) {
-                    echo Html::a(
-                        '<span class="glyphicon glyphicon-pencil"></span>', 
-                        CategoryUrl::edit($categoryRowData['id'])    
-                    ); 
+                if ($canDeleteCategory) {
                     echo Html::a(
                         '<span class="glyphicon glyphicon-trash"></span>', 
                         CategoryUrl::delete($categoryRowData['id'])
@@ -50,16 +32,6 @@ if ($post) {
             </div>
         
         <?php endforeach; ?>
-    </div>
-    
-    <div>
-        <?php 
-        if ($post && $categoriesList && $canEditCategory) {
-            echo Html::submitButton(Yii::t('app', 'Save'), [
-                'class' => 'btn btn-primary btn-xs']);
-            echo Html::endForm();
-        } 
-        ?>
     </div>
     
 </div>
