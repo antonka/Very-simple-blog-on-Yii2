@@ -17,14 +17,8 @@ class ShowListByCategory extends \blog\base\Action
     public function run()
     {
         $categoryModel = Category::findByUrlQueryParam('slug', 'slug');
-  
-        $query = Post::find()
-            ->join(
-                'inner join',
-                'posts_categories AS rel',
-                'rel.post_id = posts.id AND rel.category_id = :category_id',
-                [':category_id' => $categoryModel->id]
-            )
+        
+        $query = Post::find(['category_id' => $categoryModel->id])
             ->orderBy('created_at DESC');
         
         $dataProvider = new ActiveDataProvider([
