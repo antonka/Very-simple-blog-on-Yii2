@@ -9,11 +9,20 @@ use app\assets\AppAsset;
 use blog\post\helpers\PostUrl;
 use blog\category\helpers\CategoryUrl;
 use blog\user\helpers\UserUrl;
+use blog\comment\helpers\CommentLink;
 
 $topNavItems = [];
 if (!Yii::$app->user->isGuest) {
-    $topNavItems[] = ['label' => Yii::t('app', 'Load post'), 'url' => PostUrl::load()];
-    $topNavItems[] = ['label' => Yii::t('app', 'Add category'), 'url' => CategoryUrl::add()];
+    
+    $topNavItems[] = [
+        'label' => Yii::t('app', 'Operation'),
+        'items' => [
+            ['label' => Yii::t('app', 'Load post'), 'url' => PostUrl::load()],
+            ['label' => Yii::t('app', 'Add category'), 'url' => CategoryUrl::add()],
+            CommentLink::showGrid(),
+        ],
+    ];
+    
     $topNavItems[] = [
         'label' => Yii::$app->user->getIdentity()->name,
         'items' => [

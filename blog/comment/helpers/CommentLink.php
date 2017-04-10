@@ -16,7 +16,7 @@ class CommentLink
     public static function showGrid()
     {
         return [
-            'label' => Yii::t('comment', 'Comments'),
+            'label' => Yii::t('comment', 'List of comments'),
             'url' => CommentUrl::showGrid(),
         ];
     }
