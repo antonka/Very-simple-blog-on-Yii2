@@ -70,17 +70,7 @@ class PostLoadProcess
         $this->post->cutted_content = $this->cutContent($content);
         $this->post->user_id = $this->identity->getId();
         
-        if (!$this->post->save()) {
-            return false;
-        }
-        
-        $this->post->getBoundCategoryIds();
-        $process = new PostCategoriesRelationSaveProcess($this->post, array_merge(
-            [$this->post->category_id], $this->post->getBoundCategoryIds()
-        ));
-        $process->execute();
-        
-        return true;
+        return $this->post->save();
     }
     
     /**

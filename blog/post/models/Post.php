@@ -53,29 +53,6 @@ class Post extends \blog\base\ActiveRecord
         ];
     }
     
-    /**
-     * @return array
-     */
-    public function getBoundCategoryIds()
-    {
-        return self::getBoundCategoryIdsByPk($this->id);
-    }
-    
-    /**
-     * @param integer $primaryKey
-     * @return array
-     */
-    public static function getBoundCategoryIdsByPk($primaryKey)
-    {
-        return Yii::$app->db->createCommand('
-            SELECT c.id
-            FROM posts_categories AS rel
-            JOIN categories AS c
-                ON c.id = rel.category_id
-            WHERE rel.post_id = :post_id
-        ')->bindValue(':post_id', $primaryKey)->queryColumn();
-    }
-    
     public function getCategory()
     {
         return $this->hasOne(Category::className(), ['id' => 'category_id']);
