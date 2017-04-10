@@ -3,7 +3,6 @@
 namespace blog\category\widgets;
 
 use Yii;
-use blog\post\models\Post;
 use blog\category\models\Category;
 
 /**
