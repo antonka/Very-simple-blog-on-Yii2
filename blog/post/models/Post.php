@@ -49,7 +49,7 @@ class Post extends \blog\base\ActiveRecord
             'content' => 'Content',
             'created_at' => 'Created At',
             'slug' => Yii::t('app', 'Slug'),
-            'category_id' => Yii::t('post', 'Main category'),
+            'category_id' => Yii::t('post', 'Category'),
         ];
     }
     
