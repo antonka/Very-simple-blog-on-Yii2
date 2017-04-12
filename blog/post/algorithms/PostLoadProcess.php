@@ -7,7 +7,7 @@ use blog\post\models\Post;
 use blog\base\FileLoader;
 use yii\web\IdentityInterface;
 use blog\base\MarkDownFileLoaderFactory;
-use blog\post\algorithms\PostCategoriesRelationSaveProcess;
+use yii\helpers\Markdown;
 
 /**
  * @author Anton Karamnov
@@ -32,7 +32,7 @@ class PostLoadProcess
     /**
      * @var string 
      */
-    protected $cutTag = '#cut#';
+    protected $cutTag = '<!-- cut -->';
     
     /**
      * @param Post $post
@@ -53,20 +53,19 @@ class PostLoadProcess
     public function execute() 
     {
         return $this->fileLoader->loadFile()
-            && $this->savePost($this->fileLoader->getFileContent());
+            && $this->savePost();
     }
     
     /**
-     * @param string $content
      * @return boolean
      */
-    protected function savePost($content)
+    protected function savePost()
     {
+        list($title, $content) = $this->parseFileContent();
+
         $this->post->load(Yii::$app->request->post());
-        $this->post->title = self::findPostTitle($content);
-        $this->post->content = preg_replace(
-            "/" . $this->cutTag  . "/", '', $content
-        );
+        $this->post->title = $title;
+        $this->post->content = $content;
         $this->post->cutted_content = $this->cutContent($content);
         $this->post->user_id = $this->identity->getId();
         
@@ -74,14 +73,50 @@ class PostLoadProcess
     }
     
     /**
-     * @return string
+     * @return array ['title', 'content']
      */
-    protected static function findPostTitle($content) 
+    protected function parseFileContent()
     {
-        $rows = explode("=", $content);
-        return substr(trim($rows[0]), 0, 255);
+        $title = '';
+        $lines = explode("\n", $this->fileLoader->getFileContent());
+        foreach ($lines as $current => $line) {
+            if ($this->identifyHeadline($line, $lines, $current)) {
+                if ($line[0] == '#') {
+                    $title = trim(substr($line, 1)); 
+                    $lines = array_slice($lines, ($current + 1));
+                }
+                else { 
+                    $title = trim($line);
+                    $lines = array_slice($lines, ($current + 2));
+                }
+                break;
+            }
+        }
+        
+        $content = Markdown::process(implode("\n", $lines));
+        
+        return [$title, $content];
     }
     
+    /**
+     * @param type $line
+     * @param type $lines
+     * @param type $current
+     * @return boolean
+     */
+    protected function identifyHeadline($line, $lines, $current)
+    {
+        return (
+            // heading with #
+            $line[0] === '#' && !preg_match('/^#\d+/', $line)
+            ||
+            // underlined headline
+            !empty($lines[$current + 1]) &&
+            (($l = $lines[$current + 1][0]) === '=' || $l === '-') &&
+            preg_match('/^(\-+|=+)\s*$/', $lines[$current + 1])
+        );
+    }
+  
     /**
      * @return FileLoader
      */
@@ -104,16 +139,8 @@ class PostLoadProcess
      */
     protected function cutContent($content)
     {
-        $explodedContent = explode("\n", $content);
-        if (strpos($explodedContent[1], '=') !== false) {
-            unset($explodedContent[0]);
-            unset($explodedContent[1]);
-        }
-        
-        $content = implode("\n", $explodedContent);
-        
-        if (($cutTagPosition = strpos($content, $this->cutTag)) > 0) {
-            return substr($content, 0, $cutTagPosition);
+        if (($cutPosition = strpos($content, $this->cutTag)) > 0) {
+            return substr($content, 0, $cutPosition);
         }
         
         return '';

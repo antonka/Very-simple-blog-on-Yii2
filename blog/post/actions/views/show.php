@@ -1,7 +1,6 @@
 <?php
 
 use yii\helpers\Html;
-use yii\helpers\Markdown;
 use blog\comment\widgets\Comment;
 use blog\post\helpers\PostUrl;
 
@@ -18,8 +17,9 @@ $this->params['breadcrumbs'] = [
 <?= \blog\post\widgets\Toolbar::widget(['postId' => $post->id]); ?>
 
 <div class="site-about"> 
-    <p><i><?= Html::encode($post->created_at) ?></i></p>
-    <div><?= Markdown::process($post->content) ?></div>
+    <p><i><?= $post->created_at ?></i></p>
+    <h1><?= $post->title ?></h1>
+    <div><?= $post->content ?></div>
 </div>
 
 <?= Comment::widget(['postId' => $post->id]) ?>

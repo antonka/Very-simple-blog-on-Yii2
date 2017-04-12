@@ -1,7 +1,6 @@
 <?php
 
 use yii\helpers\Html;
-use yii\helpers\Markdown;
 use blog\post\helpers\PostUrl;
 use Yii;
 
@@ -14,10 +13,10 @@ $showPostUrl = PostUrl::show($model);
         'class' => 'post-list-item__title'
     ]); ?>
     <div class="post-list-item__cut">
-        <?= Markdown::process($content); ?>
+        <?= $content ?>
     </div>
     <div class="post-list-item__descr">
-        <span><?= Yii::t('post', 'Created at') . ' ' . Html::encode($model->created_at) ?></span>
+        <span><?= Yii::t('post', 'Created at') . ' ' . $model->created_at ?></span>
         <span>/</span>
         <span>
             <?= Html::a(Yii::t('post', 'Read more'), $showPostUrl); ?>
