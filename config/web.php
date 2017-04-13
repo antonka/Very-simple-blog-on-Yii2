@@ -41,14 +41,21 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
+        
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            'enableStrictParsing' => false,
+             'normalizer' => [
+                'class' => yii\web\UrlNormalizer::className(),
+                'action' => yii\web\UrlNormalizer::ACTION_REDIRECT_TEMPORARY,
+            ],
             'rules' => [
+                'login' => 'user/login',
+                'record/<slug:\w+>' => 'post/show',
+                'section/<slug:\w+>' => 'post/showListByCategory',
             ],
         ],
-        */
         
         'i18n' => [
             'translations' => [
