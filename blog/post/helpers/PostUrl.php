@@ -72,5 +72,14 @@ class PostUrl extends \yii\helpers\Url
             'post/showListByCategory', 'slug' => $slug
         ]);
     }
+    
+    /**
+     * @param type $id
+     * @return string
+     */
+    public static function edit($id)
+    {
+        return self::toRoute(['post/edit', 'post_id' => $id]);
+    }
 }
 
