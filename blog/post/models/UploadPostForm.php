@@ -7,7 +7,7 @@ use Yii;
 /**
  * @author Anton Karamnov
  */
-class UploadMarkdownPostFileForm extends \yii\base\Model
+class UploadPostForm extends \yii\base\Model
 {
     public $file;
     
