@@ -7,20 +7,25 @@ use Yii;
 /**
  * @author Anton Karamnov
  */
-class UploadPostForm extends \yii\base\Model
+class UploadPostForm extends Post
 {
+    const TAG_CUT = '<!-- cut -->';
+    
     public $file;
-    
-    public $slug;
-    
-    public $category_id;
-    
+        
     public function rules()
     {
-        return [
+        return array_merge(parent::rules(), [
             ['file', 'file', 'mimeTypes' => 'text/markdown, text/plain', 'skipOnEmpty' => false],
-            [['slug', 'category_id'], 'required'],
-            [['slug'], 'string', 'max' => 100],
-        ];
+        ]);
     }
 }
+
+/*
+ *   
+    public function getContent()
+    {
+        return $this->fileLoaded ? 
+            file_get_contents($this->model->file->tempName) : '';
+    }
+ */

@@ -13,69 +13,46 @@ class FileLoader
     /**
      * @var \yii\base\Model
      */
-    protected $fileModel;
+    protected $model;
     
     /**
-     * @var boolean
+     * @var string
      */
-    public $fileLoaded = false;
-   
+    public $fileFieldName;
+    
     /**
-     * @param \yii\base\Model $fileModel
+     * @param \yii\base\Model $model
+     * @param type $fileFieldName
      */
-    public function __construct(\yii\base\Model $fileModel) 
+    public function __construct(\yii\base\Model $model, $fileFieldName) 
     {
-        $this->fileModel = $fileModel;
+        $this->model = $model;
+        $this->fileFieldName = $fileFieldName;
     }
     
     /**
      * @return \yii\base\Model
      */
-    public function getFileModel()
+    public function getModel()
     {
-        return $this->fileModel;
+        return $this->model;
     }
     
     /**
-     * @return string
+     * @throws Exception
      */
-    public function getFileContent()
+    public function loadFile()
     {
-        return $this->fileLoaded ? 
-            file_get_contents($this->fileModel->file->tempName) : '';
-    }
-    
-    /**
-     * @return boolean
-     */
-    public function validateFileModel()
-    {
-        $postParams = Yii::$app->request->post();
         $shortModelClassName = (
-            new \ReflectionClass($this->fileModel)
+            new \ReflectionClass($this->model)
         )->getShortName();
         
-        if (!array_key_exists($shortModelClassName, $postParams)) {
-            return false;
+        if (!array_key_exists($shortModelClassName, Yii::$app->request->post())) {
+            throw new Exception('File can not loaded');
         }
          
-        $this->fileModel->file = UploadedFile::getInstance(
-            $this->fileModel, 'file'
-        );
-
-        return $this->fileModel->file && $this->fileModel->validate();
-    }
-    
-    /**
-     * @return boolean
-     */
-    public function loadFile() 
-    {
-        if (Yii::$app->request->isPost) {
-            $this->fileLoaded = $this->validateFileModel();
-        }
-        
-        return $this->fileLoaded;
+        $this->model->{$this->fileFieldName} = UploadedFile::getInstance(
+            $this->model, $this->fileFieldName);
     }
 }
 
