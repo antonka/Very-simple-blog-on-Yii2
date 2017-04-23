@@ -4,6 +4,7 @@ namespace blog\post\models;
 
 use Yii;
 use yii\helpers\Markdown;
+use yii\web\UploadedFile;
 
 /**
  * @author Anton Karamnov
@@ -108,7 +109,7 @@ class UploadPostForm extends Post
     public function loadPost()
     {
         if ($this->load(Yii::$app->request->post())) {
-            $this->file = UploadedFile::getInstance($uploadPostForm, 'file');
+            $this->file = UploadedFile::getInstance($this, 'file');
             return $this->save();
         }
         

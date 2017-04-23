@@ -20,22 +20,16 @@ class Reload extends \blog\base\Action
     public function run()
     {
         $uploadPostForm = UploadPostForm::findByUrlQueryParam('post_id');
-        /*
-        $post = Post::findByUrlQueryParam('post_id');
-        $process = PostLoadProcess::build($post);
-        
-        if ($process->execute()) {
+
+        if ($uploadPostForm->loadPost()) {
             Yii::$app->session->setFlash('success', 
                 Yii::t('post', 'This post was reloaded'));
-            return $this->redirect(PostUrl::show($process->getPost()));
+            return $this->redirect(PostUrl::show($uploadPostForm));
         }
         
-        return $this->render('reload', [
-            'fileModel' => $process->getFileLoader()->getFileModel(),
-            'postModel' => $process->getPost(),
+        return $this->render('load', [
+            'uploadPostForm' => $uploadPostForm,
         ]);
-         * 
-         */
     }
 }
 

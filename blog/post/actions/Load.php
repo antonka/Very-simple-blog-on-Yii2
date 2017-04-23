@@ -5,7 +5,6 @@ namespace blog\post\actions;
 use blog\base\traits\AuthenticatedAccess;
 use blog\post\helpers\PostUrl;
 use blog\post\models\UploadPostForm;
-use yii\web\UploadedFile;
 use Yii;
 
 /**
