@@ -3,9 +3,8 @@
 namespace blog\post\actions; 
 
 use blog\base\traits\AuthenticatedAccess;
-use blog\post\algorithms\PostLoadProcess;
 use blog\post\helpers\PostUrl;
-use blog\post\models\Post;
+use blog\post\models\UploadPostForm;
 use Yii;
 
 /**
@@ -20,6 +19,8 @@ class Reload extends \blog\base\Action
      */
     public function run()
     {
+        $uploadPostForm = UploadPostForm::findByUrlQueryParam('post_id');
+        /*
         $post = Post::findByUrlQueryParam('post_id');
         $process = PostLoadProcess::build($post);
         
@@ -33,6 +34,8 @@ class Reload extends \blog\base\Action
             'fileModel' => $process->getFileLoader()->getFileModel(),
             'postModel' => $process->getPost(),
         ]);
+         * 
+         */
     }
 }
 

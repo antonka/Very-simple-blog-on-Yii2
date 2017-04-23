@@ -9,12 +9,11 @@ $form = ActiveForm::begin([
     'options' => ['enctype' => 'multipart/form-data'],
     'enableClientValidation' => false,
 ]); 
-
-echo $form->errorSummary($fileModel);
-echo $form->errorSummary($postModel);
-echo $form->field($fileModel, 'file')->fileInput();
-echo $form->field($postModel, 'slug')->textInput();
-echo $form->field($postModel, 'category_id')->dropDownList(
+;
+echo $form->errorSummary($uploadPostForm);
+echo $form->field($uploadPostForm, 'file')->fileInput();
+echo $form->field($uploadPostForm, 'slug')->textInput();
+echo $form->field($uploadPostForm, 'category_id')->dropDownList(
     ArrayHelper::map(Category::find()->all(), 'id', 'name'),
     ['style' => 'width: 250px']
 );
