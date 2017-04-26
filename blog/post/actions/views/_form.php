@@ -13,6 +13,9 @@ $form = ActiveForm::begin([
 echo $form->errorSummary($uploadPostForm);
 echo $form->field($uploadPostForm, 'file')->fileInput();
 echo $form->field($uploadPostForm, 'slug')->textInput();
+echo $form->field($uploadPostForm, 'description')->textarea([
+    'style' => 'resize: none; height: 80px;'
+]);
 echo $form->field($uploadPostForm, 'category_id')->dropDownList(
     ArrayHelper::map(Category::find()->all(), 'id', 'name'),
     ['style' => 'width: 250px']

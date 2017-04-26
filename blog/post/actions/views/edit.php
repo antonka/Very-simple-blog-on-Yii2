@@ -32,17 +32,14 @@ $this->params['breadcrumbs'] = [
             );
             echo $form->field($post, 'slug')->textInput();
             echo $form->field($post, 'title')->textInput();
+            echo $form->field($post, 'description')->textarea([
+                'style' => 'resize: none; height: 80px;'
+            ]);
             echo \yii\imperavi\Widget::widget([
                 'model' => $post,
                 'attribute' => 'content',
                 
             ]);
-            /*
-            echo $form->field($post, 'content')->textarea([
-                'style' => 'height: 400px',
-            ]);
-             * 
-             */
             echo Html::button(Yii::t('app', 'Save'), [
                 'type' => 'submit',
                 'class' => 'btn btn-primary',

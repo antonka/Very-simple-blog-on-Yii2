@@ -35,6 +35,7 @@ class Post extends \blog\base\ActiveRecord
             [['title'], 'string', 'max' => 255],
             [['cutted_content'], 'string', 'max' => 1000],
             [['slug'], 'string', 'max' => 100],
+            [['description'], 'string', 'max' => 500],
         ];
     }
 
@@ -50,6 +51,7 @@ class Post extends \blog\base\ActiveRecord
             'created_at' => 'Created At',
             'slug' => Yii::t('app', 'Slug'),
             'category_id' => Yii::t('post', 'Category'),
+            'description' => Yii::t('post', 'Description'),
         ];
     }
     
