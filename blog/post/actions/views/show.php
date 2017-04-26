@@ -12,6 +12,12 @@ $this->params['breadcrumbs'] = [
     ],
     $this->title,
 ];
+if ($post->description) {
+    $this->registerMetaTag([
+        'name' => 'description',
+        'content' => $post->description,
+    ]);
+}
 ?>
 
 <?= \blog\post\widgets\Toolbar::widget(['postId' => $post->id]); ?>
