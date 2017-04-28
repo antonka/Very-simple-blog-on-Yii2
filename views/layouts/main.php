@@ -72,7 +72,7 @@ AppAsset::register($this);
         <?= blog\base\widgets\AlertBlock::widget() ?> 
         
         <div class="row">
-            <div class="col-sm-8">
+            <div class="col-sm-9">
                 <?= $content ?>
             </div>
             <div class="col-sm-3">
@@ -83,16 +83,19 @@ AppAsset::register($this);
     
 </div>
 
-<footer class="footer">
+<footer class="footer" >
     <div class="container">
-        <p class="pull-left">
-            &copy; <?= Yii::$app->params['blog']['name'] . ' ' . date('Y') ?>
-        </p>
-
-        <p class="pull-right">
-            Powered by 
-            <a href="https://github.com/antonka/Yii2Blog" rel="_blank" class="">Yii2blog</a>
-        </p>
+        <div class="row">
+            <div class="col-sm-4">
+                &copy; <?= Yii::$app->params['blog']['name'] . ' ' . date('Y') ?>
+                <br>
+                Powered by 
+                <a href="https://github.com/antonka/Yii2Blog" rel="_blank" class="">Yii2blog</a>
+            </div>
+            <div class="col-sm-8">
+                <?= Yii::$app->params['blog']['analitics'] ?>
+            </div>
+        </div>
     </div>
 </footer>
 
