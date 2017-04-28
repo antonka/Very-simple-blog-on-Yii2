@@ -52,8 +52,8 @@ $config = [
             ],
             'rules' => [
                 'login' => 'user/login',
-                'record/<slug:[a-z0-9]+>' => 'post/show',
-                'section/<slug:[a-z0-9]+>' => 'post/showListByCategory',
+                'record/<slug:[a-z0-9-]+>' => 'post/show',
+                'section/<slug:[a-z0-9-]+>' => 'post/showListByCategory',
             ],
         ],
         
