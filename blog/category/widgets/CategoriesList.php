@@ -16,7 +16,7 @@ class CategoriesList extends \yii\base\Widget
         
         return $this->render('categories_list', [
             'categoriesList' => $categoriesList,
-            'canDeleteCategory' => !Yii::$app->user->isGuest,
+            'canManageCategories' => !Yii::$app->user->isGuest,
         ]);
     }
 }

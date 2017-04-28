@@ -22,7 +22,11 @@ use blog\post\helpers\PostUrl;
                     PostUrl::showListByCategory($categoryRowData['slug'])
                 ); 
                 
-                if ($canDeleteCategory) {
+                if ($canManageCategories) {
+                    echo Html::a(
+                        '<span class="glyphicon glyphicon-pencil"></span>', 
+                        CategoryUrl::edit($categoryRowData['id'])
+                    );
                     echo Html::a(
                         '<span class="glyphicon glyphicon-trash"></span>', 
                         CategoryUrl::delete($categoryRowData['id'])
