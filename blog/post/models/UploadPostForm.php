@@ -28,21 +28,6 @@ class UploadPostForm extends Post
         ]);
     }
     
-    public function beforeValidate()
-    {
-        if (is_null($this->file)) {
-            throw new Exception('This file is null');
-        }
-        
-        list($title, $content) = $this->parseFileContent();
-        
-        $this->title = $title;
-        $this->content = $content;
-        $this->cutted_content = $this->getCuttedContent();
-        $this->user_id = Yii::$app->user->getIdentity()->getId();
-
-        return parent::beforeValidate();
-    }
     
     /**
      * @return array ['title', 'content']
@@ -78,8 +63,10 @@ class UploadPostForm extends Post
      * @return boolean
      */
     protected function identifyHeadline($line, $lines, $current)
-    {
+    {   
         return (
+            isset($line[0])
+            &&
             // heading with #
             $line[0] === '#' && !preg_match('/^#\d+/', $line)
             ||
@@ -99,10 +86,19 @@ class UploadPostForm extends Post
         if (($cutPosition = strpos($this->content, self::TAG_CUT)) > 0) {
             return substr($this->content, 0, $cutPosition);
         }
-        
         return '';
     }
     
+    protected function fillBaseModelAttributes()
+    {
+        list($title, $content) = $this->parseFileContent();
+        
+        $this->title = $title;
+        $this->content = $content;
+        $this->cutted_content = $this->getCuttedContent();
+        $this->user_id = Yii::$app->user->getIdentity()->getId();
+    }
+
     /**
      * @return boolean
      */
@@ -110,9 +106,12 @@ class UploadPostForm extends Post
     {
         if ($this->load(Yii::$app->request->post())) {
             $this->file = UploadedFile::getInstance($this, 'file');
+            if (!$this->validate(['file'])) {
+                return false;
+            }
+            $this->fillBaseModelAttributes();
             return $this->save();
         }
-        
         return false;
     }
      
