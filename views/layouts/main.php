@@ -17,7 +17,10 @@ if (!Yii::$app->user->isGuest) {
     $topNavItems[] = [
         'label' => Yii::t('app', 'Operation'),
         'items' => [
-            ['label' => Yii::t('app', 'Load post'), 'url' => PostUrl::load()],
+            [
+                'label' => Yii::t('app', 'Load post'), 
+                'url' => \blog\post\actions\Load::url(),
+            ],
             ['label' => Yii::t('app', 'Add category'), 'url' => CategoryUrl::add()],
             CommentLink::showGrid(),
         ],

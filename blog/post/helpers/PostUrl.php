@@ -9,14 +9,7 @@ use blog\post\models\Post;
  */
 class PostUrl extends \yii\helpers\Url
 {     
-    /**
-     * @param string $id
-     * @return string
-     */
-    public static function load()
-    {
-        return self::toRoute(['post/load']);
-    }
+
     
     /**
      * @param string $id

@@ -5,6 +5,7 @@ namespace blog\post\actions;
 use blog\base\traits\AuthenticatedAccess;
 use blog\post\models\UploadPostForm;
 use Yii;
+use yii\helpers\Url;
 
 /**
  * @author Anton Karamnov
@@ -28,5 +29,13 @@ class Load extends \blog\base\Action
         return $this->render('load', [
             'uploadPostForm' => $uploadPostForm,
         ]);
+    }
+    
+    /**
+     * @return string
+     */
+    public static function url()
+    {
+        return Url::toRoute(['post/load']);
     }
 }
