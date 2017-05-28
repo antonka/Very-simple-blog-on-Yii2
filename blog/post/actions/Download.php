@@ -5,6 +5,7 @@ namespace blog\post\actions;
 use blog\base\traits\AuthenticatedAccess;
 use yii\web\Response;
 use blog\post\models\Post;
+use yii\helpers\Url;
 
 /**
  * @author Anton Karamnov
@@ -23,4 +24,14 @@ class Download extends \yii\base\Action
         ); 
         $response->send();
     }
+    
+    /**
+     * @param Post $post
+     * @return string
+     */
+    public static function url(Post $post)
+    {
+        return Url::toRoute(['post/download', 'post_id' => $post->id]);
+    }
+     
 }
