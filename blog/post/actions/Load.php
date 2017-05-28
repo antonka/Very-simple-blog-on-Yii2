@@ -3,7 +3,6 @@
 namespace blog\post\actions;
 
 use blog\base\traits\AuthenticatedAccess;
-use blog\post\helpers\PostUrl;
 use blog\post\models\UploadPostForm;
 use Yii;
 
@@ -23,7 +22,7 @@ class Load extends \blog\base\Action
         if ($uploadPostForm->loadPost()) {
             Yii::$app->session->setFlash('success', 
                 Yii::t('post', 'This post was loaded'));
-            return $this->redirect(PostUrl::show($uploadPostForm));
+            return $this->redirect(Show::url($uploadPostForm));
         }
         
         return $this->render('load', [

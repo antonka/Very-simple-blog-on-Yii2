@@ -8,16 +8,7 @@ use blog\post\models\Post;
  * @author Anton Karamnov
  */
 class PostUrl extends \yii\helpers\Url
-{
-    /**
-     * @param Post $post
-     * @return string
-     */
-    public static function show(Post $post)
-    {
-        return self::toRoute(['post/show', 'slug' => $post->slug]);
-    }
-    
+{   
     /**
      * @param string $id
      * @return string

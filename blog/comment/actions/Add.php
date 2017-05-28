@@ -6,7 +6,6 @@ use Yii;
 use blog\comment\models\Comment;
 use blog\post\models\Post;
 use yii\web\HttpException;
-use blog\post\helpers\PostUrl;
 
 /**
  * @author Anton Karamnov
@@ -47,7 +46,7 @@ class Add extends \blog\base\Action
         if ($comment->save()) {
             Yii::$app->session->setFlash('success', Yii::t('comment', 
                 'The comment was added'));
-            return $this->redirect(PostUrl::show($post));
+            return $this->redirect(\blog\post\actions\Show::url($post));
         }
         
         return $this->render('add', [

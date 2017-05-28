@@ -3,6 +3,7 @@
 namespace blog\post\actions;
 
 use blog\post\models\Post;
+use yii\helpers\Url;
 
 /**
  * @author Anton Karamnov
@@ -31,5 +32,14 @@ class Show extends \blog\base\Action
     public function getPost()
     {
         return $this->post;
+    }
+    
+    /**
+     * @param Post $post
+     * @return return
+     */
+    public static function url(Post $post)
+    {
+        return Url::toRoute(['post/show', 'slug' => $post->slug]);
     }
 }

@@ -1,11 +1,10 @@
 <?php
 
 use yii\helpers\Html;
-use blog\post\helpers\PostUrl;
 use Yii;
 
 $content = empty($model->cutted_content) ? $model->content : $model->cutted_content;
-$showPostUrl = PostUrl::show($model);
+$showPostUrl = blog\post\actions\Show::url($model);
 ?>
 
 <div class="post-list-item">

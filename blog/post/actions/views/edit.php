@@ -12,7 +12,7 @@ $this->title = Yii::t('post', 'Editing this post');
 $this->params['breadcrumbs'] = [
     [
         'label' => $post->title, 
-        'url' => PostUrl::show($post),
+        'url' => blog\post\actions\Show::url($post),
     ],
     Yii::t('post', 'Edit'),
 ];
