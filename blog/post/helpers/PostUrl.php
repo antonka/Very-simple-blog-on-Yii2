@@ -8,18 +8,7 @@ use blog\post\models\Post;
  * @author Anton Karamnov
  */
 class PostUrl extends \yii\helpers\Url
-{     
-
-    
-    /**
-     * @param string $id
-     * @return string
-     */
-    public static function reload($id)
-    {
-        return self::toRoute(['post/reload', 'post_id' => $id]);
-    }
-    
+{         
     /**
      * @param string $id
      * @return string

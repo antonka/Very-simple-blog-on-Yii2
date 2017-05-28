@@ -5,6 +5,7 @@ namespace blog\post\actions;
 use blog\base\traits\AuthenticatedAccess;
 use blog\post\models\UploadPostForm;
 use Yii;
+use yii\helpers\Url;
 
 /**
  * @author Anton Karamnov
@@ -29,6 +30,15 @@ class Reload extends \blog\base\Action
         return $this->render('load', [
             'uploadPostForm' => $uploadPostForm,
         ]);
+    }
+    
+    /**
+     * @param \blog\post\models\Post $post
+     * @return string
+     */
+    public static function url(\blog\post\models\Post $post)
+    {
+       return self::toRoute(['post/reload', 'post_id' => $$post->id]); 
     }
 }
 
