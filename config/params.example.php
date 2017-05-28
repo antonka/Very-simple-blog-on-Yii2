@@ -2,8 +2,8 @@
 
 return [
     'blog' => [
-        'name' => 'The blog',
-        'owner' => 'Anton Karamnov',
+        'name' => 'yii2blog',
+        'analitics' => '',
     ],
 ];
 
