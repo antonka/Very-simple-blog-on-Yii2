@@ -25,8 +25,8 @@ class Toolbar extends \yii\base\Widget
            'links' => [
                 [Yii::t('post', 'Edit'), PostUrl::edit($this->post->id)],
                 [Yii::t('post', 'Download'), \blog\post\actions\Download::url($this->post)],
-                [Yii::t('post', 'Reload'), \blog\post\actions\Reload::url($this->post),
-                [Yii::t('post','Delete'), PostUrl::delete($this->post->id)],
+                [Yii::t('post', 'Reload'), \blog\post\actions\Reload::url($this->post)],
+                [Yii::t('post','Delete'), \blog\post\actions\Delete::url($this->post)],
             ],
         ]);
     }
