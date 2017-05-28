@@ -38,7 +38,7 @@ class Reload extends \blog\base\Action
      */
     public static function url(\blog\post\models\Post $post)
     {
-       return self::toRoute(['post/reload', 'post_id' => $$post->id]); 
+       return self::toRoute(['post/reload', 'post_id' => $post->id]); 
     }
 }
 
