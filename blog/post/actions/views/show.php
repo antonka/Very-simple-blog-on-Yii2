@@ -20,7 +20,7 @@ if ($post->description) {
 }
 ?>
 
-<?= \blog\post\widgets\Toolbar::widget(['postId' => $post->id]); ?>
+<?= \blog\post\widgets\Toolbar::widget(['post' => $post]); ?>
 
 <div class="site-about"> 
     <p><i><?= $post->created_at ?></i></p>
