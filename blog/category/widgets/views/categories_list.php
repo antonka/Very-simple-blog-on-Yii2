@@ -2,7 +2,6 @@
 
 use yii\bootstrap\Html;
 use blog\category\helpers\CategoryUrl;
-use blog\post\helpers\PostUrl;
 
 ?>
 
@@ -19,7 +18,7 @@ use blog\post\helpers\PostUrl;
                   
                 echo Html::a(
                     $categoryRowData['name'], 
-                    PostUrl::showListByCategory($categoryRowData['slug'])
+                    blog\post\actions\ShowListByCategory::url($categoryRowData['slug'])
                 ); 
                 
                 if ($canManageCategories) {

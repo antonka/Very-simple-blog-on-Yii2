@@ -4,6 +4,7 @@ namespace blog\post\actions;
 
 use yii\data\ActiveDataProvider;
 use blog\post\models\Post;
+use yii\helpers\Url;
 
 /**
  * @author Anton Karamnov
@@ -20,5 +21,13 @@ class ShowList extends \blog\base\Action
         return $this->render('list/show', [
             'postsListActiveDataProvider' => $dataProvider,
         ]);
+    }
+    
+    /**
+     * @return string
+     */
+    public function url()
+    {
+        return Url::toRoute(['post/showList']);
     }
 }

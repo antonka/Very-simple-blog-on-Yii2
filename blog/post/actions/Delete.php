@@ -22,7 +22,7 @@ class Delete extends \blog\base\Action
         Post::findByUrlQueryParam('post_id')->delete();
         Yii::$app->session->setFlash('success', 
             Yii::t('post', 'This post was removed'));
-        return $this->redirect(PostUrl::showList());
+        return $this->redirect(\blog\post\actions\ShowList::url());
     }
     
     /**

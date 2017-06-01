@@ -5,6 +5,7 @@ namespace blog\post\actions;
 use yii\data\ActiveDataProvider;
 use blog\post\models\Post;
 use blog\category\models\Category;
+use yii\helpers\Url;
 
 /**
  * @author Anton Karamnov
@@ -30,5 +31,14 @@ class ShowListByCategory extends \blog\base\Action
             'categoryName' => $categoryModel->name,
             'postsListActiveDataProvider' => $dataProvider,
         ]);
+    }
+    
+    /**
+     * @param string $categorySlug
+     * @return string
+     */
+    public function url($categorySlug)
+    {
+        return Url::toRoute(['post/showListByCategory', 'slug' => $categorySlug]);
     }
 }

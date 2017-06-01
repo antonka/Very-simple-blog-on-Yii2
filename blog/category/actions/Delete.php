@@ -3,7 +3,6 @@
 namespace blog\category\actions;
 
 use Yii;
-use blog\post\helpers\PostUrl;
 use blog\category\models\Category;
 use blog\base\traits\AuthenticatedAccess;
 
@@ -22,6 +21,6 @@ class Delete extends \blog\base\Action
         Category::findByUrlQueryParam('category_id')->delete();
         Yii::$app->session->setFlash('success', 
             Yii::t('category', 'This category was removed'));
-        return $this->redirect(PostUrl::showList());
+        return $this->redirect(\blog\post\actions\ShowList::url());
     }
 }

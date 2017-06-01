@@ -8,7 +8,7 @@ $this->title = $post->title;
 $this->params['breadcrumbs'] = [
     [
         'label' => $category['name'], 
-        'url' => PostUrl::showListByCategory($category['slug'])
+        'url' => blog\post\actions\ShowListByCategory::url($category['slug']),
     ],
     $this->title,
 ];
