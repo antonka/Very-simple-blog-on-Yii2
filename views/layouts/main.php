@@ -6,8 +6,6 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
-use blog\post\helpers\PostUrl;
-use blog\category\helpers\CategoryUrl;
 use blog\user\helpers\UserUrl;
 use blog\comment\helpers\CommentLink;
 
@@ -21,7 +19,10 @@ if (!Yii::$app->user->isGuest) {
                 'label' => Yii::t('app', 'Load post'), 
                 'url' => \blog\post\actions\Load::url(),
             ],
-            ['label' => Yii::t('app', 'Add category'), 'url' => CategoryUrl::add()],
+            [
+                'label' => Yii::t('app', 'Add category'), 
+                'url' => \blog\category\actions\Add::url(),
+            ],
             CommentLink::showGrid(),
         ],
     ];

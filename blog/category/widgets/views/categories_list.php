@@ -1,8 +1,5 @@
 <?php
-
 use yii\bootstrap\Html;
-use blog\category\helpers\CategoryUrl;
-
 ?>
 
 <div style="margin-bottom: 50px;">
@@ -24,11 +21,12 @@ use blog\category\helpers\CategoryUrl;
                 if ($canManageCategories) {
                     echo Html::a(
                         '<span class="glyphicon glyphicon-pencil"></span>', 
-                        CategoryUrl::edit($categoryRowData['id'])
+                        blog\category\actions\Edit::url($categoryRowData['id'])
+                        
                     );
                     echo Html::a(
-                        '<span class="glyphicon glyphicon-trash"></span>', 
-                        CategoryUrl::delete($categoryRowData['id'])
+                        '<span class="glyphicon glyphicon-trash"></span>',    
+                        blog\category\actions\Delete::url($categoryRowData['id'])
                     );
                 } 
                 ?>

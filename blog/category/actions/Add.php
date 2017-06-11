@@ -5,6 +5,7 @@ namespace blog\category\actions;
 use Yii;
 use \blog\category\models\Category as Category;
 use blog\base\traits\AuthenticatedAccess;
+use yii\helpers\Url;
 
 /**
  * @author Anton Karamnov
@@ -28,4 +29,13 @@ class Add extends \blog\base\Action
             'categoryModel' => $category,
         ]);
     }
+    
+    /**
+     * @return string
+     */
+    public static function url()
+    {
+        return Url::toRoute(['category/add']);
+    }
+            
 }
