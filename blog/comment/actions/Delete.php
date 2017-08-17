@@ -4,8 +4,8 @@ namespace blog\comment\actions;
 
 use Yii;
 use blog\comment\models\Comment;
-use \blog\comment\helpers\CommentUrl;
 use blog\base\traits\AuthenticatedAccess;
+use yii\helpers\Url;
 
 /**
  * @author Anton Karamnov
@@ -20,7 +20,17 @@ class Delete extends \blog\base\Action {
         $comment->delete();
         Yii::$app->session->setFlash('success', Yii::t('comment', 'The comment
             was deleted'));
-        $this->redirect(CommentUrl::showGrid());
+        $this->redirect(ShowGrid::url());
     }
+    
+    /**
+     * @param integer $commentId
+     * @return string
+     */
+    static public function url($commentId)
+    {        
+        return Url::toRoute(['comment/delete', 'comment_id' => $commentId]);
+    }
+            
 }
 

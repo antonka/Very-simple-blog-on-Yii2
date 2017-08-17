@@ -2,8 +2,6 @@
 
 use yii\grid\GridView;
 use yii\grid\ActionColumn;
-use yii\helpers\Url;
-use blog\comment\helpers\CommentUrl;
 
 $this->title = Yii::t('comment', 'Comments');
 $this->params['breadcrumbs'][] = $this->title;
@@ -22,9 +20,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'class' => ActionColumn::className(),
                     'template' => '{view}',
-                    'urlCreator' => function ($action, $model, $key, $index) {
+                    'urlCreator' => function($action, $model, $key, $index) {
                         if ($action === 'view') {
-                            return CommentUrl::show($model);
+                            return \blog\comment\actions\Show::url($model->id);
                         }
                     },
                 ],

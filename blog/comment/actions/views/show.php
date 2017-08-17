@@ -1,13 +1,11 @@
 <?php
 
 use yii\widgets\DetailView;
-use blog\comment\helpers\CommentLink;
-use blog\comment\helpers\CommentUrl;
 use yii\helpers\Html;
 
 $this->title = Yii::t('comment', 'Comment');
 $this->params['breadcrumbs'] = [
-    CommentLink::showGrid(),
+    \blog\comment\actions\ShowGrid::link(),
     $this->title,
 ];
 
@@ -30,13 +28,13 @@ $this->params['breadcrumbs'] = [
         
         <?= Html::a(
             Yii::t('comment', 'Publicate'), 
-            CommentUrl::publicate($comment),
+            \blog\comment\actions\Publicate::url($comment->id),
             ['class' => 'btn btn-primary']
         ); ?>
         
-         <?= Html::a(
-            Yii::t('app', 'Delete'), 
-            CommentUrl::delete($comment),
+        <?= Html::a(
+            Yii::t('app', 'Delete'),
+            \blog\comment\actions\Delete::url($comment->id),
             ['class' => 'btn btn-primary btn-danger']
         ); ?>
         

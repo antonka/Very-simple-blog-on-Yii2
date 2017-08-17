@@ -4,8 +4,8 @@ namespace blog\comment\actions;
 
 use Yii;
 use blog\comment\models\Comment;
-use \blog\comment\helpers\CommentUrl;
 use blog\base\traits\AuthenticatedAccess;
+use yii\helpers\Url;
 
 /**
  * @author Anton Karamnov
@@ -20,6 +20,16 @@ class Publicate extends \blog\base\Action {
         $comment->publicate();
         Yii::$app->session->setFlash('success', Yii::t('comment', 'The comment
             was publicated'));
-        $this->redirect(CommentUrl::show($comment));
+        $this->redirect(Show::url($comment->id));
     }
+    
+    /**
+     * @param integer $commentId
+     * @return string
+     */
+    static public function url($commentId)
+    {
+        return Url::toRoute(['comment/publicate', 'comment_id' => $commentId]);
+    }
+            
 }

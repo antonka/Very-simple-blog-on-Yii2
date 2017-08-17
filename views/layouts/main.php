@@ -7,7 +7,6 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use blog\user\helpers\UserUrl;
-use blog\comment\helpers\CommentLink;
 
 $topNavItems = [];
 if (!Yii::$app->user->isGuest) {
@@ -23,7 +22,7 @@ if (!Yii::$app->user->isGuest) {
                 'label' => Yii::t('app', 'Add category'), 
                 'url' => \blog\category\actions\Add::url(),
             ],
-            CommentLink::showGrid(),
+            \blog\comment\actions\ShowGrid::link(),
         ],
     ];
     
