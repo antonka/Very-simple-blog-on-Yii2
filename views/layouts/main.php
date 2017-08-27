@@ -29,7 +29,7 @@ if (!Yii::$app->user->isGuest) {
         'label' => Yii::$app->user->getIdentity()->name,
         'items' => [
             ['label' => Yii::t('user', 'Change profile'), 'url' => \blog\user\actions\ChangeProfile::url()],
-            ['label' => Yii::t('user', 'Change password'), 'url' => \blog\user\actions\ChangeProfile::url()],
+            ['label' => Yii::t('user', 'Change password'), 'url' => \blog\user\actions\ChangePassword::url()],
             ['label' => Yii::t('app', 'Log out'), 'url' => \blog\user\actions\Logout::url()],
         ],
     ];
