@@ -5,6 +5,7 @@ namespace blog\user\actions;
 use Yii;
 use blog\base\traits\AuthenticatedAccess;
 use blog\user\models\ChangePasswordForm;
+use yii\helpers\Url;
 
 /**
  * @author Anton Karamnov
@@ -31,4 +32,13 @@ class ChangePassword extends \blog\base\Action
             'changePasswordForm' => $changePasswordForm,
         ]);
     }
+    
+    /**
+     * @return string
+     */
+    public static function url()
+    {
+        return Url::toRoute(['user/changePassword']);
+    }
+            
 }

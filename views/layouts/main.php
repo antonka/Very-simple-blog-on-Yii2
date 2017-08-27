@@ -6,7 +6,6 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
-use blog\user\helpers\UserUrl;
 
 $topNavItems = [];
 if (!Yii::$app->user->isGuest) {
@@ -29,9 +28,9 @@ if (!Yii::$app->user->isGuest) {
     $topNavItems[] = [
         'label' => Yii::$app->user->getIdentity()->name,
         'items' => [
-            ['label' => Yii::t('user', 'Change profile'), 'url' => UserUrl::changeProfile()],
-            ['label' => Yii::t('user', 'Change password'), 'url' => UserUrl::changePassword()],
-            ['label' => Yii::t('app', 'Log out'), 'url' => UserUrl::logout()],
+            ['label' => Yii::t('user', 'Change profile'), 'url' => \blog\user\actions\ChangeProfile::url()],
+            ['label' => Yii::t('user', 'Change password'), 'url' => \blog\user\actions\ChangeProfile::url()],
+            ['label' => Yii::t('app', 'Log out'), 'url' => \blog\user\actions\Logout::url()],
         ],
     ];
 }

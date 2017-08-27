@@ -4,6 +4,7 @@ namespace blog\user\actions;
 
 use Yii;
 use blog\base\traits\AuthenticatedAccess;
+use yii\helpers\Url;
 
 /**
  * @author Anton Karamnov
@@ -24,8 +25,15 @@ class ChangeProfile extends \blog\base\Action
         
         return $this->render('changeProfile', [
             'userModel' => $userModel,
-        ]);
-        
+        ]);   
     }
+    
+    /**
+     * @return string
+     */
+    public static function url()
+    {
+        return Url::toRoute(['user/changeProfile']);
+    }    
 }
 
